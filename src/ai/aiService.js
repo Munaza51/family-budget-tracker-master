@@ -1,7 +1,3 @@
-// Simple OpenAI fetch wrapper for demo use ONLY.
-// WARNING: Do NOT embed your secret key in public repos.
-// For production, call OpenAI from a secure backend.
-
 export async function getBudgetTips(summary) {
   const key = import.meta.env.VITE_OPENAI_API_KEY;
   if (!key) throw new Error("OpenAI API key missing (VITE_OPENAI_API_KEY).");
