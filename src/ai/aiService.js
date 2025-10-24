@@ -1,5 +1,5 @@
 export async function getBudgetTips(summary) {
-  // 🔑 مستقیم بنویس برای تست
+  
   const key = "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";
 
   const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -7,7 +7,7 @@ export async function getBudgetTips(summary) {
     headers: {
       Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": "https://delightful-baklava-f727aa.netlify.app/", // لینک دقیق سایت تو
+      "HTTP-Referer": "https://delightful-baklava-f727aa.netlify.app/", 
       "X-Title": "Family Budget Tracker",
     },
     body: JSON.stringify({
