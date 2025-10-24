@@ -1,18 +1,80 @@
-# Family Budget & Essentials Tracker
+# 💰 Family Budget Tracker
 
-Simple budget tracker built with React, LocalStorage, Recharts, and a demo OpenAI integration.
+A simple, elegant, and AI-powered web app that helps users manage their daily expenses, visualize spending habits, and receive personalized money-saving tips — all in one place.
 
-## Features
-- Add / Delete expenses (stored in localStorage)
-- Pie chart for spending by category (Recharts)
-- Essentials checklist (shopping items)
-- AI-powered saving tips (requires OpenAI API key)
+Live Demo 👉 [https://delightful-baklava-f727aa.netlify.app/](https://delightful-baklava-f727aa.netlify.app/)
 
-## Run locally
-1. `npm install`
-2. Create `.env` with `VITE_OPENAI_API_KEY=your_api_key`
-3. `npm run dev`
+---
 
-## Deploy
-- Build: `npm run build`
-- Deploy `dist/` to Netlify or GitHub Pages.
+## ✨ Features
+
+- 🧾 **Add, edit, and delete expenses and Essentials** — stay organized with your monthly spending.
+- 📊 **Visual charts** — get a clear overview of where your money goes.
+- 💡 **AI-powered budget tips** — uses OpenRouter (GPT-based model) to give short, smart saving suggestions.
+- 💬 **Instant updates** — all changes are saved locally with `localStorage`.
+- 🎨 **Clean UI** — minimal, responsive design that works beautifully on any device.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React + Vite  
+- **Styling:** CSS / Tailwind  
+- **AI Integration:** OpenRouter API (`gpt-4o-mini` model)  
+- **Data Storage:** localStorage  
+- **Deployment:** Netlify  
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the app locally 👇
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-username/family-budget-tracker.git
+
+# 2. Navigate into the folder
+cd family-budget-tracker
+
+# 3. Install dependencies
+npm install
+
+# 4. Create an .env file and add your API key
+VITE_OPENROUTER_API_KEY=your_api_key_here
+
+# 5. Start the development server
+npm run dev
+🔑 Environment Variables
+Before running the project, create a .env file in the root directory and add:
+
+ini
+Copy code
+VITE_OPENROUTER_API_KEY=your_api_key_here
+⚠️ Don’t upload your real key to GitHub! Instead, include a .env.example file for reference.
+
+📸 Screenshots
+Dashboard
+![bandicam 2025-10-24 16-53-16-138](https://github.com/user-attachments/assets/e019821d-ab88-4b69-b882-e1f52f8dc1fe)
+
+
+Essentials
+![bandicam 2025-10-24 16-53-45-836](https://github.com/user-attachments/assets/5153208a-32eb-4bd0-aaa0-e407d37b1f61)
+
+👩‍💻 Author
+
+Munaza
+🎨 Graphic Designer & Frontend Developer
+💬 Instagram: @munazaart
+
+
+🪪 License
+
+This project is licensed under the MIT License — feel free to use and modify it for learning or personal use.
+
+⭐ If you liked this project, give it a star on GitHub — it means a lot! 🌟
+
+
+
+
+
