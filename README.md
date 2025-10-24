@@ -55,11 +55,10 @@ VITE_OPENROUTER_API_KEY=your_api_key_here
 
 ## 📸 Screenshots
 ### 🖥️ Dashboard
-![Dashboard Screenshot](https://github.com/user-attachments/assets/6543ec8c-cb49-43d7-9b0c-836a765c7f17)
+![Dashboard](assets/dashboard.png)
 
 ### 📊 Essentials
-![Essentials Screenshot](https://github.com/user-attachments/assets/20412808-25b0-4575-968d-b2b418d28b80)
-
+![Essentials](assets/essentials.png)
 
 
 👩‍💻 Author
