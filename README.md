@@ -53,7 +53,7 @@ Copy code
 VITE_OPENROUTER_API_KEY=your_api_key_here
 ⚠️ Don’t upload your real key to GitHub! Instead, include a .env.example file for reference.
 
-📸 Screenshots
+## 📸 Screenshots
 ### 🖥️ Dashboard
 ![Dashboard Screenshot](https://github.com/user-attachments/assets/6543ec8c-cb49-43d7-9b0c-836a765c7f17)
 
