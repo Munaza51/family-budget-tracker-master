@@ -10,7 +10,7 @@ export async function getBudgetTips(summary) {
     headers: {
       Authorization: `Bearer ${key}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": "http://localhost:5173", // اگر سایتت لوکال است
+      "HTTP-Referer": "https://delightful-baklava-f727aa.netlify.app/",
       "X-Title": "Family Budget Tracker",
     },
     body: JSON.stringify({
