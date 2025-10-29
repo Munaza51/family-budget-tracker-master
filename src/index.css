@@ -72,19 +72,18 @@ body {
 
 .nav a {
   text-decoration: none;
-  background: var(--gradient);
-  color: #fff;
+  color: var(--text);
   font-weight: 600;
-  padding: 10px 14px;
-  border-radius: var(--radius);
-  transition: all 0.2s ease-in-out;
-  display: inline-block;
+  margin-left: 20px;
+  padding: 6px 0;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .nav a:hover {
-  background-color: red;
-  background-image: none;
-  color: white;
+  color: red;
+  transform: translateY(-2px);
+}
+
   transform: translateY(-2px);
 }
 
