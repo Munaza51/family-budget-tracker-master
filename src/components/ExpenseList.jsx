@@ -20,13 +20,13 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
         }
         .expense-list th, .expense-list td {
           padding: 8px;
-          border: 1px solid #ccc;
+          border: 1px solid #fff;
           text-align: left;
         }
         button.small {
           padding: 4px 8px;
           background-color: #eee;
-          border: 1px solid #ccc;
+          border: 1px solid #fff;
           cursor: pointer;
         }
         button.small.clicked {
