@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
           <p>
             <span className="highlight">Family Budget Tracker</span> is a modern web app designed
             to help families manage daily expenses, track essentials, and set smarter
-            saving goals. all from one clean, visual dashboard.
+            saving goals — all from one clean, visual dashboard.
           </p>
           <p>
             Built for the <strong>CodeWeekend Capstone</strong>, this project combines
@@ -46,37 +47,49 @@ export default function About() {
             </div>
           </div>
 
-          <a href="/dashboard" className="about-btn">Go to Dashboard</a>
+          <Link to="/dashboard" className="about-btn">Go to Dashboard</Link>
         </div>
 
         <div className="about-images">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/041/172/859/original/family-planning-two-hands-intertwined-people-holding-hands-newborn-vector.jpg"
-            alt="Family Planning"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-            alt="Financial Teamwork"
-          />
-          <img
-            src="https://tse2.mm.bing.net/th/id/OIP.8O84QMk41JpKTUBFnaXxPAHaE8?pid=Api&P=0&h=220"
-            alt="Savings Plan"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28"
-            alt="Budget Growth"
-          />
+          <div className="image-card">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/041/172/859/original/family-planning-two-hands-intertwined-people-holding-hands-newborn-vector.jpg"
+              alt="Family Planning"
+            />
+            <p>Family Planning</p>
+          </div>
+          <div className="image-card">
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+              alt="Financial Teamwork"
+            />
+            <p>Financial Teamwork</p>
+          </div>
+          <div className="image-card">
+            <img
+              src="https://tse2.mm.bing.net/th/id/OIP.8O84QMk41JpKTUBFnaXxPAHaE8?pid=Api&P=0&h=220"
+              alt="Savings Plan"
+            />
+            <p>Savings Plan</p>
+          </div>
+          <div className="image-card">
+            <img
+              src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28"
+              alt="Budget Growth"
+            />
+            <p>Budget Growth</p>
+          </div>
         </div>
       </div>
 
       <div className="about-tech">
         <h3>🧩 Tech Stack</h3>
-        <ul>
-          <li>⚛️ React + Vite</li>
-          <li>🎨 Modern CSS (custom properties, gradients, glassmorphism)</li>
-          <li>📦 LocalStorage for data persistence</li>
-          <li>🤖 AI API for savings tips</li>
-        </ul>
+        <div className="tech-icons">
+          <span>⚛️</span>
+          <span>🎨</span>
+          <span>📦</span>
+          <span>🤖</span>
+        </div>
       </div>
     </div>
   );
