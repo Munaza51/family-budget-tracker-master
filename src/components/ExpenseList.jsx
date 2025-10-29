@@ -13,6 +13,32 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
 
   return (
     <div className="expense-list">
+      <style>{`
+        .expense-list table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .expense-list th, .expense-list td {
+          padding: 8px;
+          border: 1px solid #ccc;
+          text-align: left;
+        }
+        button.small {
+          padding: 4px 8px;
+          background-color: #eee;
+          border: 1px solid #ccc;
+          cursor: pointer;
+        }
+        button.small.clicked {
+          background-color: red;
+          color: white;
+        }
+        .muted {
+          color: #888;
+          font-style: italic;
+        }
+      `}</style>
+
       <table>
         <thead>
           <tr>
