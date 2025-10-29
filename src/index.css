@@ -148,10 +148,11 @@ body {
 }
 
 .form button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+   background-color: red;
+          background-image: none;
+          color: white;
 }
-
+ 
 /* === Tables === */
 .expense-list table {
   width: 100%;
