@@ -30,7 +30,8 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
         }
 
         .expense-list th {
-          background: #f3f4f6;
+          background: var(--gradient);
+          color: #fff;
           font-weight: 600;
         }
 
@@ -47,8 +48,9 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
         }
 
         button.small:hover {
-          opacity: 0.9;
-          transform: translateY(-1px);
+          background-color: red;
+          background-image: none;
+          color: white;
         }
 
         .muted {
@@ -61,7 +63,11 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
       <table>
         <thead>
           <tr>
-            <th>Date</th><th>Item</th><th>Category</th><th>Cost</th><th></th>
+            <th>Date</th>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Cost</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
