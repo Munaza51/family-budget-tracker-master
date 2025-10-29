@@ -47,7 +47,7 @@ export default function About() {
             </div>
           </div>
 
-          <Link to="/dashboard" className="about-btn">Go to Dashboard</Link>
+          <Link to="/" className="about-btn">Go to Dashboard</Link>
         </div>
 
         <div className="about-images">
