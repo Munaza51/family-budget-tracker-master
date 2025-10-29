@@ -35,6 +35,11 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           font-weight: 600;
         }
 
+        .button-group {
+          display: flex;
+          gap: 8px;
+        }
+
         button.small {
           padding: 14px 16px;
           border-radius: var(--radius);
@@ -67,7 +72,7 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
             <th>Item</th>
             <th>Category</th>
             <th>Cost</th>
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -78,9 +83,14 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
               <td>{it.category}</td>
               <td>{it.cost}</td>
               <td>
-                <button className="small" onClick={() => onDelete(it.id)}>
-                  Delete
-                </button>
+                <div className="button-group">
+                  <button className="small" onClick={() => onEdit(it.id)}>
+                    Edit
+                  </button>
+                  <button className="small" onClick={() => onDelete(it.id)}>
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
