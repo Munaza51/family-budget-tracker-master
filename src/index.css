@@ -39,9 +39,10 @@ body {
   width: 100%;
   max-width: var(--max-w);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 28px;
+  padding: 16px 20px;
   margin-bottom: 32px;
   border-radius: var(--radius);
   background: var(--blur-bg);
@@ -51,6 +52,7 @@ body {
   top: 16px;
   z-index: 1000;
   animation: fadeInDown 0.8s ease;
+  gap: 12px;
 }
 
 .nav h1 {
@@ -59,19 +61,47 @@ body {
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .nav a {
   text-decoration: none;
-  color: var(--text);
+  background: var(--gradient);
+  color: #fff;
   font-weight: 600;
-  margin-left: 20px;
-  transition: var(--transition);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  transition: all 0.2s ease-in-out;
+  display: inline-block;
 }
 
 .nav a:hover {
-  color: var(--accent);
+  background-color: red;
+  background-image: none;
+  color: white;
   transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav a {
+    width: auto;
+  }
 }
 
 /* === Main Container === */
