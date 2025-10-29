@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function ExpenseList({ items, onDelete, onEdit }) {
-  if (!items.length) return <p className="muted">No expenses yet — add something to start tracking.</p>;
+  const [clickedId, setClickedId] = useState(null);
+
+  if (!items.length)
+    return <p className="muted">No expenses yet — add something to start tracking.</p>;
+
+  const handleDeleteClick = (id) => {
+    setClickedId(id);
+    onDelete(id);
+  };
 
   return (
     <div className="expense-list">
@@ -19,7 +27,12 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
               <td>{it.category}</td>
               <td>{it.cost}</td>
               <td>
-                <button className="small" onClick={() => onDelete(it.id)}>Delete</button>
+                <button
+                  className={`small ${clickedId === it.id ? "clicked" : ""}`}
+                  onClick={() => handleDeleteClick(it.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
