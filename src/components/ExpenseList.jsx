@@ -1,41 +1,60 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function ExpenseList({ items, onDelete, onEdit }) {
-  const [clickedId, setClickedId] = useState(null);
-
   if (!items.length)
     return <p className="muted">No expenses yet — add something to start tracking.</p>;
-
-  const handleDeleteClick = (id) => {
-    setClickedId(id);
-    onDelete(id);
-  };
 
   return (
     <div className="expense-list">
       <style>{`
+        :root {
+          --radius: 6px;
+          --accent: #6366f1;
+          --gradient: linear-gradient(to right, #6366f1, #8b5cf6);
+          --transition: all 0.2s ease-in-out;
+        }
+
         .expense-list table {
           width: 100%;
           border-collapse: collapse;
+          background: #fff;
+          border-radius: var(--radius);
+          overflow: hidden;
         }
+
         .expense-list th, .expense-list td {
-          padding: 8px;
-          border: 1px solid #fff;
+          padding: 14px 16px;
+          border: 1px solid #e5e7eb;
           text-align: left;
+          font-size: 15px;
         }
+
+        .expense-list th {
+          background: #f3f4f6;
+          font-weight: 600;
+        }
+
         button.small {
-          padding: 4px 8px;
-          background-color: #eee;
-          border: 1px solid #fff;
+          padding: 14px 16px;
+          border-radius: var(--radius);
+          border: none;
+          background: var(--gradient);
+          color: #fff;
+          font-weight: 600;
+          font-size: 15px;
           cursor: pointer;
+          transition: var(--transition);
         }
-        button.small.clicked {
-          background-color: red;
-          color: white;
+
+        button.small:hover {
+          opacity: 0.9;
+          transform: translateY(-1px);
         }
+
         .muted {
           color: #888;
           font-style: italic;
+          font-size: 15px;
         }
       `}</style>
 
@@ -53,10 +72,7 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
               <td>{it.category}</td>
               <td>{it.cost}</td>
               <td>
-                <button
-                  className={`small ${clickedId === it.id ? "clicked" : ""}`}
-                  onClick={() => handleDeleteClick(it.id)}
-                >
+                <button className="small" onClick={() => onDelete(it.id)}>
                   Delete
                 </button>
               </td>
