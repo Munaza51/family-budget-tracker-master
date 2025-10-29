@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function ExpenseList({ items, onDelete, onEdit }) {
+  const [editingId, setEditingId] = useState(null);
+  const [editedItem, setEditedItem] = useState("");
+
+  const handleEditClick = (id, currentItem) => {
+    setEditingId(id);
+    setEditedItem(currentItem);
+  };
+
+  const handleSaveClick = () => {
+    if (editedItem.trim()) {
+      onEdit(editingId, editedItem.trim());
+      setEditingId(null);
+      setEditedItem("");
+    }
+  };
+
   if (!items.length)
     return <p className="muted">No expenses yet — add something to start tracking.</p>;
 
@@ -63,6 +79,14 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           font-style: italic;
           font-size: 15px;
         }
+
+        input.edit-input {
+          padding: 10px;
+          font-size: 15px;
+          border: 1px solid #ccc;
+          border-radius: var(--radius);
+          width: 100%;
+        }
       `}</style>
 
       <table>
@@ -79,14 +103,30 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           {items.map(it => (
             <tr key={it.id}>
               <td>{it.date}</td>
-              <td>{it.item}</td>
+              <td>
+                {editingId === it.id ? (
+                  <input
+                    className="edit-input"
+                    value={editedItem}
+                    onChange={(e) => setEditedItem(e.target.value)}
+                  />
+                ) : (
+                  it.item
+                )}
+              </td>
               <td>{it.category}</td>
               <td>{it.cost}</td>
               <td>
                 <div className="button-group">
-                  <button className="small" onClick={() => onEdit(it.id)}>
-                    Edit
-                  </button>
+                  {editingId === it.id ? (
+                    <button className="small" onClick={handleSaveClick}>
+                      Save
+                    </button>
+                  ) : (
+                    <button className="small" onClick={() => handleEditClick(it.id, it.item)}>
+                      Edit
+                    </button>
+                  )}
                   <button className="small" onClick={() => onDelete(it.id)}>
                     Delete
                   </button>
