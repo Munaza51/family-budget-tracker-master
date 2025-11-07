@@ -1,92 +1,97 @@
-
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const gallery = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-    title: "Smart Budgeting",
-    text: "Use simple entries and clear charts to spot saving opportunities."
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1556155092-490a1ba16284",
-    title: "Track Every Expense",
-    text: "Log items with category, date and amount — fast and mobile-friendly."
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28",
-    title: "Plan Together",
-    text: "Share takeaways and plan the family budget with confidence."
-  }
-];
-
 export default function About() {
-  const [active, setActive] = useState(null);
+return (
+<div className="about-section">
+<div className="about-content">
+<div className="about-text">
+<h2>💡 About Family Budget Tracker</h2>
+<p>
+<span className="highlight">Family Budget Tracker</span> is a modern web app designed
+to help families manage daily expenses, track essentials, and set smarter
+saving goals — all from one clean, visual dashboard.
+</p>
+<p>
+Built for the <strong>CodeWeekend Capstone</strong>, this project combines
+simplicity, data visualization, and AI assistance to bring clarity to your
+financial life.
+</p>
 
-  return (
-    <div className="about-section">
-      <div className="about-content">
-        <div className="about-text">
-          <h2>About Family Budget Tracker</h2>
+<div className="app-highlights">
+  <div className="highlight-card">  
+          <img  
+            src="https://www.freshbooks.com/wp-content/uploads/2022/02/expense-tracking.jpg"  
+            alt="Expense Tracking"  
+          />  
+          <h4>Track Expenses</h4>  
+          <p>Log every expense easily with category, date, and item tracking.</p>  
+        </div>  
 
-          <h3>What is it?</h3>
-          <p>
-            Family Budget Tracker is a lightweight web app that helps families track daily expenses,
-            view visual reports, and keep finances organized — designed to be fast, local-first,
-            and easy to use.
-          </p>
+        <div className="highlight-card">  
+          <img  
+            src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/8bc7d876-e4c5-4710-854a-a23c0f231652/thumb_AI_Insights800_800_px__1b.gif"  
+            alt="AI Insights"  
+          />  
+          <h4>AI Saving Tips</h4>  
+          <p>Use AI to get personalized recommendations to save more efficiently.</p>  
+        </div>  
 
-          <h3>What it offers</h3>
-          <ul>
-            <li>Quick expense entry (category, amount, date)</li>
-            <li>Visual summaries and charts</li>
-            <li>Simple local storage — you control your data</li>
-          </ul>
+        <div className="highlight-card">  
+          <img  
+            src="https://images.unsplash.com/photo-1556155092-490a1ba16284"  
+            alt="Charts and Analytics"  
+          />  
+          <h4>Visual Reports</h4>  
+          <p>Beautiful pie charts and summaries make your spending clear at a glance.</p>  
+        </div>  
+      </div>  
 
-          <Link to="/" className="about-btn">Back to Dashboard</Link>
+      <Link to="/" className="about-btn">Go to Dashboard</Link>  
+    </div>  
 
-          <div className="contact-row">
-            <h4>Contact</h4>
-            <p>Questions or feedback? Reach out:</p>
-            <div className="contact-links">
-              <a href="https://instagram.com/your_username" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="mailto:youremail@example.com">Email</a>
-            </div>
-          </div>
-        </div>
+    <div className="about-images">  
+      <div className="image-card">  
+        <img  
+          src="https://static.vecteezy.com/system/resources/previews/041/172/859/original/family-planning-two-hands-intertwined-people-holding-hands-newborn-vector.jpg"  
+          alt="Family Planning"  
+        />  
+        <p>Family Planning</p>  
+      </div>  
+      <div className="image-card">  
+        <img  
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"  
+          alt="Financial Teamwork"  
+        />  
+        <p>Financial Teamwork</p>  
+      </div>  
+      <div className="image-card">  
+        <img  
+          src="https://tse2.mm.bing.net/th/id/OIP.8O84QMk41JpKTUBFnaXxPAHaE8?pid=Api&P=0&h=220"  
+          alt="Savings Plan"  
+        />  
+        <p>Savings Plan</p>  
+      </div>  
+      <div className="image-card">  
+        <img  
+          src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28"  
+          alt="Budget Growth"  
+        />  
+        <p>Budget Growth</p>  
+      </div>  
+    </div>  
+  </div>  
 
-        <div className="about-gallery">
-          {gallery.map((g) => (
-            <div
-              key={g.id}
-              className={`gallery-card ${active === g.id ? "active" : ""}`}
-              onClick={() => setActive(active === g.id ? null : g.id)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => { if (e.key === "Enter") setActive(active === g.id ? null : g.id); }}
-              aria-pressed={active === g.id}
-            >
-              <img src={g.src + "?auto=format&fit=crop&w=800&q=60"} alt={g.title} />
-              <div className="overlay">
-                <h4>{g.title}</h4>
-                <p>{g.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+  <div className="about-tech">  
+    <h3>🧩 Tech Stack</h3>  
+    <div className="tech-icons">  
+      <span>⚛️</span>  
+      <span>🎨</span>  
+      <span>📦</span>  
+      <span>🤖</span>  
+    </div>  
+  </div>  
+</div>
 
-      <div className="about-tech">
-        <h3>Tech</h3>
-        <div className="tech-icons">
-          <span>React</span>
-          <span>localStorage</span>
-          <span>SVG & CSS</span>
-        </div>
-      </div>
-    </div>
-  );
+);
 }
