@@ -41,9 +41,9 @@ return acc;
 async function askAITips() {
 setLoadingTips(true);
 const summary =
-Object.entries(totalsByCategory)
-.map(([cat, val]) => ${cat}: ${val})
-.join(", ") || "No expenses recorded yet";
+  Object.entries(totalsByCategory)
+    .map(([cat, val]) => `${cat}: ${val}`)
+    .join(", ") || "No expenses recorded yet";
 try {
 const tips = await getBudgetTips(summary);
 setAiTips(tips);
