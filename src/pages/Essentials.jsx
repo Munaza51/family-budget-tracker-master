@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { CheckCircle2, Trash2, PlusCircle } from "lucide-react";
 
@@ -43,11 +44,37 @@ export default function Essentials() {
       ? items.filter((i) => !i.done)
       : items;
 
+  const counts = {
+    total: items.length,
+    pending: items.filter((i) => !i.done).length,
+    done: items.filter((i) => i.done).length,
+  };
+
   return (
     <div className="essentials-page">
       <header className="essentials-header">
         <h2>🧺 Essentials Checklist</h2>
-        <p>Keep track of what your family needs, from groceries to home supplies.</p>
+        <p>Keep track of household essentials — سریع اضافه کن، علامت بزن، مدیریت کن.</p>
+
+        <div className="essentials-stats">
+          <div className="stat">
+            <strong>{counts.total}</strong>
+            <span>Total</span>
+          </div>
+          <div className="stat">
+            <strong className="muted">{counts.pending}</strong>
+            <span>Pending</span>
+          </div>
+          <div className="stat">
+            <strong className="accent">{counts.done}</strong>
+            <span>Completed</span>
+          </div>
+        </div>
+
+        <div className="essentials-explain">
+          <p><strong>Pending:</strong> اقلامی که هنوز باید خریداری یا بررسی شوند.</p>
+          <p><strong>Completed:</strong> اقلامی که تهیه شده یا بررسی شده‌اند.</p>
+        </div>
       </header>
 
       <div className="essentials-add">
@@ -56,8 +83,9 @@ export default function Essentials() {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Add an essential (e.g., Cooking Oil)"
+          aria-label="Add essential item"
         />
-        <button onClick={addItem}>
+        <button onClick={addItem} className="btn">
           <PlusCircle size={18} /> Add
         </button>
       </div>
@@ -89,18 +117,19 @@ export default function Essentials() {
         )}
         {filtered.map((it) => (
           <li key={it.id} className={it.done ? "done" : ""}>
-            <label>
+            <label className="essentials-row">
               <input
                 type="checkbox"
                 checked={it.done}
                 onChange={() => toggle(it.id)}
+                aria-label={`Mark ${it.label} as ${it.done ? "pending" : "done"}`}
               />
-              <span>{it.label}</span>
+              <span className="item-label">{it.label}</span>
             </label>
             <div className="actions">
-              {it.done && <CheckCircle2 size={18} color="#22c55e" />}
-              <button onClick={() => remove(it.id)}>
-                <Trash2 size={18} />
+              {it.done && <CheckCircle2 size={18} />}
+              <button onClick={() => remove(it.id)} className="action-btn" aria-label={`Delete ${it.label}`}>
+                <Trash2 size={16} />
               </button>
             </div>
           </li>
