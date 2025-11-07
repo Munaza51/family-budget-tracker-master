@@ -7,15 +7,24 @@ export default function About() {
       <div className="about-content">
         <div className="about-text">
           <h2>💡 About Family Budget Tracker</h2>
+
+          <h3>چی هست؟</h3>
           <p>
-            <span className="highlight">Family Budget Tracker</span> is a modern web app designed
-            to help families manage daily expenses, track essentials, and set smarter
-            saving goals — all from one clean, visual dashboard.
+            <strong>Family Budget Tracker</strong> یک وب‌اپ ساده و مینیمال است برای ثبت مخارج روزمره،
+            نمایش گزارشات بصری و دریافت نکات صرفه‌جویی با کمک هوش مصنوعی — مناسب خانواده‌ها و افراد.
           </p>
+
+          <h3>چی ارائه می‌دهد؟</h3>
+          <ul className="what-list">
+            <li><strong>ثبت سریع هزینه:</strong> ورود آیتم، مبلغ، تاریخ و دسته‌بندی.</li>
+            <li><strong>تحلیل بصری:</strong> چارت‌ها و خلاصه‌های قابل فهم برای صرفه‌جویی فوری.</li>
+            <li><strong>پیشنهادات AI:</strong> نکات عملی برای کاهش هزینه‌ها و بودجه‌بندی بهتر.</li>
+          </ul>
+
+          <h3>چطور کار می‌کند؟</h3>
           <p>
-            Built for the <strong>CodeWeekend Capstone</strong>, this project combines
-            simplicity, data visualization, and AI assistance to bring clarity to your
-            financial life.
+            اطلاعات روی مرورگر ذخیره می‌شود (localStorage)؛ چارت‌ها از روی دیتا تولید می‌شوند و
+            بخش AI بر اساس جمع‌بندی هزینه‌ها پیشنهاد می‌دهد.
           </p>
 
           <div className="app-highlights">
@@ -30,7 +39,7 @@ export default function About() {
 
             <div className="highlight-card">
               <img
-                src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/8bc7d876-e4c5-4710-854a-a23c0f231652/thumb_AI_Insights__800___800_px__1b.gif"
+                src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto/uploads/publication/logo/8bc7d876-e4c5-4710-854a-a23c0f231652/thumb_AI_Insights__800___800_px__1b.gif"
                 alt="AI Insights"
               />
               <h4>AI Saving Tips</h4>
@@ -48,6 +57,15 @@ export default function About() {
           </div>
 
           <Link to="/" className="about-btn">Go to Dashboard</Link>
+
+          <div className="contact-row">
+            <h4>Contact</h4>
+            <p>برای سوال یا نشان دادن بازخورد: </p>
+            <div className="contact-links">
+              <a href="https://instagram.com/your_username" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="mailto:youremail@example.com">Email</a>
+            </div>
+          </div>
         </div>
 
         <div className="about-images">
@@ -67,15 +85,15 @@ export default function About() {
           </div>
           <div className="image-card">
             <img
-              src="https://tse2.mm.bing.net/th/id/OIP.8O84QMk41JpKTUBFnaXxPAHaE8?pid=Api&P=0&h=220"
-              alt="Savings Plan"
+              src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28"
+              alt="Budget Growth"
             />
             <p>Savings Plan</p>
           </div>
           <div className="image-card">
             <img
-              src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28"
-              alt="Budget Growth"
+              src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
+              alt="Smart Budgeting"
             />
             <p>Budget Growth</p>
           </div>
@@ -85,10 +103,10 @@ export default function About() {
       <div className="about-tech">
         <h3>🧩 Tech Stack</h3>
         <div className="tech-icons">
-          <span>⚛️</span>
-          <span>🎨</span>
-          <span>📦</span>
-          <span>🤖</span>
+          <span>⚛️ React</span>
+          <span>🎨 Tailwind / CSS</span>
+          <span>📦 localStorage</span>
+          <span>🤖 AI</span>
         </div>
       </div>
     </div>
