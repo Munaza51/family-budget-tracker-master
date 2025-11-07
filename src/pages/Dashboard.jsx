@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
@@ -60,16 +61,31 @@ export default function Dashboard() {
   return (
     <div className="dashboard-page container">
       {/* 🖼️ Hero Section */}
-      <div className="dashboard-hero">
+      <div className="dashboard-hero" role="banner" aria-label="Hero: Family Budget Tracker">
         <div className="text">
-          <h1>
-            <Wallet size={30} /> Family Budget Tracker
+          <h1 className="hero-title">
+            <Wallet size={34} /> Family Budget Tracker
           </h1>
-          <p>
-            Smart tracking, visual insights, and AI-powered saving tips to keep your
-            household budget balanced and stress-free.
+          <p className="hero-sub">
+            Smart tracking + visual insights + AI suggestions — همه‌چیز برای کنترل هزینه‌های خانواده‌تان.
           </p>
+
+          <ul className="hero-features">
+            <li>✅ ثبت هزینه سریع (تاریخ، دسته‌بندی، مبلغ)</li>
+            <li>📊 چارت و گزارشات بصری برای فهم سریع خرج‌ها</li>
+            <li>🧠 پیشنهادات هوش‌مصنوعی برای صرفه‌جویی</li>
+          </ul>
+
+          <div className="hero-cta-row">
+            <button className="btn primary" onClick={() => window.scrollTo({ top: 400, behavior: "smooth" })}>
+              شروع ثبت هزینه
+            </button>
+            <button className="btn ghost" onClick={askAITips} disabled={loadingTips}>
+              {loadingTips ? "🤔 Thinking..." : "🧠 دریافت پیشنهاد AI"}
+            </button>
+          </div>
         </div>
+
         <img
           src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=1200&q=60"
           alt="budget"
@@ -94,12 +110,12 @@ export default function Dashboard() {
             <p>Total Spent:</p>
             <h1>{totalSpent.toLocaleString()} AFN</h1>
           </div>
-          <button onClick={askAITips} disabled={loadingTips}>
+          <button className="btn wide" onClick={askAITips} disabled={loadingTips}>
             {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
           </button>
 
           {aiTips && (
-            <div className="ai-tips">
+            <div className="ai-tips" aria-live="polite">
               <Brain size={20} />
               <div>
                 <h4>AI Suggestions</h4>
@@ -119,6 +135,7 @@ export default function Dashboard() {
       {/* 📜 Expense List */}
       <div className="card full expense-list-card">
         <h2>All Expenses</h2>
+        {/* ExpenseList should render edit/delete buttons which are styled globally by .action-btn */}
         <ExpenseList
           items={expenses}
           onDelete={removeExpense}
