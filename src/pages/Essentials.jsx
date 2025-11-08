@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { CheckCircle2, Trash2, PlusCircle, Lightbulb } from "lucide-react";
-import "./index.css"; // مطمئن شو استایل‌ها در این فایل تعریف شده‌اند
 
 const KEY = "cw_essentials_v2";
 
