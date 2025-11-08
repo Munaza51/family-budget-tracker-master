@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRightCircle, Mail, Phone } from "lucide-react";
-import "./index.css"; // مطمئن شو استایل‌ها در این فایل تعریف شده‌اند
+import "../index.css"; // مطمئن شو استایل‌ها در این فایل تعریف شده‌اند
 
 export default function About() {
   const [activeInfo, setActiveInfo] = useState(null);
