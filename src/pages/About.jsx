@@ -1,97 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ArrowRightCircle, Mail, Phone } from "lucide-react";
+import "./index.css"; // مطمئن شو استایل‌ها در این فایل تعریف شده‌اند
 
 export default function About() {
-return (
-<div className="about-section">
-<div className="about-content">
-<div className="about-text">
-<h2>💡 About Family Budget Tracker</h2>
-<p>
-<span className="highlight">Family Budget Tracker</span> is a modern web app designed
-to help families manage daily expenses, track essentials, and set smarter
-saving goals — all from one clean, visual dashboard.
-</p>
-<p>
-Built for the <strong>CodeWeekend Capstone</strong>, this project combines
-simplicity, data visualization, and AI assistance to bring clarity to your
-financial life.
-</p>
+  const [activeInfo, setActiveInfo] = useState(null);
 
-<div className="app-highlights">
-  <div className="highlight-card">  
-          <img  
-            src="https://www.freshbooks.com/wp-content/uploads/2022/02/expense-tracking.jpg"  
-            alt="Expense Tracking"  
-          />  
-          <h4>Track Expenses</h4>  
-          <p>Log every expense easily with category, date, and item tracking.</p>  
-        </div>  
+  const features = [
+    {
+      id: "expense",
+      title: "Track Expenses",
+      img: "https://www.freshbooks.com/wp-content/uploads/2022/02/expense-tracking.jpg",
+      desc: "Log every expense easily with category, date, and item tracking.",
+    },
+    {
+      id: "ai",
+      title: "AI Saving Tips",
+      img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/8bc7d876-e4c5-4710-854a-a23c0f231652/thumb_AI_Insights800_800_px__1b.gif",
+      desc: "Use AI to get personalized recommendations to save more efficiently.",
+    },
+    {
+      id: "charts",
+      title: "Visual Reports",
+      img: "https://images.unsplash.com/photo-1556155092-490a1ba16284",
+      desc: "Beautiful pie charts and summaries make your spending clear at a glance.",
+    },
+  ];
 
-        <div className="highlight-card">  
-          <img  
-            src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/8bc7d876-e4c5-4710-854a-a23c0f231652/thumb_AI_Insights800_800_px__1b.gif"  
-            alt="AI Insights"  
-          />  
-          <h4>AI Saving Tips</h4>  
-          <p>Use AI to get personalized recommendations to save more efficiently.</p>  
-        </div>  
+  return (
+    <div className="about-section container dark-theme">
+      {/* 🧠 Intro */}
+      <header className="about-header tracky-style">
+        <h1>💡 About Family Budget Tracker</h1>
+        <p>
+          <span className="highlight">Family Budget Tracker</span> is a modern web app designed to help families manage daily expenses, track essentials, and set smarter saving goals — all from one clean, visual dashboard.
+        </p>
+        <p>
+          Built for the <strong>CodeWeekend Capstone</strong>, this project combines simplicity, data visualization, and AI assistance to bring clarity to your financial life.
+        </p>
+      </header>
 
-        <div className="highlight-card">  
-          <img  
-            src="https://images.unsplash.com/photo-1556155092-490a1ba16284"  
-            alt="Charts and Analytics"  
-          />  
-          <h4>Visual Reports</h4>  
-          <p>Beautiful pie charts and summaries make your spending clear at a glance.</p>  
-        </div>  
-      </div>  
+      {/* 🎯 Feature Graph */}
+      <section className="feature-graph">
+        <div className="graph-center">
+          <h2 className="graph-title">What It Offers</h2>
+          <ArrowRightCircle className="arrow arrow-1" />
+          <ArrowRightCircle className="arrow arrow-2" />
+          <ArrowRightCircle className="arrow arrow-3" />
+        </div>
 
-      <Link to="/" className="about-btn">Go to Dashboard</Link>  
-    </div>  
+        <div className="feature-cards">
+          {features.map((f) => (
+            <div
+              key={f.id}
+              className={`feature-card ${activeInfo === f.id ? "active" : ""}`}
+              onClick={() => setActiveInfo(f.id)}
+            >
+              <img src={f.img} alt={f.title} />
+              <h4>{f.title}</h4>
+              {activeInfo === f.id && <p className="feature-desc">{f.desc}</p>}
+            </div>
+          ))}
+        </div>
+      </section>
 
-    <div className="about-images">  
-      <div className="image-card">  
-        <img  
-          src="https://static.vecteezy.com/system/resources/previews/041/172/859/original/family-planning-two-hands-intertwined-people-holding-hands-newborn-vector.jpg"  
-          alt="Family Planning"  
-        />  
-        <p>Family Planning</p>  
-      </div>  
-      <div className="image-card">  
-        <img  
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"  
-          alt="Financial Teamwork"  
-        />  
-        <p>Financial Teamwork</p>  
-      </div>  
-      <div className="image-card">  
-        <img  
-          src="https://tse2.mm.bing.net/th/id/OIP.8O84QMk41JpKTUBFnaXxPAHaE8?pid=Api&P=0&h=220"  
-          alt="Savings Plan"  
-        />  
-        <p>Savings Plan</p>  
-      </div>  
-      <div className="image-card">  
-        <img  
-          src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28"  
-          alt="Budget Growth"  
-        />  
-        <p>Budget Growth</p>  
-      </div>  
-    </div>  
-  </div>  
+      {/* 🔧 Tech Stack */}
+      <section className="about-tech card highlight">
+        <h3>🧩 Tech Stack</h3>
+        <div className="tech-icons">
+          <span>⚛️ React</span>
+          <span>🎨 CSS</span>
+          <span>📦 LocalStorage</span>
+          <span>🤖 OpenAI</span>
+        </div>
+      </section>
 
-  <div className="about-tech">  
-    <h3>🧩 Tech Stack</h3>  
-    <div className="tech-icons">  
-      <span>⚛️</span>  
-      <span>🎨</span>  
-      <span>📦</span>  
-      <span>🤖</span>  
-    </div>  
-  </div>  
-</div>
-
-);
+      {/* 📞 Contact */}
+      <section className="about-contact card gradient">
+        <h3>📬 Contact Us</h3>
+        <p>If you have questions, feedback, or want to collaborate, feel free to reach out:</p>
+        <div className="contact-info">
+          <p><Mail size={18} /> Email: support@familybudget.app</p>
+          <p><Phone size={18} /> Phone: +93 700 000 000</p>
+        </div>
+        <Link to="/" className="about-btn">Go to Dashboard</Link>
+      </section>
+    </div>
+  );
 }
