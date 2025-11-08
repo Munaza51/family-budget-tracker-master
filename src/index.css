@@ -606,35 +606,43 @@ gap: 12px;
 }
 
 /* 🖼️ Hero Banner */
-
 .dashboard-hero {
   display: flex;
+  flex-direction: row; /* برای اینکه تصویر و متن در یک ردیف باشند */
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* مرکز چین کردن همه بخش ها */
   background: linear-gradient(135deg, #eef2ff, #f8fafc);
   border-radius: 22px;
   padding: 50px;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
   gap: 40px;
   margin-bottom: 40px;
+  position: relative;
 }
 
-.dashboard-hero .text {
-  flex: 1;
-}
-
+/* تنظیم برای عنوان */
 .dashboard-hero h1 {
-  font-size: 2.6rem;
+  font-size: 3rem;  /* اندازه فونت بزرگتر */
   font-weight: 800;
   display: flex;
   align-items: center;
   gap: 12px;
   color: #111827;
-  margin-bottom: 16px;
+  position: absolute; /* برای قرارگیری عنوان در مرکز */
+  top: 20%;  /* موقعیت عنوان در بالای بنر */
+  left: 50%;
+  transform: translateX(-50%); /* مرکز کردن عنوان در عرض */
+  z-index: 1;  /* برای اینکه عنوان جلوتر از بقیه عناصر نمایش داده شود */
+}
+
+/* متن و ویژگی ها */
+.dashboard-hero .text {
+  flex: 1;
+  text-align: left;
 }
 
 .dashboard-hero p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;  /* اندازه فونت بزرگتر برای متن */
   color: #374151;
   margin-bottom: 14px;
   line-height: 1.7;
@@ -652,13 +660,15 @@ gap: 12px;
   line-height: 1.6;
 }
 
+/* تصویر */
 .dashboard-hero .hero-img {
-  width: 48%;
+  width: 50%;  /* تصویر باید به اندازه کافی بزرگ باشد */
   border-radius: 18px;
   object-fit: cover;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
 }
 
+/* موبایل */
 @media (max-width: 768px) {
   .dashboard-hero {
     flex-direction: column;
@@ -668,11 +678,14 @@ gap: 12px;
 
   .dashboard-hero .hero-img {
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .dashboard-hero h1 {
     font-size: 2.1rem;
-    justify-content: center;
+    position: static;  /* برای اینکه عنوان در وسط صفحه باشد */
+    transform: none;
+    margin-bottom: 20px;
   }
 }
 
