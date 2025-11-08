@@ -49,8 +49,8 @@ body {
 }
 
 .nav a {
-  color: var(--text);
   text-decoration: none;
+  color: var(--text);
   font-weight: 600;
   margin-left: 20px;
   transition: var(--transition);
@@ -158,44 +158,84 @@ body {
 }
 
 /* === Add Expense Form === */
-.form input,
-.form select {
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 14px;
+.expense-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: end;
+}
+
+.expense-form input,
+.expense-form select {
+  padding: 12px 16px;
   border-radius: var(--radius);
-  border: 1px solid #333;
   background: #1f1f1f;
   color: var(--text);
+  border: 1px solid #333;
   font-size: 15px;
-}
-
-.form input:focus,
-.form select:focus {
-  border-color: var(--accent);
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.2);
-}
-
-.form button {
   width: 100%;
-  padding: 14px 16px;
-  border-radius: var(--radius);
-  border: none;
+}
+
+.expense-form button {
   background: var(--gradient);
   color: #fff;
   font-weight: 600;
-  font-size: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border: none;
   cursor: pointer;
   transition: var(--transition);
 }
 
-.form button:hover {
+.expense-form button:hover {
   opacity: 0.9;
   transform: translateY(-2px);
 }
 
-/* === Essentials List === */
+/* === Expense List === */
+.expense-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expense-list th,
+.expense-list td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #333;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.expense-list th {
+  background: #1f1f1f;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.expense-list td.actions {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-btn {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.action-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* === Essentials === */
 .essentials-list-modern li {
   background: #1f1f1f;
   padding: 14px 16px;
@@ -287,6 +327,10 @@ body {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+
+  .expense-form {
+    grid-template-columns: 1fr;
   }
 
   .essentials-add {
