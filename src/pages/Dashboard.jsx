@@ -58,24 +58,109 @@ setLoadingTips(false);
 const totalSpent = expenses.reduce((s, e) => s + Number(e.cost), 0);
 
 return (
-<div className="dashboard-page container">
-{/* 🖼️ Hero Section */}
-<div className="dashboard-hero">
-<div className="text">
-<h1>
-<Wallet size={30} /> Family Budget Tracker
-</h1>
-<p>
-Smart tracking, visual insights, and AI-powered saving tips to keep your
-household budget balanced and stress-free.
-</p>
-</div>
-<img  
-src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=1200&q=60"  
-alt="budget"  
-className="hero-img"  
-/>
-</div>
+  <div className="dashboard-page container">
+
+    {/* ✅ Inject Hero CSS inside JSX */}
+    <style>{`
+      .dashboard-hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        border-radius: 22px;
+        padding: 50px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .dashboard-hero .text {
+        flex: 1;
+      }
+
+      .dashboard-hero h1 {
+        font-size: 2.6rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #111827;
+        margin-bottom: 16px;
+      }
+
+      .dashboard-hero p {
+        font-size: 1.1rem;
+        color: #374151;
+        margin-bottom: 14px;
+        line-height: 1.7;
+      }
+
+      .dashboard-hero .features {
+        font-size: 1rem;
+        margin-top: 12px;
+        color: #4b5563;
+        background: #fff;
+        padding: 14px 18px;
+        border-radius: 12px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        border-left: 4px solid #6d72ff;
+        line-height: 1.6;
+      }
+
+      .dashboard-hero .hero-img {
+        width: 48%;
+        border-radius: 18px;
+        object-fit: cover;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      }
+
+      @media (max-width: 768px) {
+        .dashboard-hero {
+          flex-direction: column;
+          text-align: center;
+          padding: 30px;
+        }
+
+        .dashboard-hero .hero-img {
+          width: 100%;
+        }
+
+        .dashboard-hero h1 {
+          font-size: 2.1rem;
+          justify-content: center;
+        }
+      }
+    `}</style>
+
+    {/* ✅ Modern Hero Section */}
+    <div className="dashboard-hero">
+      <div className="text">
+        <h1>
+          <Wallet size={38} /> Family Budget Tracker
+        </h1>
+
+        <p>
+          A clean, modern way to understand your money — track smarter, save
+          confidently, and plan effortlessly with beautiful visual insights.
+        </p>
+
+        <p className="features">
+          ✅ Real-time expense tracking <br />
+          ✅ Category & monthly breakdowns <br />
+          ✅ Smart insights to improve saving <br />
+          ✅ Fast, simple, organized — made for families
+        </p>
+      </div>
+
+      <img
+        src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=1200&q=60"
+        alt="budget"
+        className="hero-img"
+      />
+    </div>
+
+  </div>
+);
 
 {/* 💸 Add Expense + Summary */}  
   <div className="row dashboard-grid">  
