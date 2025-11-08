@@ -606,40 +606,74 @@ gap: 12px;
 }
 
 /* 🖼️ Hero Banner */
+
 .dashboard-hero {
-display: flex;
-align-items: center;
-justify-content: space-between;
-background: linear-gradient(135deg, #eef2ff, #f8fafc);
-border-radius: 18px;
-padding: 30px;
-box-shadow: var(--shadow);
-gap: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  border-radius: 22px;
+  padding: 50px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+  gap: 40px;
+  margin-bottom: 40px;
 }
 
 .dashboard-hero .text {
-flex: 1;
+  flex: 1;
 }
 
 .dashboard-hero h1 {
-font-size: 2rem;
-display: flex;
-align-items: center;
-gap: 10px;
-color: #111827;
+  font-size: 2.6rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #111827;
+  margin-bottom: 16px;
 }
 
 .dashboard-hero p {
-font-size: 1rem;
-color: #4b5563;
-margin-top: 8px;
+  font-size: 1.1rem;
+  color: #374151;
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+.dashboard-hero .features {
+  font-size: 1rem;
+  margin-top: 12px;
+  color: #4b5563;
+  background: #fff;
+  padding: 14px 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #6d72ff;
+  line-height: 1.6;
 }
 
 .dashboard-hero .hero-img {
-width: 45%;
-border-radius: 14px;
-object-fit: cover;
-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  width: 48%;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 768px) {
+  .dashboard-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .dashboard-hero .hero-img {
+    width: 100%;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 2.1rem;
+    justify-content: center;
+  }
 }
 
 /* 💸 Card Layouts */
