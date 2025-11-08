@@ -54,6 +54,46 @@ a:hover {
   color: var(--accent-color);
 }
 
+.nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background: var(--bg);
+}
+
+.nav-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--text);
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(99,102,241,0.3);
+}
+
 /* Hero Section Container */
 .hero {
   display: flex;
@@ -67,21 +107,24 @@ a:hover {
   min-height: 70vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: var(--border-radius);
+  position: relative;
+  overflow: hidden;
 }
 
 /* Main Heading */
 .hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
   margin-bottom: 1rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for better readability */
 }
 
 /* Supporting Text */
 .hero p {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  margin-bottom: 2.5rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 2rem;
   max-width: 600px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
@@ -93,12 +136,12 @@ a:hover {
   color: var(--primary-color);
   font-weight: 600;
   font-size: 1.25rem;
-  padding: 0.85rem 2.5rem;
+  padding: 0.75rem 2.5rem;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   box-shadow: 0 8px 15px rgba(76, 175, 80, 0.4);
-  transition: var(--transition);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
   display: inline-block;
 }
@@ -114,10 +157,12 @@ a:hover {
 .hero img {
   max-width: 100%;
   height: auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
   border-radius: 1rem;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  width: clamp(280px, 50vw, 400px);
+  width: 100%; /* Make sure the image is responsive */
+  object-fit: cover; /* Image will cover the area without stretching */
+  max-height: 500px; /* Limiting the height of the image */
 }
 
 /* Responsive Layout for wider screens */
@@ -139,7 +184,6 @@ a:hover {
     margin-top: 0;
   }
 }
-
 /* Layout Classes (Figma-inspired containers) */
 .container {
   max-width: 1200px;
