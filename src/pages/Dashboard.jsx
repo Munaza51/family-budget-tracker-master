@@ -161,7 +161,7 @@ export default function Dashboard() {
       <div style={styles.cardGrid}>
         <section style={{ ...styles.card, ...styles.addExpenseCard }}>
           <h2><Sparkles size={20} /> Add Expense</h2>
-          <ExpenseForm onAdd={(e) => { e.preventDefault(); addExpense(e); }} />
+          <ExpenseForm onAdd={addExpense} />
         </section>
 
         <section style={{ ...styles.card, ...styles.quickAddCard }}>
