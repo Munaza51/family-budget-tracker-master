@@ -79,11 +79,6 @@ export default function Dashboard() {
             </span>
           </p>
         </div>
-        <img
-          src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=1200&q=60"
-          alt="budget"
-          className="hero-img"
-        />
       </div>
 
       {/* 💸 Add Expense + Summary */}
@@ -138,8 +133,8 @@ export default function Dashboard() {
       {/* ===== CSS ===== */}
       <style jsx>{`
         :root {
-          --main-color: #4a2dff;
-          --text-color: #000;
+          --main-color: #4a2dff; /* بنفش */
+          --text-color: #000; /* مشکی */
           --light-color: #fff;
         }
 
@@ -150,36 +145,41 @@ export default function Dashboard() {
           font-family: 'Poppins', sans-serif;
         }
 
-        a {
-          text-decoration: none;
-        }
-
         .hero {
           position: relative;
           max-width: 1440px;
           margin: auto;
-          padding: 75px 75px 75px 0px;
+          padding: 75px 2rem;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 2rem;
+          justify-content: flex-start; /* چپ چین */
+          flex-direction: column;
+          background: linear-gradient(135deg, #f7f7ff 0%, #ffffff 100%);
+          border-radius: 12px;
+          animation: gradientShift 10s ease infinite alternate;
         }
 
-        .hero-img {
-          width: 625px;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-          z-index: -1;
+        @keyframes gradientShift {
+          0% {
+            background: linear-gradient(135deg, #f7f7ff 0%, #ffffff 100%);
+          }
+          50% {
+            background: linear-gradient(135deg, #e6e6ff 0%, #ffffff 100%);
+          }
+          100% {
+            background: linear-gradient(135deg, #f7f7ff 0%, #ffffff 100%);
+          }
         }
 
         .main-title {
           max-width: 600px;
+          color: var(--text-color);
+          padding-left: 1rem;
         }
 
         .h1 {
           font-size: 3rem;
           margin-bottom: 1rem;
-          color: var(--main-color);
+          color: var(--main-color); /* تیتر اصلی بنفش */
         }
 
         .features {
@@ -188,7 +188,7 @@ export default function Dashboard() {
           gap: 10px;
           margin-top: 20px;
           font-size: 1.1rem;
-          color: var(--main-color);
+          color: var(--text-color); /* بقیه متن مشکی */
         }
 
         .feature-item {
@@ -207,21 +207,14 @@ export default function Dashboard() {
 
         /* Responsive */
         @media (max-width: 1080px) {
-          .hero-img {
-            width: 500px;
+          .h1 {
+            font-size: 2.5rem;
           }
         }
 
         @media (max-width: 900px) {
           .hero {
-            flex-direction: column;
-            padding: 2rem;
-          }
-          .hero-img {
-            width: 100%;
-          }
-          .main-title {
-            max-width: 100%;
+            padding: 2rem 1rem;
           }
           .h1 {
             font-size: 2rem;
