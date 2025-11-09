@@ -18,7 +18,11 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
   };
 
   if (!items.length)
-    return <p className="muted">No expenses yet — add something to start tracking.</p>;
+    return (
+      <p className="muted" style={{ textAlign: "center", padding: "20px", color: "#6366f1" }}>
+        No expenses yet — add something to start tracking.
+      </p>
+    );
 
   return (
     <div className="expense-list">
@@ -36,6 +40,7 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           background: #fff;
           border-radius: var(--radius);
           overflow: hidden;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
 
         .expense-list th, .expense-list td {
@@ -51,13 +56,18 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           font-weight: 600;
         }
 
+        .expense-list td {
+          vertical-align: middle;
+        }
+
         .button-group {
           display: flex;
           gap: 8px;
+          justify-content: center; /* Align buttons horizontally in center */
         }
 
         button.small {
-          padding: 14px 16px;
+          padding: 10px 12px;
           border-radius: var(--radius);
           border: none;
           background: var(--gradient);
@@ -86,6 +96,18 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           border: 1px solid #ccc;
           border-radius: var(--radius);
           width: 100%;
+        }
+
+        .expense-list td {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .expense-list td .button-group {
+          display: flex;
+          gap: 8px;
+          justify-content: flex-start;
         }
       `}</style>
 
