@@ -128,7 +128,8 @@ export default function Dashboard() {
     progressContainer: { background: "#eee", borderRadius: "12px", overflow: "hidden", marginTop: "10px" },
     progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
     toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" },
-    quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" }
+    quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" },
+    spendingSummaryContainer: { display: "flex", justifyContent: "center", alignItems: "center", gap: "20px", marginTop: "40px" }
   };
 
   return (
@@ -179,12 +180,15 @@ export default function Dashboard() {
           <h2>Quick Add</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {["Food", "Transport", "Rent", "Groceries", "Electricity", "Water", "Internet", "Entertainment"].map((item, i) => (
-              <button key={i} style={styles.quickAddButton} onClick={() => quickAdd(item, 100 * (i + 1), "General")}>{item}</button>
+              <button key={i} style={styles.quickAddButton} onClick={() => quickAdd(item, 100 * (i+1), "General")}>{item}</button>
             ))}
           </div>
         </section>
+      </div>
 
-        <section style={styles.card}>
+      {/* Spending Summary - Now in its own row */}
+      <div style={styles.spendingSummaryContainer}>
+        <section style={{ ...styles.card, ...styles.addExpenseCard }}>
           {budgetAlert && <div style={styles.badgeAlert}>⚠️ Budget exceeded!</div>}
           <h2><PieChart size={20} /> Spending Summary</h2>
           <div style={styles.summaryBox}>
