@@ -124,7 +124,7 @@ export default function Dashboard() {
     infoTable: { width: "100%", borderCollapse: "collapse", margin: "20px 0", textAlign: "left" },
     infoTableTh: { borderBottom: `2px solid ${PURPLE}`, padding: "10px", color: PURPLE },
     infoTableTd: { borderBottom: "1px solid #ddd", padding: "10px" },
-    quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" }
+    quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: white, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" }
   };
 
   return (
@@ -224,7 +224,7 @@ export default function Dashboard() {
             <small>Goal: {savingGoal.toLocaleString()} AFN</small>
           </div>
           <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
-            {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
+            {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
           </button>
           {aiTips && (
             <div style={styles.aiTips}>
