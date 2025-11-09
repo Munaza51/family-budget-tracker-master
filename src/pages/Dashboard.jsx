@@ -49,6 +49,7 @@ export default function Dashboard() {
       setAiTips(tips);
     } catch (err) {
       setAiTips("⚠️ AI tip error — check API key or network.");
+      console.error(err);
     } finally {
       setLoadingTips(false);
     }
@@ -58,115 +59,26 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-page container">
-
-      {/* ✅ CSS — اضافه شده داخل فایل */}
-      <style>{`
-        :root {
-          --main-color:#4a2dff;
-          --text-color:#000;
-          --light-color:#fff;
-        }
-
-        .dashboard-hero {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 40px;
-          padding: 60px 40px;
-          border-radius: 20px;
-          background: linear-gradient(135deg, #fff 0%, #f4f3ff 100%);
-          box-shadow: 0 4px 18px #00000020;
-          margin-bottom: 40px;
-        }
-
-        .dashboard-hero .text {
-          flex: 1;
-        }
-
-        .dashboard-hero h1 {
-          font-size: 2.4rem;
-          font-weight: 700;
-          color: var(--main-color);
-          margin-bottom: 10px;
-          position: relative;
-        }
-
-        .dashboard-hero h1::before {
-          content: "";
-          position: absolute;
-          bottom: -5px;
-          left: 0;
-          width: 55%;
-          height: 12px;
-          background-color: #4a2dff33;
-          clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
-          z-index: -1;
-        }
-
-        .dashboard-hero p {
-          color: #444;
-          font-size: 15px;
-          margin-bottom: 15px;
-          line-height: 1.6;
-        }
-
-        .dashboard-hero .features {
-          font-size: 14px;
-          background: #f6f3ff;
-          padding: 12px 15px;
-          border-left: 4px solid var(--main-color);
-          border-radius: 6px;
-          color: #333;
-        }
-
-        .dashboard-hero .hero-img {
-          width: 340px;
-          height: 260px;
-          object-fit: cover;
-          border-radius: 18px;
-          box-shadow: 0 4px 12px #00000025;
-        }
-
-        /* ✅ Mobile */
-        @media(max-width: 900px) {
-          .dashboard-hero {
-            flex-direction: column;
-            text-align: center;
-            padding: 30px 20px;
-          }
-          .dashboard-hero h1::before {
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-          }
-          .dashboard-hero .hero-img {
-            width: 100%;
-            height: auto;
-            margin-top: 15px;
-          }
-        }
-      `}</style>
-
       {/* 🖼️ Hero Section */}
-      <div className="dashboard-hero">
-        <div className="text">
-          <h1>
+      <div className="dashboard-hero hero">
+        <div className="main-title text">
+          <h1 className="h1">
             <Wallet size={38} /> Family Budget Tracker
           </h1>
-
           <p>
-            A clean, modern way to understand your money — track smarter, 
-            save confidently, and plan effortlessly with beautiful visual insights.
+            A clean, modern way to understand your money — track smarter, save
+            confidently, and plan effortlessly with beautiful visual insights.
           </p>
 
           <p className="features">
-            ✅ Real-time expense tracking <br />
-            ✅ Category & monthly breakdowns <br />
-            ✅ Smart insights to improve saving <br />
-            ✅ Fast, simple, organized — made for families
+            <span className="feature-item">Real-time expense tracking</span>
+            <span className="feature-item">Category & monthly breakdowns</span>
+            <span className="feature-item">Smart insights to improve saving</span>
+            <span className="feature-item">
+              Fast, simple, organized — made for families
+            </span>
           </p>
         </div>
-
         <img
           src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=1200&q=60"
           alt="budget"
@@ -216,8 +128,106 @@ export default function Dashboard() {
       {/* 📜 Expense List */}
       <div className="card full expense-list-card">
         <h2>All Expenses</h2>
-        <ExpenseList items={expenses} onDelete={removeExpense} onEdit={editExpense} />
+        <ExpenseList
+          items={expenses}
+          onDelete={removeExpense}
+          onEdit={editExpense}
+        />
       </div>
+
+      {/* ===== CSS ===== */}
+      <style jsx>{`
+        :root {
+          --main-color: #4a2dff;
+          --text-color: #000;
+          --light-color: #fff;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        .hero {
+          position: relative;
+          max-width: 1440px;
+          margin: auto;
+          padding: 75px 75px 75px 0px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 2rem;
+        }
+
+        .hero-img {
+          width: 625px;
+          border-radius: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+          z-index: -1;
+        }
+
+        .main-title {
+          max-width: 600px;
+        }
+
+        .h1 {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          color: var(--main-color);
+        }
+
+        .features {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 20px;
+          font-size: 1.1rem;
+          color: var(--main-color);
+        }
+
+        .feature-item {
+          position: relative;
+          padding-left: 25px;
+          line-height: 1.5;
+        }
+
+        .feature-item::before {
+          content: "➤";
+          position: absolute;
+          left: 0;
+          color: var(--main-color);
+          font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 1080px) {
+          .hero-img {
+            width: 500px;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .hero {
+            flex-direction: column;
+            padding: 2rem;
+          }
+          .hero-img {
+            width: 100%;
+          }
+          .main-title {
+            max-width: 100%;
+          }
+          .h1 {
+            font-size: 2rem;
+          }
+        }
+      `}</style>
     </div>
   );
-      }
+}
