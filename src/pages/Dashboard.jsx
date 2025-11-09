@@ -105,21 +105,15 @@ const styles = {
   container: {
     fontFamily: "'Poppins', sans-serif",
     color: "#000",
-    maxWidth: "1200px",
-    margin: "0 auto",
-    padding: "20px",
+    maxWidth: "1440px",
+    margin: "auto",
+    padding: "0 20px",
     background: "#fff",
     transition: "background 0.3s, color 0.3s",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
   },
-
-  // === Hero Section ===
   hero: {
     display: "flex",
-    flexDirection: "row", // side by side on desktop
-    flexWrap: "wrap",     // wrap on smaller screens
+    flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     gap: "20px",
@@ -129,48 +123,20 @@ const styles = {
     background: PURPLE,
     boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
     transition: "all 0.5s",
-  },
-  heroText: {
-    flex: "1 1 300px", // flexible width
-    minWidth: "250px",
-    textAlign: "left",
-  },
-  mainTitle: {
-    fontSize: "2.5rem",
-    color: "#fff",
-    marginBottom: "15px",
-    fontWeight: "bold",
-  },
-  heroDesc: {
-    fontSize: "1.1rem",
-    lineHeight: "1.5",
-    color: "#fff",
-    marginBottom: "15px",
-  },
-  heroImg: {
-    flex: "1 1 250px",
-    width: "100%",
-    maxWidth: "300px",
-    height: "auto",
-    borderRadius: "20px",
-    objectFit: "cover",
-  },
-  features: {
-    listStyle: "none",
-    paddingLeft: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    color: "#fff",
-  },
-
-  // === Cards / Expense / Quick Add ===
-  cardGrid: {
-    display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
+  },
+  heroText: { flex: "1", minWidth: "250px" },
+  heroImg: { width: "200px", height: "200px", borderRadius: "20px", objectFit: "cover" },
+  mainTitle: { fontSize: "2.5rem", color: "#fff", marginBottom: "15px", fontWeight: "bold" },
+  heroDesc: { fontSize: "1.1rem", lineHeight: "1.5", color: "#fff", marginBottom: "15px" },
+  features: { listStyle: "none", paddingLeft: 0, display: "flex", flexDirection: "column", gap: "10px", color: "#fff" },
+  featureItem: { display: "flex", alignItems: "center", fontSize: "0.95rem" },
+  featureArrow: { color: "#fff", fontWeight: "bold", marginRight: "8px" },
+
+  cardGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: "20px",
-    width: "100%",
     marginBottom: "40px",
   },
   card: {
@@ -179,41 +145,37 @@ const styles = {
     boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
     background: "#fff",
     transition: "all 0.3s ease",
-    flex: "1 1 300px",
-    maxWidth: "400px",
-    textAlign: "center",
   },
-  quickAddCard: {
-    padding: "20px",
-    borderRadius: "12px",
-    background: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "12px",
-    flex: "1 1 300px",
-    maxWidth: "400px",
-    textAlign: "center",
-  },
-  quickAddButton: {
-    padding: "10px 16px",
-    borderRadius: "6px",
-    background: PURPLE,
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-    minWidth: "120px",
-  },
-
-  // === Spending Summary ===
+  addExpenseCard: { background: PURPLE, color: "#fff" },
+  quickAddCard: { 
+  background: "#fff", 
+  color: "#000", 
+  display: "flex", 
+  flexDirection: "column", 
+  gap: "10px", 
+  padding: "20px", 
+  alignItems: "center",      // اضافه شد
+  justifyContent: "center",  // اضافه شد
+  textAlign: "center"        // اضافه شد
+},
+quickAddButton: {
+  padding: "8px 15px",
+  borderRadius: "6px",
+  background: PURPLE,
+  color: "#fff",
+  border: "none",
+  cursor: "pointer",
+  transition: "all 0.3s ease",
+  textAlign: "center",
+  width: "fit-content",
+  minWidth: "100px",
+  margin: "0 auto"           // اضافه شد برای وسط چین
+},
   spendingSummaryContainer: {
     display: "flex",
-    flexWrap: "wrap",
     justifyContent: "center",
+    alignItems: "center",
     gap: "20px",
-    width: "100%",
     marginTop: "40px",
   },
   spendingSummaryCard: {
@@ -222,13 +184,12 @@ const styles = {
     boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
     background: "#fff",
     color: "#000",
-    flex: "1 1 250px",
-    maxWidth: "300px",
+    maxWidth: "400px",
+    width: "100%",
     textAlign: "center",
     transition: "all 0.3s ease",
   },
 
-  // === Inputs / Buttons ===
   input: {
     width: "100%",
     padding: "8px 12px",
@@ -249,7 +210,8 @@ const styles = {
   },
   button: {
     width: "100%",
-    padding: "10px 16px",
+    padding: "8px 12px",
+    marginBottom: "10px",
     borderRadius: "6px",
     border: "none",
     fontSize: "0.95rem",
@@ -257,41 +219,45 @@ const styles = {
     boxSizing: "border-box",
   },
 
-  // === AI Tips ===
-  aiTips: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "10px",
-    backgroundColor: PURPLE,
-    color: "#fff",
-    padding: "10px",
-    borderRadius: "8px",
-    marginTop: "10px",
-    width: "100%",
-    maxWidth: "400px",
-  },
-  aiButton: {
-    backgroundColor: PURPLE,
-    color: "#fff",
-    border: "none",
-    padding: "10px 15px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    marginTop: "10px",
-    transition: "all 0.3s ease",
-  },
-
-  // === Footer ===
-  footer: {
-    marginTop: "60px",
+spendingSummaryContainer: {
+  display: "flex",
+  justifyContent: "space-between", // تغییر یافت
+  alignItems: "center",
+  gap: "20px",
+  flexWrap: "wrap",               // اضافه شد
+  marginTop: "40px",
+},
+spendingSummaryCard: {
+  padding: "25px",
+  borderRadius: "12px",
+  boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
+  background: "#fff",
+  color: "#000",
+  flex: "1 1 250px",              // اضافه شد برای اندازه قابل انعطاف
+  textAlign: "center",
+  transition: "all 0.3s ease",
+  maxWidth: "300px",              // محدود کردن حداکثر اندازه
+},
+  summaryBox: {
+    backgroundColor: "#fff",
+    padding: "15px",
+    borderRadius: "10px",
+    marginBottom: "15px",
     textAlign: "center",
-    width: "100%",
-    padding: "20px 0",
-    color: "#555",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
   },
-};
+  aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
+  aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "all 0.3s ease" },
 
+  sectionMargin: { marginTop: "40px" },
+  inputFilter: { padding: "6px 10px", borderRadius: "6px", border: "1px solid #ccc", width: "150px", fontSize: "0.9rem" },
+  badgeAlert: { backgroundColor: "#fff", color: PURPLE, padding: "6px 12px", borderRadius: "6px", fontWeight: "bold", marginBottom: "10px", textAlign: "center" },
+  miniList: { display: "flex", gap: "10px", marginTop: "10px" },
+  miniItem: { padding: "5px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", fontSize: "0.85rem" },
+  progressContainer: { background: "#eee", borderRadius: "12px", overflow: "hidden", marginTop: "10px" },
+  progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
+  toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" },
+};   
 
 
   return (
