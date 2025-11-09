@@ -58,52 +58,56 @@ export default function Dashboard() {
   const totalSpent = expenses.reduce((s, e) => s + Number(e.cost), 0);
 
   return (
-    <div className="dashboard-page container">
+    <div style={styles.container}>
       {/* 🖼️ Hero Section */}
-      <div className="dashboard-hero hero">
-        <div className="main-title text">
-          <h1 className="h1">
-            <Wallet size={38} /> Family Budget Tracker
+      <div style={styles.hero}>
+        <div style={styles.heroText}>
+          <h1 style={styles.heroTitle}>
+            <Wallet size={32} /> <span style={styles.mainColor}>Family Budget Tracker</span>
           </h1>
-          <p>
-            A clean, modern way to understand your money — track smarter, save
-            confidently, and plan effortlessly with beautiful visual insights.
+          <p style={styles.heroDesc}>
+            Track your family's expenses effortlessly with a clean and modern dashboard. Stay
+            informed, save smarter, and plan ahead confidently.
           </p>
-
-          <p className="features">
-            <span className="feature-item">Real-time expense tracking</span>
-            <span className="feature-item">Category & monthly breakdowns</span>
-            <span className="feature-item">Smart insights to improve saving</span>
-            <span className="feature-item">
-              Fast, simple, organized — made for families
-            </span>
-          </p>
+          <ul style={styles.features}>
+            <li>➡️ Real-time expense tracking</li>
+            <li>➡️ Category & monthly breakdowns</li>
+            <li>➡️ Smart insights to improve saving</li>
+            <li>➡️ Fast, simple, organized — made for families</li>
+          </ul>
+        </div>
+        <div style={styles.heroImageWrapper}>
+          <img
+            style={styles.heroImage}
+            src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=800&q=60"
+            alt="Budget Illustration"
+          />
         </div>
       </div>
 
       {/* 💸 Add Expense + Summary */}
-      <div className="row dashboard-grid">
-        <section className="card gradient">
+      <div style={styles.dashboardGrid}>
+        <section style={{ ...styles.card, ...styles.gradientCard }}>
           <h2>
             <Sparkles size={20} /> Add Expense
           </h2>
           <ExpenseForm onAdd={addExpense} />
         </section>
 
-        <section className="card highlight">
+        <section style={{ ...styles.card, ...styles.highlightCard }}>
           <h2>
             <PieChart size={20} /> Spending Summary
           </h2>
-          <div className="summary-box">
+          <div style={styles.summaryBox}>
             <p>Total Spent:</p>
             <h1>{totalSpent.toLocaleString()} AFN</h1>
           </div>
-          <button onClick={askAITips} disabled={loadingTips}>
+          <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
             {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
           </button>
 
           {aiTips && (
-            <div className="ai-tips">
+            <div style={styles.aiTips}>
               <Brain size={20} />
               <div>
                 <h4>AI Suggestions</h4>
@@ -115,112 +119,112 @@ export default function Dashboard() {
       </div>
 
       {/* 📊 Pie Chart */}
-      <div className="card full chart-card">
+      <div style={{ ...styles.card, ...styles.fullCard }}>
         <h2>Spending by Category</h2>
         <SpendingPie data={totalsByCategory} />
       </div>
 
       {/* 📜 Expense List */}
-      <div className="card full expense-list-card">
+      <div style={{ ...styles.card, ...styles.fullCard }}>
         <h2>All Expenses</h2>
-        <ExpenseList
-          items={expenses}
-          onDelete={removeExpense}
-          onEdit={editExpense}
-        />
+        <ExpenseList items={expenses} onDelete={removeExpense} onEdit={editExpense} />
       </div>
-
-      {/* ===== CSS ===== */}
-      <style jsx>{`
-        :root {
-          --main-color: #4a2dff; /* بنفش */
-          --text-color: #000; /* مشکی */
-          --light-color: #fff;
-        }
-
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: 'Poppins', sans-serif;
-        }
-
-        .hero {
-          position: relative;
-          max-width: 1440px;
-          margin: auto;
-          padding: 75px 2rem;
-          display: flex;
-          justify-content: flex-start; /* چپ چین */
-          flex-direction: column;
-          background: linear-gradient(135deg, #f7f7ff 0%, #ffffff 100%);
-          border-radius: 12px;
-          animation: gradientShift 10s ease infinite alternate;
-        }
-
-        @keyframes gradientShift {
-          0% {
-            background: linear-gradient(135deg, #f7f7ff 0%, #ffffff 100%);
-          }
-          50% {
-            background: linear-gradient(135deg, #e6e6ff 0%, #ffffff 100%);
-          }
-          100% {
-            background: linear-gradient(135deg, #f7f7ff 0%, #ffffff 100%);
-          }
-        }
-
-        .main-title {
-          max-width: 600px;
-          color: var(--text-color);
-          padding-left: 1rem;
-        }
-
-        .h1 {
-          font-size: 3rem;
-          margin-bottom: 1rem;
-          color: var(--main-color); /* تیتر اصلی بنفش */
-        }
-
-        .features {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          margin-top: 20px;
-          font-size: 1.1rem;
-          color: var(--text-color); /* بقیه متن مشکی */
-        }
-
-        .feature-item {
-          position: relative;
-          padding-left: 25px;
-          line-height: 1.5;
-        }
-
-        .feature-item::before {
-          content: "➤";
-          position: absolute;
-          left: 0;
-          color: var(--main-color);
-          font-weight: bold;
-        }
-
-        /* Responsive */
-        @media (max-width: 1080px) {
-          .h1 {
-            font-size: 2.5rem;
-          }
-        }
-
-        @media (max-width: 900px) {
-          .hero {
-            padding: 2rem 1rem;
-          }
-          .h1 {
-            font-size: 2rem;
-          }
-        }
-      `}</style>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    fontFamily: "'Poppins', sans-serif",
+    color: "#000",
+  },
+  mainColor: {
+    color: "#4a2dff",
+  },
+  hero: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    maxWidth: "1440px",
+    margin: "0 auto",
+    padding: "60px 40px",
+    background: "linear-gradient(120deg, #ffffff, #f0f0ff)",
+    borderRadius: "15px",
+    gap: "30px",
+    flexWrap: "wrap",
+  },
+  heroText: {
+    flex: "1 1 500px",
+    minWidth: "300px",
+    textAlign: "left",
+  },
+  heroTitle: {
+    fontSize: "3rem",
+    marginBottom: "20px",
+  },
+  heroDesc: {
+    fontSize: "1.1rem",
+    lineHeight: "1.6",
+    marginBottom: "20px",
+  },
+  features: {
+    listStyle: "none",
+    paddingLeft: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+  },
+  heroImageWrapper: {
+    flex: "1 1 400px",
+    minWidth: "250px",
+    display: "flex",
+    justifyContent: "center",
+  },
+  heroImage: {
+    width: "100%",
+    maxWidth: "450px",
+    height: "auto",
+    borderRadius: "50% 40% 60% 50% / 50% 60% 40% 50%",
+    objectFit: "cover",
+    boxShadow: "0px 10px 30px rgba(0,0,0,0.15)",
+  },
+  dashboardGrid: {
+    display: "grid",
+    gap: "30px",
+    marginTop: "50px",
+    padding: "0 40px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+  },
+  card: {
+    backgroundColor: "#fff",
+    padding: "25px",
+    borderRadius: "15px",
+    boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
+  },
+  gradientCard: {
+    background: "linear-gradient(135deg, #4a2dff33, #ffffff)",
+  },
+  highlightCard: {
+    background: "#f8f8ff",
+  },
+  summaryBox: {
+    margin: "15px 0",
+  },
+  aiButton: {
+    padding: "10px 15px",
+    border: "none",
+    borderRadius: "8px",
+    backgroundColor: "#4a2dff",
+    color: "#fff",
+    cursor: "pointer",
+  },
+  aiTips: {
+    display: "flex",
+    gap: "10px",
+    marginTop: "15px",
+    alignItems: "flex-start",
+  },
+  fullCard: {
+    gridColumn: "1 / -1",
+  },
+};
