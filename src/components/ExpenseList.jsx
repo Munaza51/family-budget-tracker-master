@@ -11,6 +11,7 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
 
   const handleSaveClick = () => {
     if (editedItem.trim()) {
+      // Pass id and new item to the parent
       onEdit(editingId, editedItem.trim());
       setEditingId(null);
       setEditedItem("");
@@ -18,11 +19,30 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
   };
 
   if (!items.length)
-    return <p style={{ textAlign: "center", padding: "20px", background: "#f3f4f6", borderRadius: "8px" }}>No expenses yet — add something to start tracking.</p>;
+    return (
+      <p
+        style={{
+          textAlign: "center",
+          padding: "20px",
+          background: "#f3f4f6",
+          borderRadius: "8px",
+        }}
+      >
+        No expenses yet — add something to start tracking.
+      </p>
+    );
 
   return (
     <div className="expense-list" style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", background: "#fff", borderRadius: "8px", boxShadow: "0 6px 15px rgba(0,0,0,0.1)" }}>
+      <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+          background: "#fff",
+          borderRadius: "8px",
+          boxShadow: "0 6px 15px rgba(0,0,0,0.1)",
+        }}
+      >
         <thead style={{ background: "linear-gradient(to right, #6366f1, #8b5cf6)", color: "#fff" }}>
           <tr>
             <th style={{ padding: "12px" }}>Date</th>
@@ -33,19 +53,40 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           </tr>
         </thead>
         <tbody>
-          {items.map(it => (
+          {items.map((it) => (
             <tr key={it.id}>
               <td style={{ padding: "12px" }}>{it.date}</td>
-              <td style={{ padding: "12px" }}>{editingId === it.id ? <input value={editedItem} onChange={(e) => setEditedItem(e.target.value)} /> : it.item}</td>
+              <td style={{ padding: "12px" }}>
+                {editingId === it.id ? (
+                  <input
+                    value={editedItem}
+                    onChange={(e) => setEditedItem(e.target.value)}
+                    style={{
+                      padding: "6px",
+                      borderRadius: "6px",
+                      border: "1px solid #ccc",
+                      width: "100%",
+                    }}
+                  />
+                ) : (
+                  it.item
+                )}
+              </td>
               <td style={{ padding: "12px" }}>{it.category}</td>
               <td style={{ padding: "12px" }}>{it.cost}</td>
               <td style={{ padding: "12px", textAlign: "center" }}>
                 {editingId === it.id ? (
-                  <button onClick={handleSaveClick} style={actionButtonStyle}>Save</button>
+                  <button onClick={handleSaveClick} style={actionButtonStyle}>
+                    Save
+                  </button>
                 ) : (
                   <>
-                    <button onClick={() => handleEditClick(it.id, it.item)} style={actionButtonStyle}>Edit</button>
-                    <button onClick={() => onDelete(it.id)} style={actionButtonStyle}>Delete</button>
+                    <button onClick={() => handleEditClick(it.id, it.item)} style={actionButtonStyle}>
+                      Edit
+                    </button>
+                    <button onClick={() => onDelete(it.id)} style={actionButtonStyle}>
+                      Delete
+                    </button>
                   </>
                 )}
               </td>
@@ -64,5 +105,5 @@ const actionButtonStyle = {
   border: "none",
   background: "#8b5cf6",
   color: "#fff",
-  cursor: "pointer"
+  cursor: "pointer",
 };
