@@ -6,7 +6,8 @@ import { getBudgetTips } from "../ai/aiService";
 import { Sparkles, Wallet, PieChart, Brain } from "lucide-react";
 
 const LOCAL_KEY = "cw_expenses_v1";
-const BLUE_GRADIENT = "linear-gradient(120deg, #60a5fa, #3b82f6)"; // گرادینت آبی
+const PURPLE = "#8b5cf6"; // رنگ بنفش جدید برای هماهنگی
+const LIGHT_PURPLE = "#d8b3ff"; // بنفش روشن برای ظرافت بیشتر
 
 export default function Dashboard() {
   const [expenses, setExpenses] = useState([]);
@@ -66,6 +67,7 @@ export default function Dashboard() {
       maxWidth: "1440px",
       margin: "auto",
       padding: "0 20px",
+      backgroundColor: "#f8f9fa",
     },
     hero: {
       display: "flex",
@@ -75,10 +77,12 @@ export default function Dashboard() {
       margin: "60px 0",
       flexDirection: "column",
       textAlign: "center",
-      background: BLUE_GRADIENT,
+      background: `linear-gradient(135deg, ${PURPLE}, ${LIGHT_PURPLE})`,
       borderRadius: "20px",
       padding: "40px 20px",
       color: "#fff",
+      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+      animation: "fadeIn 1s ease-out",
     },
     heroText: {
       flex: "1 1 400px",
@@ -86,8 +90,10 @@ export default function Dashboard() {
     },
     mainTitle: {
       fontSize: "3rem",
-      color: "#ffffff",
+      color: "#fff",
       marginBottom: "20px",
+      fontWeight: "bold",
+      letterSpacing: "-0.5px",
     },
     heroDesc: {
       fontSize: "1.2rem",
@@ -100,6 +106,7 @@ export default function Dashboard() {
       display: "flex",
       flexDirection: "column",
       gap: "12px",
+      alignItems: "center",
     },
     featureItem: {
       display: "flex",
@@ -107,7 +114,7 @@ export default function Dashboard() {
       fontSize: "1rem",
     },
     featureArrow: {
-      color: "#ffffff",
+      color: "#fff",
       fontWeight: "bold",
       marginRight: "10px",
     },
@@ -122,10 +129,19 @@ export default function Dashboard() {
       borderRadius: "12px",
       boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
       background: "linear-gradient(145deg, #ffffff, #f0f4ff)",
+      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    },
+    cardHover: {
+      transform: "translateY(-5px)",
+      boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)",
     },
     addExpenseCard: {
-      background: BLUE_GRADIENT,
+      background: PURPLE,
       color: "#fff",
+      transition: "background 0.3s ease",
+    },
+    addExpenseHover: {
+      background: LIGHT_PURPLE,
     },
     summaryBox: {
       backgroundColor: "#fff",
@@ -139,20 +155,24 @@ export default function Dashboard() {
       display: "flex",
       alignItems: "flex-start",
       gap: "10px",
-      backgroundColor: BLUE_GRADIENT,
+      backgroundColor: PURPLE,
       color: "#fff",
       padding: "10px",
       borderRadius: "8px",
       marginTop: "10px",
     },
     aiButton: {
-      backgroundColor: BLUE_GRADIENT,
+      backgroundColor: PURPLE,
       color: "#fff",
       border: "none",
       padding: "10px 15px",
       borderRadius: "6px",
       cursor: "pointer",
       marginTop: "10px",
+      transition: "background 0.3s ease",
+    },
+    aiButtonHover: {
+      backgroundColor: LIGHT_PURPLE,
     },
     sectionMargin: {
       marginTop: "40px",
@@ -171,6 +191,14 @@ export default function Dashboard() {
       },
       cardGrid: {
         marginBottom: "20px",
+      },
+    },
+    "@keyframes fadeIn": {
+      "0%": {
+        opacity: 0,
+      },
+      "100%": {
+        opacity: 1,
       },
     },
   };
@@ -206,7 +234,12 @@ export default function Dashboard() {
 
       {/* Add Expense + Summary */}
       <div style={styles.cardGrid}>
-        <section style={{ ...styles.card, ...styles.addExpenseCard }}>
+        <section
+          style={{
+            ...styles.card,
+            ...styles.addExpenseCard,
+          }}
+        >
           <h2>
             <Sparkles size={20} /> Add Expense
           </h2>
@@ -221,8 +254,14 @@ export default function Dashboard() {
             <p>Total Spent:</p>
             <h1>{totalSpent.toLocaleString()} AFN</h1>
           </div>
-          <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
-            {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
+          <button
+            style={styles.aiButton}
+            onClick={askAITips}
+            disabled={loadingTips}
+            onMouseEnter={(e) => e.target.style.backgroundColor = LIGHT_PURPLE}
+            onMouseLeave={(e) => e.target.style.backgroundColor = PURPLE}
+          >
+            {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
           </button>
 
           {aiTips && (
