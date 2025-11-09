@@ -117,6 +117,19 @@ export default function Dashboard() {
     card: { padding: "25px", borderRadius: "12px", boxShadow: "0 6px 15px rgba(0,0,0,0.08)", background: "#fff", transition: "all 0.3s ease" },
     addExpenseCard: { background: PURPLE, color: "#fff" },
     quickAddCard: { background: "#fff", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
+    spendingSummaryContainer: { display: "flex", justifyContent: "center", marginTop: "40px" },
+spendingSummaryCard: { 
+    padding: "25px", 
+    borderRadius: "12px", 
+    boxShadow: "0 6px 15px rgba(0,0,0,0.08)", 
+    background: "#fff", 
+    color: "#000", 
+    maxWidth: "400px",
+    width: "100%",
+    textAlign: "center",
+    transition: "all 0.3s ease"
+},
+progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
     summaryBox: { backgroundColor: "#fff", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
     aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
     aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "all 0.3s ease" },
@@ -188,28 +201,28 @@ export default function Dashboard() {
 
       {/* Spending Summary - Now in its own row */}
       <div style={styles.spendingSummaryContainer}>
-        <section style={{ ...styles.card, ...styles.addExpenseCard }}>
-          {budgetAlert && <div style={styles.badgeAlert}>⚠️ Budget exceeded!</div>}
-          <h2><PieChart size={20} /> Spending Summary</h2>
-          <div style={styles.summaryBox}>
-            <p>Total Spent:</p>
-            <h1>{totalSpent.toLocaleString()} AFN</h1>
-            <div style={styles.progressContainer}>
-              <div style={styles.progressBar}></div>
-            </div>
-            <small>Goal: {savingGoal.toLocaleString()} AFN</small>
-          </div>
-          <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
-            {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
-          </button>
-          {aiTips && (
-            <div style={styles.aiTips}>
-              <Brain size={20} />
-              <div><h4>AI Suggestions</h4><p>{aiTips}</p></div>
-            </div>
-          )}
-        </section>
+  <section style={styles.spendingSummaryCard}>
+    {budgetAlert && <div style={styles.badgeAlert}>⚠️ Budget exceeded!</div>}
+    <h2><PieChart size={20} /> Spending Summary</h2>
+    <div style={styles.summaryBox}>
+      <p>Total Spent:</p>
+      <h1>{totalSpent.toLocaleString()} AFN</h1>
+      <div style={styles.progressContainer}>
+        <div style={styles.progressBar}></div>
       </div>
+      <small>Goal: {savingGoal.toLocaleString()} AFN</small>
+    </div>
+    <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
+      {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
+    </button>
+    {aiTips && (
+      <div style={styles.aiTips}>
+        <Brain size={20} />
+        <div><h4>AI Suggestions</h4><p>{aiTips}</p></div>
+      </div>
+    )}
+  </section>
+</div>
 
       {/* Filter + Expense List */}
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
