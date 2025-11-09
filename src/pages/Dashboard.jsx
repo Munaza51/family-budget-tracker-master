@@ -147,8 +147,30 @@ const styles = {
     transition: "all 0.3s ease",
   },
   addExpenseCard: { background: PURPLE, color: "#fff" },
-  quickAddCard: { background: "#fff", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
-
+  quickAddCard: { 
+  background: "#fff", 
+  color: "#000", 
+  display: "flex", 
+  flexDirection: "column", 
+  gap: "10px", 
+  padding: "20px", 
+  alignItems: "center",      // اضافه شد
+  justifyContent: "center",  // اضافه شد
+  textAlign: "center"        // اضافه شد
+},
+quickAddButton: {
+  padding: "8px 15px",
+  borderRadius: "6px",
+  background: PURPLE,
+  color: "#fff",
+  border: "none",
+  cursor: "pointer",
+  transition: "all 0.3s ease",
+  textAlign: "center",
+  width: "fit-content",
+  minWidth: "100px",
+  margin: "0 auto"           // اضافه شد برای وسط چین
+},
   spendingSummaryContainer: {
     display: "flex",
     justifyContent: "center",
@@ -197,19 +219,25 @@ const styles = {
     boxSizing: "border-box",
   },
 
-  quickAddButton: {
-    padding: "8px 15px",
-    borderRadius: "6px",
-    background: PURPLE,
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-    textAlign: "center",
-    width: "fit-content",
-    minWidth: "100px",
-  },
-
+spendingSummaryContainer: {
+  display: "flex",
+  justifyContent: "space-between", // تغییر یافت
+  alignItems: "center",
+  gap: "20px",
+  flexWrap: "wrap",               // اضافه شد
+  marginTop: "40px",
+},
+spendingSummaryCard: {
+  padding: "25px",
+  borderRadius: "12px",
+  boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
+  background: "#fff",
+  color: "#000",
+  flex: "1 1 250px",              // اضافه شد برای اندازه قابل انعطاف
+  textAlign: "center",
+  transition: "all 0.3s ease",
+  maxWidth: "300px",              // محدود کردن حداکثر اندازه
+},
   summaryBox: {
     backgroundColor: "#fff",
     padding: "15px",
