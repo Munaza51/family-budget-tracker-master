@@ -148,13 +148,13 @@ export default function Dashboard() {
             <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
             <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
           </ul>
-          {{recentlyAdded.map((e) => (
+          {recentlyAdded.map((e) => (
   <div key={e.id} style={styles.miniItem}>{e.item} - {e.cost} AFN</div>
 ))}
             </div>
           )}
         </div>
-        <img style={styles.heroImg} src="https://source.unsplash.com/200x200/?finance,money" alt="Budget illustration" />
+        <img style={styles.heroImg} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s" alt="Budget illustration" />
       </div>
 
       {/* Add Expense + Quick Add + Summary */}
