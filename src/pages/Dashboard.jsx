@@ -38,8 +38,8 @@ export default function Dashboard() {
     setRecentlyAdded((s) => [exp, ...s].slice(0, 3));
   }
   function quickAdd(name, cost, category) {
-    const exp = { id: Date.now(), name, cost, category, date: new Date().toISOString() };
-    addExpense(exp);
+  const exp = { id: Date.now(), item: name, cost, category, date: new Date().toISOString() };
+  addExpense(exp);
   }
   function removeExpense(id) {
     setExpenses((s) => s.filter((e) => e.id !== id));
@@ -88,8 +88,8 @@ export default function Dashboard() {
   // Filtered expenses
   const filteredExpenses = expenses.filter((e) => {
     const matchesFilter =
-      e.name.toLowerCase().includes(filter.toLowerCase()) ||
-      e.category.toLowerCase().includes(filter.toLowerCase());
+  e.item.toLowerCase().includes(filter.toLowerCase()) ||
+  e.category.toLowerCase().includes(filter.toLowerCase());
     if (timeFilter === "month") {
       const now = new Date();
       return matchesFilter && new Date(e.date).getMonth() === now.getMonth();
@@ -148,11 +148,9 @@ export default function Dashboard() {
             <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
             <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
           </ul>
-          {recentlyAdded.length > 0 && (
-            <div style={styles.miniList}>
-              {recentlyAdded.map((e) => (
-                <div key={e.id} style={styles.miniItem}>{e.name} - {e.cost} AFN</div>
-              ))}
+          {{recentlyAdded.map((e) => (
+  <div key={e.id} style={styles.miniItem}>{e.item} - {e.cost} AFN</div>
+))}
             </div>
           )}
         </div>
