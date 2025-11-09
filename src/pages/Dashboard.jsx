@@ -44,9 +44,11 @@ export default function Dashboard() {
   function removeExpense(id) {
     setExpenses((s) => s.filter((e) => e.id !== id));
   }
-  function editExpense(updated) {
-    setExpenses((s) => s.map((e) => (e.id === updated.id ? updated : e)));
-  }
+  function editExpense(id, newItem) {
+  setExpenses((s) =>
+    s.map((e) => (e.id === id ? { ...e, item: newItem } : e))
+  );
+  } 
 
   // Compute totals
   const totalsByCategory = expenses.reduce((acc, e) => {
