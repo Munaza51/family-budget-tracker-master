@@ -109,7 +109,7 @@ export default function Dashboard() {
     cardGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" },
     card: { padding: "25px", borderRadius: "12px", boxShadow: "0 6px 15px rgba(0,0,0,0.08)", background: "#fff", transition: "all 0.3s ease" },
     addExpenseCard: { background: PURPLE, color: "#fff" },
-    quickAddCard: { background: "#fff", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
+    quickAddCard: { background: "purple", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
     summaryBox: { backgroundColor: "#fff", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
     aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
     aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "all 0.3s ease" },
