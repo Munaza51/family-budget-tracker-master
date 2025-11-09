@@ -6,8 +6,8 @@ import { getBudgetTips } from "../ai/aiService";
 import { Sparkles, Wallet, PieChart, Brain } from "lucide-react";
 
 const LOCAL_KEY = "cw_expenses_v1";
-const PURPLE = "#8b5cf6"; // رنگ بنفش جدید برای هماهنگی
-const LIGHT_PURPLE = "#d8b3ff"; // بنفش روشن برای ظرافت بیشتر
+const PURPLE = "#8b5cf6"; // رنگ بنفش
+const LIGHT_PURPLE = "#d8b3ff"; // بنفش روشن
 
 export default function Dashboard() {
   const [expenses, setExpenses] = useState([]);
@@ -67,30 +67,28 @@ export default function Dashboard() {
       maxWidth: "1440px",
       margin: "auto",
       padding: "0 20px",
-      backgroundColor: "#f8f9fa",
+      backgroundColor: "#f8f9fa", // رنگ مایل به سفید برای همه بخش‌ها
     },
     hero: {
       display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      flexDirection: "column",
+      textAlign: "left", // متن از سمت چپ
+      alignItems: "flex-start",
       gap: "20px",
       margin: "60px 0",
-      flexDirection: "column",
-      textAlign: "center",
-      background: `linear-gradient(135deg, ${PURPLE}, ${LIGHT_PURPLE})`,
-      borderRadius: "20px",
       padding: "40px 20px",
-      color: "#fff",
-      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-      animation: "fadeIn 1s ease-out",
+      borderRadius: "20px",
+      backgroundColor: "#ffffff", // هیرو هم روشن، بدون گرادینت
+      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
     },
     heroText: {
       flex: "1 1 400px",
       minWidth: "280px",
+      marginLeft: "20px", // فاصله از لبه چپ
     },
     mainTitle: {
       fontSize: "3rem",
-      color: "#fff",
+      color: PURPLE,
       marginBottom: "20px",
       fontWeight: "bold",
       letterSpacing: "-0.5px",
@@ -106,7 +104,6 @@ export default function Dashboard() {
       display: "flex",
       flexDirection: "column",
       gap: "12px",
-      alignItems: "center",
     },
     featureItem: {
       display: "flex",
@@ -114,7 +111,7 @@ export default function Dashboard() {
       fontSize: "1rem",
     },
     featureArrow: {
-      color: "#fff",
+      color: PURPLE,
       fontWeight: "bold",
       marginRight: "10px",
     },
@@ -128,20 +125,13 @@ export default function Dashboard() {
       padding: "25px",
       borderRadius: "12px",
       boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
-      background: "linear-gradient(145deg, #ffffff, #f0f4ff)",
+      background: "#ffffff",
       transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    },
-    cardHover: {
-      transform: "translateY(-5px)",
-      boxShadow: "0 8px 25px rgba(0, 0, 0, 0.1)",
     },
     addExpenseCard: {
       background: PURPLE,
       color: "#fff",
       transition: "background 0.3s ease",
-    },
-    addExpenseHover: {
-      background: LIGHT_PURPLE,
     },
     summaryBox: {
       backgroundColor: "#fff",
@@ -171,34 +161,23 @@ export default function Dashboard() {
       marginTop: "10px",
       transition: "background 0.3s ease",
     },
-    aiButtonHover: {
-      backgroundColor: LIGHT_PURPLE,
-    },
     sectionMargin: {
       marginTop: "40px",
     },
-    // تنظیمات برای موبایل
+    // ریسپانسیو
     "@media (max-width: 768px)": {
       hero: {
-        flexDirection: "column",
         textAlign: "center",
+        alignItems: "center",
+      },
+      heroText: {
+        marginLeft: 0,
       },
       mainTitle: {
         fontSize: "2rem",
       },
       heroDesc: {
         fontSize: "1rem",
-      },
-      cardGrid: {
-        marginBottom: "20px",
-      },
-    },
-    "@keyframes fadeIn": {
-      "0%": {
-        opacity: 0,
-      },
-      "100%": {
-        opacity: 1,
       },
     },
   };
@@ -212,12 +191,12 @@ export default function Dashboard() {
             <Wallet size={36} /> Family Budget Tracker
           </h1>
           <p style={styles.heroDesc}>
-            A clean, modern way to understand your money — track smarter, save
+            A clean, modern way to understand your money. track smarter, save
             confidently, and plan effortlessly with beautiful visual insights.
           </p>
           <ul style={styles.features}>
             <li style={styles.featureItem}>
-              <span style={styles.featureArrow}>➡</span>Real-time expense tracking
+              <span style={styles.featureArrow}>➡</span>Real time expense tracking
             </li>
             <li style={styles.featureItem}>
               <span style={styles.featureArrow}>➡</span>Category & monthly breakdowns
@@ -226,7 +205,7 @@ export default function Dashboard() {
               <span style={styles.featureArrow}>➡</span>Smart insights to improve saving
             </li>
             <li style={styles.featureItem}>
-              <span style={styles.featureArrow}>➡</span>Fast, simple, organized — made for families
+              <span style={styles.featureArrow}>➡</span>Fast, simple, organized; made for families
             </li>
           </ul>
         </div>
@@ -234,12 +213,7 @@ export default function Dashboard() {
 
       {/* Add Expense + Summary */}
       <div style={styles.cardGrid}>
-        <section
-          style={{
-            ...styles.card,
-            ...styles.addExpenseCard,
-          }}
-        >
+        <section style={{ ...styles.card, ...styles.addExpenseCard }}>
           <h2>
             <Sparkles size={20} /> Add Expense
           </h2>
@@ -258,8 +232,8 @@ export default function Dashboard() {
             style={styles.aiButton}
             onClick={askAITips}
             disabled={loadingTips}
-            onMouseEnter={(e) => e.target.style.backgroundColor = LIGHT_PURPLE}
-            onMouseLeave={(e) => e.target.style.backgroundColor = PURPLE}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = LIGHT_PURPLE)}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = PURPLE)}
           >
             {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
           </button>
@@ -293,4 +267,4 @@ export default function Dashboard() {
       </div>
     </div>
   );
-}
+        }
