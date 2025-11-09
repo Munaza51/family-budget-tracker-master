@@ -64,7 +64,7 @@ export default function Dashboard() {
       color: "#000",
       maxWidth: "1440px",
       margin: "auto",
-      padding: "0 50px",
+      padding: "0 20px",
       background: "linear-gradient(120deg, #fefefe, #f0f4ff)",
     },
     hero: {
@@ -73,22 +73,22 @@ export default function Dashboard() {
       justifyContent: "space-between",
       gap: "30px",
       margin: "60px 0",
-      flexWrap: "wrap-reverse", // موبایل متن بالای تصویر
+      flexWrap: "wrap",
+      textAlign: "center",
     },
     heroText: {
-      flex: "1 1 400px",
-      paddingRight: "50px",
-      minWidth: "280px",
+      flex: "1 1 100%",
+      minWidth: "250px",
+      paddingRight: "0",
     },
     mainTitle: {
-      fontSize: "3.5rem",
+      fontSize: "2.2rem",
       color: "#4a2dff",
-      fontFamily: "'Poppins', sans-serif",
-      marginBottom: "20px",
+      marginBottom: "15px",
     },
     heroDesc: {
-      fontSize: "1.2rem",
-      lineHeight: "1.6",
+      fontSize: "1rem",
+      lineHeight: "1.5",
       marginBottom: "20px",
     },
     features: {
@@ -96,34 +96,35 @@ export default function Dashboard() {
       paddingLeft: 0,
       display: "flex",
       flexDirection: "column",
-      gap: "12px",
+      gap: "10px",
+      alignItems: "center",
     },
     featureItem: {
       display: "flex",
       alignItems: "center",
-      fontSize: "1rem",
+      fontSize: "0.9rem",
     },
     featureArrow: {
       color: "#4a2dff",
       fontWeight: "bold",
-      marginRight: "10px",
+      marginRight: "8px",
     },
     heroImageContainer: {
-      flex: "1 1 300px",
+      flex: "1 1 100%",
       display: "flex",
-      justifyContent: "flex-end",
-      minWidth: "250px",
+      justifyContent: "center",
+      marginBottom: "20px",
     },
     heroImage: {
-      width: "350px",
-      height: "350px",
+      width: "250px",
+      height: "250px",
       borderRadius: "50%",
       objectFit: "cover",
       boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
     },
     cardGrid: {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
       gap: "20px",
       marginBottom: "40px",
     },
@@ -131,10 +132,14 @@ export default function Dashboard() {
       padding: "25px",
       borderRadius: "12px",
       boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
-      background: "linear-gradient(145deg, #fefefe, #f0f4ff)",
+      background: "linear-gradient(145deg, #ffffff, #f0f4ff)",
+    },
+    addExpenseCard: {
+      background: "linear-gradient(145deg, #a855f7, #9333ea)",
+      color: "#fff",
     },
     summaryBox: {
-      backgroundColor: "#ffffff",
+      backgroundColor: "#fff",
       padding: "15px",
       borderRadius: "10px",
       marginBottom: "15px",
@@ -145,9 +150,19 @@ export default function Dashboard() {
       display: "flex",
       alignItems: "flex-start",
       gap: "10px",
-      backgroundColor: "#eef2ff",
+      backgroundColor: "#a855f7",
+      color: "#fff",
       padding: "10px",
       borderRadius: "8px",
+      marginTop: "10px",
+    },
+    aiButton: {
+      backgroundColor: "#4a2dff",
+      color: "#fff",
+      border: "none",
+      padding: "10px 15px",
+      borderRadius: "6px",
+      cursor: "pointer",
       marginTop: "10px",
     },
   };
@@ -190,7 +205,7 @@ export default function Dashboard() {
 
       {/* Add Expense + Summary */}
       <div style={styles.cardGrid}>
-        <section style={styles.card}>
+        <section style={{ ...styles.card, ...styles.addExpenseCard }}>
           <h2>
             <Sparkles size={20} /> Add Expense
           </h2>
@@ -205,7 +220,7 @@ export default function Dashboard() {
             <p>Total Spent:</p>
             <h1>{totalSpent.toLocaleString()} AFN</h1>
           </div>
-          <button onClick={askAITips} disabled={loadingTips}>
+          <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
             {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
           </button>
 
