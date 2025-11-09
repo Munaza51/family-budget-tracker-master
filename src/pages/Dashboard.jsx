@@ -57,35 +57,37 @@ export default function Dashboard() {
 
   const totalSpent = expenses.reduce((s, e) => s + Number(e.cost), 0);
 
-  // Inline CSS styles
+  // استایل‌ها
   const styles = {
     container: {
       fontFamily: "'Poppins', sans-serif",
       color: "#000",
       maxWidth: "1440px",
       margin: "auto",
-      padding: "0 60px",
+      padding: "0 50px",
+      background: "linear-gradient(120deg, #fefefe, #f0f4ff)",
     },
     hero: {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      margin: "60px 0",
       gap: "30px",
-      flexWrap: "wrap-reverse", // برای موبایل متن بالای تصویر
+      margin: "60px 0",
+      flexWrap: "wrap-reverse", // موبایل متن بالای تصویر
     },
     heroText: {
       flex: "1 1 400px",
-      paddingRight: "40px",
+      paddingRight: "50px",
       minWidth: "280px",
     },
     mainTitle: {
       fontSize: "3.5rem",
-      color: "#4a2dff", // تیتر بنفش
+      color: "#4a2dff",
+      fontFamily: "'Poppins', sans-serif",
       marginBottom: "20px",
     },
     heroDesc: {
-      fontSize: "1.1rem",
+      fontSize: "1.2rem",
       lineHeight: "1.6",
       marginBottom: "20px",
     },
@@ -117,7 +119,7 @@ export default function Dashboard() {
       height: "350px",
       borderRadius: "50%",
       objectFit: "cover",
-      boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
     },
     cardGrid: {
       display: "grid",
@@ -128,15 +130,16 @@ export default function Dashboard() {
     card: {
       padding: "25px",
       borderRadius: "12px",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
-      background: "linear-gradient(145deg, #eef2ff, #ffffff)",
+      boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
+      background: "linear-gradient(145deg, #fefefe, #f0f4ff)",
     },
     summaryBox: {
-      backgroundColor: "#f5f5f5",
+      backgroundColor: "#ffffff",
       padding: "15px",
       borderRadius: "10px",
       marginBottom: "15px",
       textAlign: "center",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
     },
     aiTips: {
       display: "flex",
@@ -151,7 +154,7 @@ export default function Dashboard() {
 
   return (
     <div style={styles.container}>
-      {/* 🖼️ Hero Section */}
+      {/* هیرو */}
       <div style={styles.hero}>
         <div style={styles.heroText}>
           <h1 style={styles.mainTitle}>
@@ -185,7 +188,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* 💸 Add Expense + Summary */}
+      {/* Add Expense + Summary */}
       <div style={styles.cardGrid}>
         <section style={styles.card}>
           <h2>
@@ -218,13 +221,13 @@ export default function Dashboard() {
         </section>
       </div>
 
-      {/* 📊 Pie Chart */}
+      {/* Pie Chart */}
       <div style={styles.card}>
         <h2>Spending by Category</h2>
         <SpendingPie data={totalsByCategory} />
       </div>
 
-      {/* 📜 Expense List */}
+      {/* Expense List */}
       <div style={styles.card}>
         <h2>All Expenses</h2>
         <ExpenseList
