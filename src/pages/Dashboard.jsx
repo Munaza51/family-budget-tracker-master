@@ -104,13 +104,13 @@ export default function Dashboard() {
     features: { listStyle: "none", paddingLeft: 0, display: "flex", flexDirection: "column", gap: "12px" },
     featureItem: { display: "flex", alignItems: "center", fontSize: "1rem" },
     featureArrow: { color: PURPLE, fontWeight: "bold", marginRight: "10px" },
-    cardGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" },
+    cardGrid: { display: "grid", gridTemplateColumns: "1fr", gap: "20px", marginBottom: "40px" },
     card: { padding: "25px", borderRadius: "12px", boxShadow: "0 6px 15px rgba(0,0,0,0.08)", background: theme === "light" ? "#fff" : "#2a2a3e", transition: "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s, color 0.3s" },
     addExpenseCard: { background: PURPLE, color: "#fff" },
-    quickAddCard: { background: LIGHT_PURPLE, color: "#000" },
+    quickAddCard: { background: PURPLE, color: "#fff" },
     summaryBox: { backgroundColor: theme === "light" ? "#fff" : "#3b3b52", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
     aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
-    aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "background 0.3s ease" },
+    aiButton: { backgroundColor: LIGHT_PURPLE, color: "#000", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "background 0.3s ease" },
     sectionMargin: { marginTop: "40px" },
     inputFilter: { padding: "6px 10px", borderRadius: "6px", border: "1px solid #ccc", marginBottom: "10px", width: "auto", fontSize: "0.9rem" },
     badgeAlert: { backgroundColor: "#ff4d4f", color: "#fff", padding: "6px 12px", borderRadius: "6px", fontWeight: "bold", marginBottom: "10px" },
@@ -118,7 +118,10 @@ export default function Dashboard() {
     miniItem: { padding: "5px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", fontSize: "0.85rem" },
     progressContainer: { background: theme === "light" ? "#e0e0e0" : "#444", borderRadius: "12px", overflow: "hidden", marginTop: "10px" },
     progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
-    toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" }
+    toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" },
+    infoBox: { background: "#f3f0ff", padding: "20px", borderRadius: "12px", margin: "30px 0", display: "flex", flexDirection: "column", gap: "15px" },
+    infoItem: { fontSize: "1rem", lineHeight: "1.5" },
+    infoTitle: { fontWeight: "bold", color: PURPLE }
   };
 
   return (
@@ -137,7 +140,6 @@ export default function Dashboard() {
           <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
           <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
         </ul>
-
         {recentlyAdded.length > 0 && (
           <div style={styles.miniList}>
             {recentlyAdded.map((e) => (
@@ -147,7 +149,18 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Add Expense */}
+      {/* Info Box توضیحی */}
+      <div style={styles.infoBox}>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Add Expense:</span> اضافه کردن هزینه جدید با جزئیات کامل.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Quick Add:</span> اضافه کردن سریع هزینه‌های پر تکرار بدون پر کردن فرم کامل.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Spending Summary:</span> نمایش مجموع هزینه‌ها و درصد پیشرفت پس‌انداز.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>AI Tips:</span> دریافت پیشنهادهای هوشمند برای مدیریت بهتر پول.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Monthly Trend:</span> نمودار روند ماهانه هزینه‌ها.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Spending by Category:</span> نمودار درصدی هزینه‌ها بر اساس دسته‌بندی.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>All Expenses:</span> لیست همه هزینه‌ها با قابلیت جستجو و فیلتر زمان.</div>
+      </div>
+
+      {/* Add Expense + Quick Add */}
       <div style={styles.cardGrid}>
         <section style={{ ...styles.card, ...styles.addExpenseCard }}>
           <h2><Sparkles size={20} /> Add Expense</h2>
@@ -156,10 +169,17 @@ export default function Dashboard() {
 
         <section style={{ ...styles.card, ...styles.quickAddCard }}>
           <h2>Quick Add</h2>
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-            <button style={styles.aiButton} onClick={() => quickAdd("Daily Food", 200, "Food")}>Food</button>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <button style={styles.aiButton} onClick={() => quickAdd("Daily Food", 200, "Food")}>Daily Food</button>
             <button style={styles.aiButton} onClick={() => quickAdd("Transport", 150, "Transport")}>Transport</button>
             <button style={styles.aiButton} onClick={() => quickAdd("Rent", 5000, "Rent")}>Rent</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Groceries", 800, "Groceries")}>Groceries</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Electricity", 1200, "Utilities")}>Electricity</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Water", 500, "Utilities")}>Water</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Internet", 1000, "Utilities")}>Internet</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Entertainment", 400, "Fun")}>Entertainment</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Clothes", 600, "Shopping")}>Clothes</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Health", 700, "Health")}>Health</button>
           </div>
         </section>
 
