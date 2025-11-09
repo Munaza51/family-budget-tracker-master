@@ -9,6 +9,7 @@ export default function ExpenseForm({ onAdd }) {
   function submit(e) {
     e.preventDefault();
     if (!item || !cost) return;
+
     const exp = {
       id: Date.now(),
       category,
@@ -16,14 +17,21 @@ export default function ExpenseForm({ onAdd }) {
       cost: Number(cost),
       date
     };
+
+    // اضافه کردن هزینه
     onAdd(exp);
+
+    // ریست کردن فرم
     setItem("");
     setCost("");
+    setCategory("Groceries");
+    setDate(new Date().toISOString().slice(0, 10));
   }
 
   return (
-    <form className="form" onSubmit={submit}>
-      <label>Category
+    <form className="form" onSubmit={submit} style={{ maxWidth: "400px", margin: "auto" }}>
+      <label>
+        Category
         <select value={category} onChange={e => setCategory(e.target.value)}>
           <option>Groceries</option>
           <option>Transport</option>
@@ -33,24 +41,27 @@ export default function ExpenseForm({ onAdd }) {
         </select>
       </label>
 
-      <label>Item
+      <label>
+        Item
         <input value={item} onChange={e => setItem(e.target.value)} placeholder="e.g. Flour" />
       </label>
 
-      <label>Cost
+      <label>
+        Cost
         <input value={cost} onChange={e => setCost(e.target.value)} type="number" placeholder="e.g. 300" />
       </label>
 
-      <label>Date
+      <label>
+        Date
         <input value={date} onChange={e => setDate(e.target.value)} type="date" />
       </label>
 
       <button
         type="submit"
         style={{
-          backgroundColor: "#8b5cf6", // بنفش
-          color: "#fff",
-          border: "none",
+          backgroundColor: "#fff", // سفید
+          color: "#8b5cf6", // متن بنفش
+          border: "2px solid #8b5cf6",
           padding: "10px 15px",
           borderRadius: "6px",
           cursor: "pointer",
