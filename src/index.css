@@ -101,25 +101,60 @@ button {
 ======================= */
 .navbar {
   display: flex;
-  justify-content: space-around;
-  background-color: var(--bg-dark);
-  color: #fff;
-  padding: 15px 20px;
-  border-radius: var(--radius);
-  margin-bottom: 40px;
+  justify-content: space-between; /* Adjusted to fit your preference */
+  align-items: center;
+  background-color: var(--dark-color); /* Matching the dark theme */
+  color: var(--white-color);
+  padding: 10px 20px; /* Adjusted padding */
+  border-radius: var(--radius); /* Assuming you have this variable defined */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  position: sticky;
+  top: 0;
+  z-index: var(--z-fixed);
 }
 
+/* Navbar links */
 .navbar a {
-  color: #fff;
+  color: var(--white-color);
   text-decoration: none;
   font-weight: 500;
-  padding: 5px 10px;
+  padding: 8px 12px; /* Updated padding */
+  border-radius: var(--radius);
+  font-size: var(--normal-font-size); /* Responsive font-size */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Navbar link hover effect */
 .navbar a:hover {
-  color: var(--accent);
-  background: rgba(255,255,255,0.1);
+  color: var(--first-color);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
+}
+
+/* Mobile responsive menu toggle */
+.navbar__toggle {
+  display: none; /* Hide on larger screens */
+  font-size: 1.5rem;
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+/* Adjusting navbar on mobile screens */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack items vertically on small screens */
+    padding: 20px; /* Add more padding for better mobile spacing */
+  }
+
+  .navbar__toggle {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .navbar a {
+    padding: 10px;
+    font-size: var(--small-font-size); /* Smaller font on mobile */
+  }
 }
 
 /* =======================
