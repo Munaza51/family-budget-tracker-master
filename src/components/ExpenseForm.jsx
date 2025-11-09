@@ -45,7 +45,21 @@ export default function ExpenseForm({ onAdd }) {
         <input value={date} onChange={e => setDate(e.target.value)} type="date" />
       </label>
 
-      <button type="submit">Add Expense</button>
+      <button
+        type="submit"
+        style={{
+          backgroundColor: "#8b5cf6", // بنفش
+          color: "#fff",
+          border: "none",
+          padding: "10px 15px",
+          borderRadius: "6px",
+          cursor: "pointer",
+          marginTop: "10px",
+          transition: "all 0.3s ease"
+        }}
+      >
+        Add Expense
+      </button>
     </form>
   );
 }
