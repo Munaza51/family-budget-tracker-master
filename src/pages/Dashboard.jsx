@@ -138,24 +138,35 @@ export default function Dashboard() {
       </div>
 
       {/* هیرو */}
-      <div style={styles.hero}>
-        <div style={styles.heroText}>
-          <h1 style={styles.mainTitle}><Wallet size={28} /> Family Budget Tracker</h1>
-          <p style={styles.heroDesc}>Track your expenses, see trends, and save smarter.</p>
-          <ul style={styles.features}>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Real-time expense tracking</li>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Category & monthly breakdowns</li>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
-          </ul>
-          {recentlyAdded.map((e) => (
-  <div key={e.id} style={styles.miniItem}>{e.item} - {e.cost} AFN</div>
-))}
-            </div>
-          )}
-        </div>
-        <img style={styles.heroImg} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s" alt="Budget illustration" />
+<div style={styles.hero}>
+  <div style={styles.heroText}>
+    <h1 style={styles.mainTitle}><Wallet size={28} /> Family Budget Tracker</h1>
+    <p style={styles.heroDesc}>Track your expenses, see trends, and save smarter.</p>
+    <ul style={styles.features}>
+      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Real-time expense tracking</li>
+      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Category & monthly breakdowns</li>
+      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
+      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
+    </ul>
+
+    {/* Recently Added Expenses */}
+    {recentlyAdded.length > 0 && (
+      <div style={styles.miniList}>
+        {recentlyAdded.map((e) => (
+          <div key={e.id} style={styles.miniItem}>
+            {e.item} - {e.cost} AFN
+          </div>
+        ))}
       </div>
+    )}
+  </div>
+
+  <img
+    style={styles.heroImg}
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s"
+    alt="Budget illustration"
+  />
+</div>
 
       {/* Add Expense + Quick Add + Summary */}
       <div style={styles.cardGrid}>
