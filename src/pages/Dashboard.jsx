@@ -98,7 +98,7 @@ export default function Dashboard() {
 
   const styles = {
     container: { fontFamily: "'Poppins', sans-serif", color: "#000", maxWidth: "1440px", margin: "auto", padding: "0 20px", background: "#fff", transition: "background 0.3s, color 0.3s" },
-    hero: { display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", background: LIGHT_PURPLE, boxShadow: "0 10px 30px rgba(0,0,0,0.05)", transition: "all 0.5s", flexWrap: "wrap" },
+    hero: { display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", background: PURPLE, boxShadow: "0 10px 30px rgba(0,0,0,0.05)", transition: "all 0.5s", flexWrap: "wrap" },
     heroText: { flex: "1", minWidth: "250px" },
     heroImg: { width: "200px", height: "200px", borderRadius: "20px", objectFit: "cover" },
     mainTitle: { fontSize: "2.5rem", color: "#fff", marginBottom: "15px", fontWeight: "bold" },
