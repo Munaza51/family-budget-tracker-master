@@ -98,7 +98,7 @@ export default function Dashboard() {
 
   const styles = {
     container: { fontFamily: "'Poppins', sans-serif", color: "#000", maxWidth: "1440px", margin: "auto", padding: "0 20px", background: "#fff", transition: "background 0.3s, color 0.3s" },
-    hero: { display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", background: PURPLE, boxShadow: "0 10px 30px rgba(0,0,0,0.05)", transition: "all 0.5s", flexWrap: "wrap" },
+    hero: { display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", background: LIGHT_PURPLE, boxShadow: "0 10px 30px rgba(0,0,0,0.05)", transition: "all 0.5s", flexWrap: "wrap" },
     heroText: { flex: "1", minWidth: "250px" },
     heroImg: { width: "200px", height: "200px", borderRadius: "20px", objectFit: "cover" },
     mainTitle: { fontSize: "2.5rem", color: "#fff", marginBottom: "15px", fontWeight: "bold" },
@@ -109,7 +109,7 @@ export default function Dashboard() {
     cardGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" },
     card: { padding: "25px", borderRadius: "12px", boxShadow: "0 6px 15px rgba(0,0,0,0.08)", background: "#fff", transition: "all 0.3s ease" },
     addExpenseCard: { background: PURPLE, color: "#fff" },
-    quickAddCard: { background: "purple", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
+    quickAddCard: { background: "#fff", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
     summaryBox: { backgroundColor: "#fff", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
     aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
     aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "all 0.3s ease" },
@@ -124,7 +124,7 @@ export default function Dashboard() {
     infoTable: { width: "100%", borderCollapse: "collapse", margin: "20px 0", textAlign: "left" },
     infoTableTh: { borderBottom: `2px solid ${PURPLE}`, padding: "10px", color: PURPLE },
     infoTableTd: { borderBottom: "1px solid #ddd", padding: "10px" },
-    quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: white, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" }
+    quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" }
   };
 
   return (
@@ -224,7 +224,7 @@ export default function Dashboard() {
             <small>Goal: {savingGoal.toLocaleString()} AFN</small>
           </div>
           <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
-            {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
+            {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
           </button>
           {aiTips && (
             <div style={styles.aiTips}>
@@ -281,4 +281,4 @@ export default function Dashboard() {
       </div>
     </div>
   );
-            }
+}
