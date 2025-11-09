@@ -38,17 +38,17 @@ export default function Dashboard() {
     setRecentlyAdded((s) => [exp, ...s].slice(0, 3));
   }
   function quickAdd(name, cost, category) {
-  const exp = { id: Date.now(), item: name, cost, category, date: new Date().toISOString() };
-  addExpense(exp);
+    const exp = { id: Date.now(), item: name, cost, category, date: new Date().toISOString() };
+    addExpense(exp);
   }
   function removeExpense(id) {
     setExpenses((s) => s.filter((e) => e.id !== id));
   }
   function editExpense(id, newItem) {
-  setExpenses((s) =>
-    s.map((e) => (e.id === id ? { ...e, item: newItem } : e))
-  );
-  } 
+    setExpenses((s) =>
+      s.map((e) => (e.id === id ? { ...e, item: newItem } : e))
+    );
+  }
 
   // Compute totals
   const totalsByCategory = expenses.reduce((acc, e) => {
@@ -88,8 +88,8 @@ export default function Dashboard() {
   // Filtered expenses
   const filteredExpenses = expenses.filter((e) => {
     const matchesFilter =
-  e.item.toLowerCase().includes(filter.toLowerCase()) ||
-  e.category.toLowerCase().includes(filter.toLowerCase());
+      e.item.toLowerCase().includes(filter.toLowerCase()) ||
+      e.category.toLowerCase().includes(filter.toLowerCase());
     if (timeFilter === "month") {
       const now = new Date();
       return matchesFilter && new Date(e.date).getMonth() === now.getMonth();
@@ -138,35 +138,35 @@ export default function Dashboard() {
       </div>
 
       {/* هیرو */}
-<div style={styles.hero}>
-  <div style={styles.heroText}>
-    <h1 style={styles.mainTitle}><Wallet size={28} /> Family Budget Tracker</h1>
-    <p style={styles.heroDesc}>Track your expenses, see trends, and save smarter.</p>
-    <ul style={styles.features}>
-      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Real-time expense tracking</li>
-      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Category & monthly breakdowns</li>
-      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
-      <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
-    </ul>
+      <div style={styles.hero}>
+        <div style={styles.heroText}>
+          <h1 style={styles.mainTitle}><Wallet size={28} /> Family Budget Tracker</h1>
+          <p style={styles.heroDesc}>Track your expenses, see trends, and save smarter.</p>
+          <ul style={styles.features}>
+            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Real-time expense tracking</li>
+            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Category & monthly breakdowns</li>
+            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
+            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
+          </ul>
 
-    {/* Recently Added Expenses */}
-    {recentlyAdded.length > 0 && (
-      <div style={styles.miniList}>
-        {recentlyAdded.map((e) => (
-          <div key={e.id} style={styles.miniItem}>
-            {e.item} - {e.cost} AFN
-          </div>
-        ))}
+          {/* Recently Added Expenses */}
+          {recentlyAdded.length > 0 && (
+            <div style={styles.miniList}>
+              {recentlyAdded.map((e) => (
+                <div key={e.id} style={styles.miniItem}>
+                  {e.item} - {e.cost} AFN
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <img
+          style={styles.heroImg}
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s"
+          alt="Budget illustration"
+        />
       </div>
-    )}
-  </div>
-
-  <img
-    style={styles.heroImg}
-    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s"
-    alt="Budget illustration"
-  />
-</div>
 
       {/* Add Expense + Quick Add + Summary */}
       <div style={styles.cardGrid}>
@@ -179,7 +179,7 @@ export default function Dashboard() {
           <h2>Quick Add</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {["Food", "Transport", "Rent", "Groceries", "Electricity", "Water", "Internet", "Entertainment"].map((item, i) => (
-              <button key={i} style={styles.quickAddButton} onClick={() => quickAdd(item, 100 * (i+1), "General")}>{item}</button>
+              <button key={i} style={styles.quickAddButton} onClick={() => quickAdd(item, 100 * (i + 1), "General")}>{item}</button>
             ))}
           </div>
         </section>
@@ -275,4 +275,4 @@ export default function Dashboard() {
       </div>
     </div>
   );
-        }
+}
