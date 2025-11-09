@@ -129,6 +129,27 @@ spendingSummaryCard: {
     textAlign: "center",
     transition: "all 0.3s ease"
 },
+    input, select, button {
+  width: 100%;        /* هم اندازه کارت */
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  }
+  quickAddButton: {
+  padding: "8px 15px",       // کمی فاصله افقی بیشتر از قبل
+  borderRadius: "6px",
+  background: PURPLE,
+  color: "#fff",
+  border: "none",
+  cursor: "pointer",
+  transition: "all 0.3s ease",
+  textAlign: "center",
+  width: "fit-content",      // دکمه فقط به اندازه محتوا باشد
+  minWidth: "100px",         // حداقل عرض برای ظاهر بهتر
+  }
 progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
     summaryBox: { backgroundColor: "#fff", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
     aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
