@@ -98,7 +98,7 @@ export default function Dashboard() {
 
   const styles = {
     container: { fontFamily: "'Poppins', sans-serif", color: theme === "light" ? "#000" : "#f8f8f8", maxWidth: "1440px", margin: "auto", padding: "0 20px", backgroundColor: theme === "light" ? "#f8f9fa" : "#1e1e2f", transition: "background 0.3s, color 0.3s" },
-    hero: { display: "flex", flexDirection: "column", textAlign: "left", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", backgroundColor: theme === "light" ? "#fff" : "#2a2a3e", boxShadow: theme === "light" ? "0 10px 30px rgba(0,0,0,0.05)" : "0 10px 30px rgba(0,0,0,0.4)", transition: "background 0.3s, color 0.3s" },
+    hero: { display: "flex", flexDirection: "column", textAlign: "center", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", backgroundColor: theme === "light" ? "#fff" : "#2a2a3e", boxShadow: theme === "light" ? "0 10px 30px rgba(0,0,0,0.05)" : "0 10px 30px rgba(0,0,0,0.4)", transition: "background 0.3s, color 0.3s" },
     mainTitle: { fontSize: "3rem", color: PURPLE, marginBottom: "20px", fontWeight: "bold" },
     heroDesc: { fontSize: "1.2rem", lineHeight: "1.6", marginBottom: "20px" },
     features: { listStyle: "none", paddingLeft: 0, display: "flex", flexDirection: "column", gap: "12px" },
@@ -106,8 +106,8 @@ export default function Dashboard() {
     featureArrow: { color: PURPLE, fontWeight: "bold", marginRight: "10px" },
     cardGrid: { display: "grid", gridTemplateColumns: "1fr", gap: "20px", marginBottom: "40px" },
     card: { padding: "25px", borderRadius: "12px", boxShadow: "0 6px 15px rgba(0,0,0,0.08)", background: theme === "light" ? "#fff" : "#2a2a3e", transition: "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s, color 0.3s" },
-    addExpenseCard: { background: PURPLE, color: "#fff" },
-    quickAddCard: { background: PURPLE, color: "#fff" },
+    addExpenseCard: { background: PURPLE, color: "#fff", border: "none" }, // بتن سفید برای Add Expense
+    quickAddCard: { background: LIGHT_PURPLE, color: "#000" },
     summaryBox: { backgroundColor: theme === "light" ? "#fff" : "#3b3b52", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
     aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
     aiButton: { backgroundColor: LIGHT_PURPLE, color: "#000", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "background 0.3s ease" },
@@ -134,6 +134,9 @@ export default function Dashboard() {
       <div style={styles.hero}>
         <h1 style={styles.mainTitle}><Wallet size={36} /> Family Budget Tracker</h1>
         <p style={styles.heroDesc}>Track your expenses, see trends, and save smarter.</p>
+        <button style={{ ...styles.aiButton, margin: "10px auto", display: "block" }} onClick={() => window.scrollTo({ top: 600, behavior: "smooth" })}>
+          ➤ Start Tracking
+        </button>
         <ul style={styles.features}>
           <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Real-time expense tracking</li>
           <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Category & monthly breakdowns</li>
@@ -149,15 +152,15 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Info Box توضیحی */}
+      {/* Info Box */}
       <div style={styles.infoBox}>
-        <div style={styles.infoItem}><span style={styles.infoTitle}>Add Expense:</span> اضافه کردن هزینه جدید با جزئیات کامل.</div>
-        <div style={styles.infoItem}><span style={styles.infoTitle}>Quick Add:</span> اضافه کردن سریع هزینه‌های پر تکرار بدون پر کردن فرم کامل.</div>
-        <div style={styles.infoItem}><span style={styles.infoTitle}>Spending Summary:</span> نمایش مجموع هزینه‌ها و درصد پیشرفت پس‌انداز.</div>
-        <div style={styles.infoItem}><span style={styles.infoTitle}>AI Tips:</span> دریافت پیشنهادهای هوشمند برای مدیریت بهتر پول.</div>
-        <div style={styles.infoItem}><span style={styles.infoTitle}>Monthly Trend:</span> نمودار روند ماهانه هزینه‌ها.</div>
-        <div style={styles.infoItem}><span style={styles.infoTitle}>Spending by Category:</span> نمودار درصدی هزینه‌ها بر اساس دسته‌بندی.</div>
-        <div style={styles.infoItem}><span style={styles.infoTitle}>All Expenses:</span> لیست همه هزینه‌ها با قابلیت جستجو و فیلتر زمان.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Add Expense:</span> Add new expense with full details.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Quick Add:</span> Quickly add recurring expenses without full form.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Spending Summary:</span> Total spent and saving progress.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>AI Tips:</span> Get smart suggestions to save money.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Monthly Trend:</span> Track monthly spending trends.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>Spending by Category:</span> Visualize spending per category.</div>
+        <div style={styles.infoItem}><span style={styles.infoTitle}>All Expenses:</span> Full expense list with search and time filter.</div>
       </div>
 
       {/* Add Expense + Quick Add */}
@@ -183,7 +186,7 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* Summary */}
+        {/* Spending Summary */}
         <section style={styles.card}>
           {budgetAlert && <div style={styles.badgeAlert}>⚠️ Budget exceeded!</div>}
           <h2><PieChart size={20} /> Spending Summary</h2>
@@ -196,7 +199,7 @@ export default function Dashboard() {
             <small>Goal: {savingGoal.toLocaleString()} AFN</small>
           </div>
           <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
-            {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
+            {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
           </button>
           {aiTips && (
             <div style={styles.aiTips}>
@@ -262,4 +265,4 @@ export default function Dashboard() {
       </div>
     </div>
   );
-                         }
+}
