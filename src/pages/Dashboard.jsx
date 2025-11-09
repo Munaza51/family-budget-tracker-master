@@ -6,6 +6,7 @@ import { getBudgetTips } from "../ai/aiService";
 import { Sparkles, Wallet, PieChart, Brain } from "lucide-react";
 
 const LOCAL_KEY = "cw_expenses_v1";
+const PURPLE = "#a855f7"; // رنگ ثابت برای همه بنفش‌ها
 
 export default function Dashboard() {
   const [expenses, setExpenses] = useState([]);
@@ -65,30 +66,34 @@ export default function Dashboard() {
       maxWidth: "1440px",
       margin: "auto",
       padding: "0 20px",
-      background: "linear-gradient(120deg, #fefefe, #f0f4ff)",
     },
     hero: {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      gap: "30px",
+      gap: "50px",
       margin: "60px 0",
       flexWrap: "wrap",
-      textAlign: "center",
+      textAlign: "left",
+      background: `linear-gradient(-45deg, #7c3aed, #a855f7, #9333ea, #c084fc)`,
+      backgroundSize: "400% 400%",
+      animation: "gradientBG 15s ease infinite",
+      borderRadius: "20px",
+      padding: "40px 20px",
+      color: "#fff",
     },
     heroText: {
-      flex: "1 1 100%",
-      minWidth: "250px",
-      paddingRight: "0",
+      flex: "1 1 400px",
+      minWidth: "280px",
     },
     mainTitle: {
-      fontSize: "2.2rem",
-      color: "#4a2dff",
-      marginBottom: "15px",
+      fontSize: "3rem",
+      color: PURPLE,
+      marginBottom: "20px",
     },
     heroDesc: {
-      fontSize: "1rem",
-      lineHeight: "1.5",
+      fontSize: "1.2rem",
+      lineHeight: "1.6",
       marginBottom: "20px",
     },
     features: {
@@ -96,28 +101,27 @@ export default function Dashboard() {
       paddingLeft: 0,
       display: "flex",
       flexDirection: "column",
-      gap: "10px",
-      alignItems: "center",
+      gap: "12px",
     },
     featureItem: {
       display: "flex",
       alignItems: "center",
-      fontSize: "0.9rem",
+      fontSize: "1rem",
     },
     featureArrow: {
-      color: "#4a2dff",
+      color: PURPLE,
       fontWeight: "bold",
-      marginRight: "8px",
+      marginRight: "10px",
     },
     heroImageContainer: {
-      flex: "1 1 100%",
+      flex: "1 1 300px",
       display: "flex",
-      justifyContent: "center",
-      marginBottom: "20px",
+      justifyContent: "flex-end",
+      minWidth: "250px",
     },
     heroImage: {
-      width: "250px",
-      height: "250px",
+      width: "350px",
+      height: "350px",
       borderRadius: "50%",
       objectFit: "cover",
       boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
@@ -135,7 +139,7 @@ export default function Dashboard() {
       background: "linear-gradient(145deg, #ffffff, #f0f4ff)",
     },
     addExpenseCard: {
-      background: "linear-gradient(145deg, #a855f7, #9333ea)",
+      background: PURPLE,
       color: "#fff",
     },
     summaryBox: {
@@ -150,20 +154,28 @@ export default function Dashboard() {
       display: "flex",
       alignItems: "flex-start",
       gap: "10px",
-      backgroundColor: "#a855f7",
+      backgroundColor: PURPLE,
       color: "#fff",
       padding: "10px",
       borderRadius: "8px",
       marginTop: "10px",
     },
     aiButton: {
-      backgroundColor: "#4a2dff",
+      backgroundColor: PURPLE,
       color: "#fff",
       border: "none",
       padding: "10px 15px",
       borderRadius: "6px",
       cursor: "pointer",
       marginTop: "10px",
+    },
+    sectionMargin: {
+      marginTop: "40px",
+    },
+    "@keyframes gradientBG": {
+      "0%": { backgroundPosition: "0% 50%" },
+      "50%": { backgroundPosition: "100% 50%" },
+      "100%": { backgroundPosition: "0% 50%" },
     },
   };
 
@@ -237,13 +249,13 @@ export default function Dashboard() {
       </div>
 
       {/* Pie Chart */}
-      <div style={styles.card}>
+      <div style={{ ...styles.card, ...styles.sectionMargin }}>
         <h2>Spending by Category</h2>
         <SpendingPie data={totalsByCategory} />
       </div>
 
       {/* Expense List */}
-      <div style={styles.card}>
+      <div style={{ ...styles.card, ...styles.sectionMargin }}>
         <h2>All Expenses</h2>
         <ExpenseList
           items={expenses}
@@ -251,6 +263,32 @@ export default function Dashboard() {
           onEdit={editExpense}
         />
       </div>
+
+      {/* Keyframes انیمیشن */}
+      <style>{`
+        @keyframes gradientBG {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 768px) {
+          .hero {
+            flex-direction: column;
+            text-align: center !important;
+          }
+          .heroImageContainer {
+            justify-content: center !important;
+            margin-bottom: 20px;
+          }
+          .mainTitle {
+            font-size: 2rem !important;
+          }
+          .heroDesc {
+            font-size: 1rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
-}
+      }
