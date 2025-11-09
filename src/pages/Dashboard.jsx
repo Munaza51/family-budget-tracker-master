@@ -6,7 +6,7 @@ import { getBudgetTips } from "../ai/aiService";
 import { Sparkles, Wallet, PieChart, Brain } from "lucide-react";
 
 const LOCAL_KEY = "cw_expenses_v1";
-const PURPLE = "#a855f7"; // رنگ ثابت برای همه بنفش‌ها
+const BLUE_GRADIENT = "linear-gradient(120deg, #60a5fa, #3b82f6)"; // گرادینت آبی
 
 export default function Dashboard() {
   const [expenses, setExpenses] = useState([]);
@@ -70,14 +70,12 @@ export default function Dashboard() {
     hero: {
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
-      gap: "50px",
+      justifyContent: "center",
+      gap: "20px",
       margin: "60px 0",
-      flexWrap: "wrap",
-      textAlign: "left",
-      background: `linear-gradient(-45deg, #7c3aed, #a855f7, #9333ea, #c084fc)`,
-      backgroundSize: "400% 400%",
-      animation: "gradientBG 15s ease infinite",
+      flexDirection: "column",
+      textAlign: "center",
+      background: BLUE_GRADIENT,
       borderRadius: "20px",
       padding: "40px 20px",
       color: "#fff",
@@ -88,7 +86,7 @@ export default function Dashboard() {
     },
     mainTitle: {
       fontSize: "3rem",
-      color: PURPLE,
+      color: "#ffffff",
       marginBottom: "20px",
     },
     heroDesc: {
@@ -109,22 +107,9 @@ export default function Dashboard() {
       fontSize: "1rem",
     },
     featureArrow: {
-      color: PURPLE,
+      color: "#ffffff",
       fontWeight: "bold",
       marginRight: "10px",
-    },
-    heroImageContainer: {
-      flex: "1 1 300px",
-      display: "flex",
-      justifyContent: "flex-end",
-      minWidth: "250px",
-    },
-    heroImage: {
-      width: "350px",
-      height: "350px",
-      borderRadius: "50%",
-      objectFit: "cover",
-      boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
     },
     cardGrid: {
       display: "grid",
@@ -139,7 +124,7 @@ export default function Dashboard() {
       background: "linear-gradient(145deg, #ffffff, #f0f4ff)",
     },
     addExpenseCard: {
-      background: PURPLE,
+      background: BLUE_GRADIENT,
       color: "#fff",
     },
     summaryBox: {
@@ -154,14 +139,14 @@ export default function Dashboard() {
       display: "flex",
       alignItems: "flex-start",
       gap: "10px",
-      backgroundColor: PURPLE,
+      backgroundColor: BLUE_GRADIENT,
       color: "#fff",
       padding: "10px",
       borderRadius: "8px",
       marginTop: "10px",
     },
     aiButton: {
-      backgroundColor: PURPLE,
+      backgroundColor: BLUE_GRADIENT,
       color: "#fff",
       border: "none",
       padding: "10px 15px",
@@ -172,10 +157,21 @@ export default function Dashboard() {
     sectionMargin: {
       marginTop: "40px",
     },
-    "@keyframes gradientBG": {
-      "0%": { backgroundPosition: "0% 50%" },
-      "50%": { backgroundPosition: "100% 50%" },
-      "100%": { backgroundPosition: "0% 50%" },
+    // تنظیمات برای موبایل
+    "@media (max-width: 768px)": {
+      hero: {
+        flexDirection: "column",
+        textAlign: "center",
+      },
+      mainTitle: {
+        fontSize: "2rem",
+      },
+      heroDesc: {
+        fontSize: "1rem",
+      },
+      cardGrid: {
+        marginBottom: "20px",
+      },
     },
   };
 
@@ -205,13 +201,6 @@ export default function Dashboard() {
               <span style={styles.featureArrow}>➡</span>Fast, simple, organized — made for families
             </li>
           </ul>
-        </div>
-        <div style={styles.heroImageContainer}>
-          <img
-            style={styles.heroImage}
-            src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=800&q=60"
-            alt="budget-hero"
-          />
         </div>
       </div>
 
@@ -263,32 +252,6 @@ export default function Dashboard() {
           onEdit={editExpense}
         />
       </div>
-
-      {/* Keyframes انیمیشن */}
-      <style>{`
-        @keyframes gradientBG {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-
-        @media (max-width: 768px) {
-          .hero {
-            flex-direction: column;
-            text-align: center !important;
-          }
-          .heroImageContainer {
-            justify-content: center !important;
-            margin-bottom: 20px;
-          }
-          .mainTitle {
-            font-size: 2rem !important;
-          }
-          .heroDesc {
-            font-size: 1rem !important;
-          }
-        }
-      `}</style>
     </div>
   );
-      }
+}
