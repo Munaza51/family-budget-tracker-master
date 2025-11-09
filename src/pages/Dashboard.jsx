@@ -7,7 +7,6 @@ import { getBudgetTips } from "../ai/aiService";
 
 const LOCAL_KEY = "cw_expenses_v1";
 const PURPLE = "#8b5cf6";
-const LIGHT_PURPLE = "linear-gradient(135deg, #d8b3ff 0%, #8b5cf6 100%)";
 const COLORS = ["#8b5cf6", "#a78bfa", "#c4b5fd", "#d8b3ff"];
 
 export default function Dashboard() {
@@ -20,48 +19,48 @@ export default function Dashboard() {
   const [recentlyAdded, setRecentlyAdded] = useState([]);
   const [timeFilter, setTimeFilter] = useState("all");
 
+  // Load expenses from localStorage
   useEffect(() => {
     const raw = localStorage.getItem(LOCAL_KEY);
     setExpenses(raw ? JSON.parse(raw) : []);
   }, []);
 
+  // Save expenses and check budget alert
   useEffect(() => {
     localStorage.setItem(LOCAL_KEY, JSON.stringify(expenses));
     const total = expenses.reduce((s, e) => s + Number(e.cost), 0);
     setBudgetAlert(total > 100000);
   }, [expenses]);
 
+  // Add, remove, edit expenses
   function addExpense(exp) {
     setExpenses((s) => [exp, ...s]);
     setRecentlyAdded((s) => [exp, ...s].slice(0, 3));
   }
-
   function quickAdd(name, cost, category) {
     const exp = { id: Date.now(), name, cost, category, date: new Date().toISOString() };
     addExpense(exp);
   }
-
   function removeExpense(id) {
     setExpenses((s) => s.filter((e) => e.id !== id));
   }
-
   function editExpense(updated) {
     setExpenses((s) => s.map((e) => (e.id === updated.id ? updated : e)));
   }
 
+  // Compute totals
   const totalsByCategory = expenses.reduce((acc, e) => {
     acc[e.category] = (acc[e.category] || 0) + Number(e.cost);
     return acc;
   }, {});
-
   const monthlyTrend = expenses.reduce((acc, e) => {
     const month = new Date(e.date).toLocaleString("default", { month: "short" });
     acc[month] = (acc[month] || 0) + Number(e.cost);
     return acc;
   }, {});
-
   const trendData = Object.entries(monthlyTrend).map(([month, total]) => ({ month, total }));
 
+  // AI tips
   async function askAITips() {
     setLoadingTips(true);
     const summary =
@@ -79,23 +78,29 @@ export default function Dashboard() {
     }
   }
 
+  // Spending summary
   const totalSpent = expenses.reduce((s, e) => s + Number(e.cost), 0);
   const savingGoal = 200000;
   const progressPercent = Math.min((savingGoal - totalSpent) / savingGoal * 100, 100);
 
+  // Filtered expenses
   const filteredExpenses = expenses.filter((e) => {
-    const matchesFilter = e.name.toLowerCase().includes(filter.toLowerCase()) || e.category.toLowerCase().includes(filter.toLowerCase());
+    const matchesFilter =
+      e.name.toLowerCase().includes(filter.toLowerCase()) ||
+      e.category.toLowerCase().includes(filter.toLowerCase());
     if (timeFilter === "month") {
       const now = new Date();
       return matchesFilter && new Date(e.date).getMonth() === now.getMonth();
     } else if (timeFilter === "week") {
       const now = new Date();
-      const weekAgo = new Date(now); weekAgo.setDate(now.getDate() - 7);
+      const weekAgo = new Date(now);
+      weekAgo.setDate(now.getDate() - 7);
       return matchesFilter && new Date(e.date) >= weekAgo;
     }
     return matchesFilter;
   });
 
+  // Styles
   const styles = {
     container: { fontFamily: "'Poppins', sans-serif", color: "#000", maxWidth: "1440px", margin: "auto", padding: "0 20px", background: "#fff", transition: "background 0.3s, color 0.3s" },
     hero: { display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", background: PURPLE, boxShadow: "0 10px 30px rgba(0,0,0,0.05)", transition: "all 0.5s", flexWrap: "wrap" },
@@ -121,9 +126,6 @@ export default function Dashboard() {
     progressContainer: { background: "#eee", borderRadius: "12px", overflow: "hidden", marginTop: "10px" },
     progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
     toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" },
-    infoTable: { width: "100%", borderCollapse: "collapse", margin: "20px 0", textAlign: "left" },
-    infoTableTh: { borderBottom: `2px solid ${PURPLE}`, padding: "10px", color: PURPLE },
-    infoTableTd: { borderBottom: "1px solid #ddd", padding: "10px" },
     quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" }
   };
 
@@ -155,47 +157,7 @@ export default function Dashboard() {
         <img style={styles.heroImg} src="https://source.unsplash.com/200x200/?finance,money" alt="Budget illustration" />
       </div>
 
-      {/* Info Table */}
-      <table style={styles.infoTable}>
-        <thead>
-          <tr>
-            <th style={styles.infoTableTh}>Feature</th>
-            <th style={styles.infoTableTh}>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style={styles.infoTableTd}>Add Expense</td>
-            <td style={styles.infoTableTd}>Add new expense with full details.</td>
-          </tr>
-          <tr>
-            <td style={styles.infoTableTd}>Quick Add</td>
-            <td style={styles.infoTableTd}>Add recurring expenses quickly without full form.</td>
-          </tr>
-          <tr>
-            <td style={styles.infoTableTd}>Spending Summary</td>
-            <td style={styles.infoTableTd}>Shows total spent and progress toward saving goal.</td>
-          </tr>
-          <tr>
-            <td style={styles.infoTableTd}>AI Tips</td>
-            <td style={styles.infoTableTd}>Get smart suggestions for better saving.</td>
-          </tr>
-          <tr>
-            <td style={styles.infoTableTd}>Monthly Trend</td>
-            <td style={styles.infoTableTd}>Displays monthly expense trend chart.</td>
-          </tr>
-          <tr>
-            <td style={styles.infoTableTd}>Spending by Category</td>
-            <td style={styles.infoTableTd}>Displays pie chart of expenses by category.</td>
-          </tr>
-          <tr>
-            <td style={styles.infoTableTd}>All Expenses</td>
-            <td style={styles.infoTableTd}>Shows full list of expenses with search and filter options.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      {/* Add Expense + Quick Add */}
+      {/* Add Expense + Quick Add + Summary */}
       <div style={styles.cardGrid}>
         <section style={{ ...styles.card, ...styles.addExpenseCard }}>
           <h2><Sparkles size={20} /> Add Expense</h2>
@@ -211,7 +173,6 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* Summary */}
         <section style={styles.card}>
           {budgetAlert && <div style={styles.badgeAlert}>⚠️ Budget exceeded!</div>}
           <h2><PieChart size={20} /> Spending Summary</h2>
@@ -235,31 +196,6 @@ export default function Dashboard() {
         </section>
       </div>
 
-      {/* Charts */}
-      <div style={{ ...styles.card, ...styles.sectionMargin }}>
-        <h2><TrendingUp size={20} /> Monthly Spending Trend</h2>
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={trendData}>
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="total" stroke={PURPLE} strokeWidth={3} />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div style={{ ...styles.card, ...styles.sectionMargin }}>
-        <h2><PieChart size={20} /> Spending by Category</h2>
-        <ResponsiveContainer width="100%" height={250}>
-          <RePieChart>
-            <Pie data={Object.entries(totalsByCategory).map(([name,value])=>({name,value}))} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
-              {Object.entries(totalsByCategory).map((_, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
-            </Pie>
-            <Legend />
-          </RePieChart>
-        </ResponsiveContainer>
-      </div>
-
       {/* Filter + Expense List */}
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
         <h2>All Expenses</h2>
@@ -279,6 +215,53 @@ export default function Dashboard() {
         </div>
         <ExpenseList items={filteredExpenses} onDelete={removeExpense} onEdit={editExpense} />
       </div>
+
+      {/* Charts آخر صفحه */}
+      <div style={{ ...styles.card, ...styles.sectionMargin }}>
+        <h2><TrendingUp size={20} /> Monthly Spending Trend</h2>
+        {trendData.length === 0 ? (
+          <p style={{ textAlign: "center", padding: "20px", color: PURPLE }}>
+            Add expenses to see your monthly spending trend.
+          </p>
+        ) : (
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart data={trendData}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Line type="monotone" dataKey="total" stroke={PURPLE} strokeWidth={3} />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
+      </div>
+
+      <div style={{ ...styles.card, ...styles.sectionMargin }}>
+        <h2><PieChart size={20} /> Spending by Category</h2>
+        {Object.keys(totalsByCategory).length === 0 ? (
+          <p style={{ textAlign: "center", padding: "20px", color: PURPLE }}>
+            Add expenses to start tracking categories.
+          </p>
+        ) : (
+          <ResponsiveContainer width="100%" height={250}>
+            <RePieChart>
+              <Pie
+                data={Object.entries(totalsByCategory).map(([name, value]) => ({ name, value }))}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={80}
+                label
+              >
+                {Object.entries(totalsByCategory).map((_, index) => (
+                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Legend />
+            </RePieChart>
+          </ResponsiveContainer>
+        )}
+      </div>
     </div>
   );
-}
+        }
