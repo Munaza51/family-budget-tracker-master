@@ -57,20 +57,22 @@ export default function ExpenseForm({ onAdd }) {
       </label>
 
       <button
-        type="submit"
-        style={{
-          backgroundColor: "#fff", // سفید
-          color: "#8b5cf6", // متن بنفش
-          border: "2px solid #8b5cf6",
-          padding: "10px 15px",
-          borderRadius: "6px",
-          cursor: "pointer",
-          marginTop: "10px",
-          transition: "all 0.3s ease"
-        }}
-      >
-        Add Expense
-      </button>
+  type="submit"
+  style={{
+    backgroundColor: "#fff",
+    color: "#8b5cf6",
+    border: "2px solid #8b5cf6",
+    padding: "6px 12px",      // کوچکتر از قبل
+    borderRadius: "12px",      // گردتر
+    cursor: "pointer",
+    marginTop: "10px",
+    fontWeight: "600",
+    fontSize: "0.9rem",        // کمی کوچکتر برای جمع‌وجور شدن
+    transition: "all 0.2s ease"
+  }}
+>
+  Add Expense
+</button>
     </form>
   );
 }
