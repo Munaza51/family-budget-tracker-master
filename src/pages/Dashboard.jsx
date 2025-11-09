@@ -101,70 +101,135 @@ export default function Dashboard() {
     }
     return matchesFilter;
   });
+const styles = {
+  container: {
+    fontFamily: "'Poppins', sans-serif",
+    color: "#000",
+    maxWidth: "1440px",
+    margin: "auto",
+    padding: "0 20px",
+    background: "#fff",
+    transition: "background 0.3s, color 0.3s",
+  },
+  hero: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "20px",
+    margin: "60px 0",
+    padding: "40px 20px",
+    borderRadius: "20px",
+    background: PURPLE,
+    boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+    transition: "all 0.5s",
+    flexWrap: "wrap",
+  },
+  heroText: { flex: "1", minWidth: "250px" },
+  heroImg: { width: "200px", height: "200px", borderRadius: "20px", objectFit: "cover" },
+  mainTitle: { fontSize: "2.5rem", color: "#fff", marginBottom: "15px", fontWeight: "bold" },
+  heroDesc: { fontSize: "1.1rem", lineHeight: "1.5", color: "#fff", marginBottom: "15px" },
+  features: { listStyle: "none", paddingLeft: 0, display: "flex", flexDirection: "column", gap: "10px", color: "#fff" },
+  featureItem: { display: "flex", alignItems: "center", fontSize: "0.95rem" },
+  featureArrow: { color: "#fff", fontWeight: "bold", marginRight: "8px" },
 
-  // Styles
-  const styles = {
-    container: { fontFamily: "'Poppins', sans-serif", color: "#000", maxWidth: "1440px", margin: "auto", padding: "0 20px", background: "#fff", transition: "background 0.3s, color 0.3s" },
-    hero: { display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: "20px", margin: "60px 0", padding: "40px 20px", borderRadius: "20px", background: PURPLE, boxShadow: "0 10px 30px rgba(0,0,0,0.05)", transition: "all 0.5s", flexWrap: "wrap" },
-    heroText: { flex: "1", minWidth: "250px" },
-    heroImg: { width: "200px", height: "200px", borderRadius: "20px", objectFit: "cover" },
-    mainTitle: { fontSize: "2.5rem", color: "#fff", marginBottom: "15px", fontWeight: "bold" },
-    heroDesc: { fontSize: "1.1rem", lineHeight: "1.5", color: "#fff", marginBottom: "15px" },
-    features: { listStyle: "none", paddingLeft: 0, display: "flex", flexDirection: "column", gap: "10px", color: "#fff" },
-    featureItem: { display: "flex", alignItems: "center", fontSize: "0.95rem" },
-    featureArrow: { color: "#fff", fontWeight: "bold", marginRight: "8px" },
-    cardGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" },
-    card: { padding: "25px", borderRadius: "12px", boxShadow: "0 6px 15px rgba(0,0,0,0.08)", background: "#fff", transition: "all 0.3s ease" },
-    addExpenseCard: { background: PURPLE, color: "#fff" },
-    quickAddCard: { background: "#fff", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
-    spendingSummaryContainer: { display: "flex", justifyContent: "center", marginTop: "40px" },
-spendingSummaryCard: { 
-    padding: "25px", 
-    borderRadius: "12px", 
-    boxShadow: "0 6px 15px rgba(0,0,0,0.08)", 
-    background: "#fff", 
-    color: "#000", 
+  cardGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gap: "20px",
+    marginBottom: "40px",
+  },
+  card: {
+    padding: "25px",
+    borderRadius: "12px",
+    boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
+    background: "#fff",
+    transition: "all 0.3s ease",
+  },
+  addExpenseCard: { background: PURPLE, color: "#fff" },
+  quickAddCard: { background: "#fff", color: "#000", display: "flex", flexDirection: "column", gap: "10px", padding: "20px" },
+
+  spendingSummaryContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "20px",
+    marginTop: "40px",
+  },
+  spendingSummaryCard: {
+    padding: "25px",
+    borderRadius: "12px",
+    boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
+    background: "#fff",
+    color: "#000",
     maxWidth: "400px",
     width: "100%",
     textAlign: "center",
-    transition: "all 0.3s ease"
-},
-    input, select, button {
-  width: 100%;        /* هم اندازه کارت */
-  padding: 8px 12px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 0.95rem;
-  box-sizing: border-box;
-  }
+    transition: "all 0.3s ease",
+  },
+
+  input: {
+    width: "100%",
+    padding: "8px 12px",
+    marginBottom: "10px",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+    fontSize: "0.95rem",
+    boxSizing: "border-box",
+  },
+  select: {
+    width: "100%",
+    padding: "8px 12px",
+    marginBottom: "10px",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+    fontSize: "0.95rem",
+    boxSizing: "border-box",
+  },
+  button: {
+    width: "100%",
+    padding: "8px 12px",
+    marginBottom: "10px",
+    borderRadius: "6px",
+    border: "none",
+    fontSize: "0.95rem",
+    cursor: "pointer",
+    boxSizing: "border-box",
+  },
+
   quickAddButton: {
-  padding: "8px 15px",       // کمی فاصله افقی بیشتر از قبل
-  borderRadius: "6px",
-  background: PURPLE,
-  color: "#fff",
-  border: "none",
-  cursor: "pointer",
-  transition: "all 0.3s ease",
-  textAlign: "center",
-  width: "fit-content",      // دکمه فقط به اندازه محتوا باشد
-  minWidth: "100px",         // حداقل عرض برای ظاهر بهتر
-  }
-progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
-    summaryBox: { backgroundColor: "#fff", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
-    aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
-    aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "all 0.3s ease" },
-    sectionMargin: { marginTop: "40px" },
-    inputFilter: { padding: "6px 10px", borderRadius: "6px", border: "1px solid #ccc", width: "150px", fontSize: "0.9rem" },
-    badgeAlert: { backgroundColor: "#fff", color: PURPLE, padding: "6px 12px", borderRadius: "6px", fontWeight: "bold", marginBottom: "10px", textAlign: "center" },
-    miniList: { display: "flex", gap: "10px", marginTop: "10px" },
-    miniItem: { padding: "5px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", fontSize: "0.85rem" },
-    progressContainer: { background: "#eee", borderRadius: "12px", overflow: "hidden", marginTop: "10px" },
-    progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
-    toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" },
-    quickAddButton: { padding: "8px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", border: "none", cursor: "pointer", transition: "all 0.3s ease", textAlign: "center" },
-    spendingSummaryContainer: { display: "flex", justifyContent: "center", alignItems: "center", gap: "20px", marginTop: "40px" }
-  };
+    padding: "8px 15px",
+    borderRadius: "6px",
+    background: PURPLE,
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    textAlign: "center",
+    width: "fit-content",
+    minWidth: "100px",
+  },
+
+  summaryBox: {
+    backgroundColor: "#fff",
+    padding: "15px",
+    borderRadius: "10px",
+    marginBottom: "15px",
+    textAlign: "center",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+  },
+  aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
+  aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "all 0.3s ease" },
+
+  sectionMargin: { marginTop: "40px" },
+  inputFilter: { padding: "6px 10px", borderRadius: "6px", border: "1px solid #ccc", width: "150px", fontSize: "0.9rem" },
+  badgeAlert: { backgroundColor: "#fff", color: PURPLE, padding: "6px 12px", borderRadius: "6px", fontWeight: "bold", marginBottom: "10px", textAlign: "center" },
+  miniList: { display: "flex", gap: "10px", marginTop: "10px" },
+  miniItem: { padding: "5px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", fontSize: "0.85rem" },
+  progressContainer: { background: "#eee", borderRadius: "12px", overflow: "hidden", marginTop: "10px" },
+  progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
+  toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" },
+};
 
   return (
     <div style={styles.container}>
