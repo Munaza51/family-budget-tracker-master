@@ -107,11 +107,12 @@ export default function Dashboard() {
     cardGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" },
     card: { padding: "25px", borderRadius: "12px", boxShadow: "0 6px 15px rgba(0,0,0,0.08)", background: theme === "light" ? "#fff" : "#2a2a3e", transition: "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s, color 0.3s" },
     addExpenseCard: { background: PURPLE, color: "#fff" },
+    quickAddCard: { background: LIGHT_PURPLE, color: "#000" },
     summaryBox: { backgroundColor: theme === "light" ? "#fff" : "#3b3b52", padding: "15px", borderRadius: "10px", marginBottom: "15px", textAlign: "center", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" },
     aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
     aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "background 0.3s ease" },
     sectionMargin: { marginTop: "40px" },
-    inputFilter: { padding: "8px 12px", borderRadius: "6px", border: "1px solid #ccc", marginBottom: "15px", width: "100%" },
+    inputFilter: { padding: "6px 10px", borderRadius: "6px", border: "1px solid #ccc", marginBottom: "10px", width: "auto", fontSize: "0.9rem" },
     badgeAlert: { backgroundColor: "#ff4d4f", color: "#fff", padding: "6px 12px", borderRadius: "6px", fontWeight: "bold", marginBottom: "10px" },
     miniList: { display: "flex", gap: "10px", marginTop: "10px" },
     miniItem: { padding: "5px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", fontSize: "0.85rem" },
@@ -146,21 +147,23 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Add Expense + Summary */}
+      {/* Add Expense */}
       <div style={styles.cardGrid}>
         <section style={{ ...styles.card, ...styles.addExpenseCard }}>
           <h2><Sparkles size={20} /> Add Expense</h2>
-          <ExpenseForm onAdd={addExpense} />
-          <div style={{ marginTop: "10px" }}>
-            <strong>Quick Add:</strong>
-            <div style={{ display: "flex", gap: "10px", marginTop: "5px" }}>
-              <button style={styles.aiButton} onClick={() => quickAdd("Daily Food", 200, "Food")}>Food</button>
-              <button style={styles.aiButton} onClick={() => quickAdd("Transport", 150, "Transport")}>Transport</button>
-              <button style={styles.aiButton} onClick={() => quickAdd("Rent", 5000, "Rent")}>Rent</button>
-            </div>
+          <ExpenseForm onAdd={(e) => { e.preventDefault(); addExpense(e); }} />
+        </section>
+
+        <section style={{ ...styles.card, ...styles.quickAddCard }}>
+          <h2>Quick Add</h2>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            <button style={styles.aiButton} onClick={() => quickAdd("Daily Food", 200, "Food")}>Food</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Transport", 150, "Transport")}>Transport</button>
+            <button style={styles.aiButton} onClick={() => quickAdd("Rent", 5000, "Rent")}>Rent</button>
           </div>
         </section>
 
+        {/* Summary */}
         <section style={styles.card}>
           {budgetAlert && <div style={styles.badgeAlert}>⚠️ Budget exceeded!</div>}
           <h2><PieChart size={20} /> Spending Summary</h2>
@@ -172,13 +175,7 @@ export default function Dashboard() {
             </div>
             <small>Goal: {savingGoal.toLocaleString()} AFN</small>
           </div>
-          <button
-            style={styles.aiButton}
-            onClick={askAITips}
-            disabled={loadingTips}
-            onMouseEnter={(e) => e.target.style.backgroundColor = LIGHT_PURPLE}
-            onMouseLeave={(e) => e.target.style.backgroundColor = PURPLE}
-          >
+          <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
             {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
           </button>
           {aiTips && (
@@ -190,7 +187,7 @@ export default function Dashboard() {
         </section>
       </div>
 
-      {/* Trend Line Chart */}
+      {/* Charts */}
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
         <h2>Monthly Spending Trend</h2>
         <ResponsiveContainer width="100%" height={250}>
@@ -203,7 +200,6 @@ export default function Dashboard() {
         </ResponsiveContainer>
       </div>
 
-      {/* Pie Chart */}
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
         <h2>Spending by Category</h2>
         <ResponsiveContainer width="100%" height={250}>
@@ -218,22 +214,31 @@ export default function Dashboard() {
 
       {/* Filter + Expense List */}
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
-        <h2>All Expenses</h2>
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "10px" }}>
+        <h2 style={{ fontSize: "1.5rem" }}>All Expenses</h2>
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "10px" }}>
           <input
             type="text"
             placeholder="Search expenses..."
-            style={styles.inputFilter}
+            style={{ ...styles.inputFilter, fontSize: "0.9rem", padding: "6px 10px", width: "200px" }}
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />
-          <select value={timeFilter} onChange={(e) => setTimeFilter(e.target.value)} style={styles.inputFilter}>
+          <select
+            value={timeFilter}
+            onChange={(e) => setTimeFilter(e.target.value)}
+            style={{ ...styles.inputFilter, fontSize: "0.9rem", padding: "6px 10px", width: "120px" }}
+          >
             <option value="all">All time</option>
             <option value="month">This Month</option>
             <option value="week">This Week</option>
           </select>
         </div>
-        <ExpenseList items={filteredExpenses} onDelete={removeExpense} onEdit={editExpense} />
+        <ExpenseList
+          items={filteredExpenses}
+          onDelete={removeExpense}
+          onEdit={editExpense}
+          style={{ fontSize: "0.9rem" }}
+        />
       </div>
     </div>
   );
