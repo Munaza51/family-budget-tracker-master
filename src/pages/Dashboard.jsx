@@ -49,7 +49,6 @@ export default function Dashboard() {
       setAiTips(tips);
     } catch (err) {
       setAiTips("⚠️ AI tip error — check API key or network.");
-      console.error(err);
     } finally {
       setLoadingTips(false);
     }
@@ -59,16 +58,107 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-page container">
+
+      {/* ✅ CSS — اضافه شده داخل فایل */}
+      <style>{`
+        :root {
+          --main-color:#4a2dff;
+          --text-color:#000;
+          --light-color:#fff;
+        }
+
+        .dashboard-hero {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 40px;
+          padding: 60px 40px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, #fff 0%, #f4f3ff 100%);
+          box-shadow: 0 4px 18px #00000020;
+          margin-bottom: 40px;
+        }
+
+        .dashboard-hero .text {
+          flex: 1;
+        }
+
+        .dashboard-hero h1 {
+          font-size: 2.4rem;
+          font-weight: 700;
+          color: var(--main-color);
+          margin-bottom: 10px;
+          position: relative;
+        }
+
+        .dashboard-hero h1::before {
+          content: "";
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 55%;
+          height: 12px;
+          background-color: #4a2dff33;
+          clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+          z-index: -1;
+        }
+
+        .dashboard-hero p {
+          color: #444;
+          font-size: 15px;
+          margin-bottom: 15px;
+          line-height: 1.6;
+        }
+
+        .dashboard-hero .features {
+          font-size: 14px;
+          background: #f6f3ff;
+          padding: 12px 15px;
+          border-left: 4px solid var(--main-color);
+          border-radius: 6px;
+          color: #333;
+        }
+
+        .dashboard-hero .hero-img {
+          width: 340px;
+          height: 260px;
+          object-fit: cover;
+          border-radius: 18px;
+          box-shadow: 0 4px 12px #00000025;
+        }
+
+        /* ✅ Mobile */
+        @media(max-width: 900px) {
+          .dashboard-hero {
+            flex-direction: column;
+            text-align: center;
+            padding: 30px 20px;
+          }
+          .dashboard-hero h1::before {
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+          }
+          .dashboard-hero .hero-img {
+            width: 100%;
+            height: auto;
+            margin-top: 15px;
+          }
+        }
+      `}</style>
+
       {/* 🖼️ Hero Section */}
       <div className="dashboard-hero">
         <div className="text">
           <h1>
             <Wallet size={38} /> Family Budget Tracker
           </h1>
+
           <p>
-            A clean, modern way to understand your money — track smarter, save
-            confidently, and plan effortlessly with beautiful visual insights.
+            A clean, modern way to understand your money — track smarter, 
+            save confidently, and plan effortlessly with beautiful visual insights.
           </p>
+
           <p className="features">
             ✅ Real-time expense tracking <br />
             ✅ Category & monthly breakdowns <br />
@@ -76,6 +166,7 @@ export default function Dashboard() {
             ✅ Fast, simple, organized — made for families
           </p>
         </div>
+
         <img
           src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=1200&q=60"
           alt="budget"
@@ -125,12 +216,8 @@ export default function Dashboard() {
       {/* 📜 Expense List */}
       <div className="card full expense-list-card">
         <h2>All Expenses</h2>
-        <ExpenseList
-          items={expenses}
-          onDelete={removeExpense}
-          onEdit={editExpense}
-        />
+        <ExpenseList items={expenses} onDelete={removeExpense} onEdit={editExpense} />
       </div>
     </div>
   );
-}
+      }
