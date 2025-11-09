@@ -190,7 +190,7 @@ progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE,
         </section>
 
         <section style={{ ...styles.card, ...styles.quickAddCard }}>
-          <h2>Quick Add</h2>
+          <h2><Sparkles size={20} />Quick Add</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {["Food", "Transport", "Rent", "Groceries", "Electricity", "Water", "Internet", "Entertainment"].map((item, i) => (
               <button key={i} style={styles.quickAddButton} onClick={() => quickAdd(item, 100 * (i+1), "General")}>{item}</button>
@@ -226,7 +226,7 @@ progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE,
 
       {/* Filter + Expense List */}
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
-        <h2>All Expenses</h2>
+        <h2><Sparkles size={20} />All Expenses</h2>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "10px", justifyContent: "center" }}>
           <input
             type="text"
