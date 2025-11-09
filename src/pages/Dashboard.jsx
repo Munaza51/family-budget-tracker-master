@@ -204,6 +204,53 @@ export default function Dashboard() {
           )}
         </section>
       </div>
+
+      {/* Charts */}
+      <div style={styles.cardGrid}>
+        <section style={{ ...styles.card, backgroundColor: WHITE, color: PURPLE }}>
+          <h2>Monthly Spending Trend</h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart data={trendData}>
+              <XAxis dataKey="month" stroke={PURPLE} />
+              <YAxis stroke={PURPLE} />
+              <Tooltip />
+              <Line type="monotone" dataKey="total" stroke={PURPLE} strokeWidth={3} />
+            </LineChart>
+          </ResponsiveContainer>
+        </section>
+
+        <section style={{ ...styles.card, backgroundColor: WHITE, color: PURPLE }}>
+          <h2>Spending by Category</h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <RePieChart>
+              <Pie data={Object.entries(totalsByCategory).map(([name,value])=>({name,value}))} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                {Object.entries(totalsByCategory).map((_, index) => <Cell key={index} fill={PURPLE} />)}
+              </Pie>
+              <Legend />
+            </RePieChart>
+          </ResponsiveContainer>
+        </section>
+      </div>
+
+      {/* All Expenses */}
+      <div style={{ ...styles.card, ...styles.sectionMargin, backgroundColor: WHITE, color: PURPLE }}>
+        <h2>All Expenses</h2>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "10px" }}>
+          <input
+            type="text"
+            placeholder="Search expenses..."
+            style={{ ...styles.inputFilter, flex: "1" }}
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+          <select value={timeFilter} onChange={(e) => setTimeFilter(e.target.value)} style={{ ...styles.inputFilter }}>
+            <option value="all">All time</option>
+            <option value="month">This Month</option>
+            <option value="week">This Week</option>
+          </select>
+        </div>
+        <ExpenseList items={filteredExpenses} onDelete={removeExpense} onEdit={editExpense} />
+      </div>
     </div>
   );
-            }
+    }
