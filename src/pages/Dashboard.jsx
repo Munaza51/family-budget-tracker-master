@@ -64,22 +64,24 @@ export default function Dashboard() {
       color: "#000",
       maxWidth: "1440px",
       margin: "auto",
-      padding: "0 20px",
+      padding: "0 60px",
     },
     hero: {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      margin: "50px 0",
-      gap: "20px",
+      margin: "60px 0",
+      gap: "30px",
+      flexWrap: "wrap-reverse", // برای موبایل متن بالای تصویر
     },
     heroText: {
-      flex: 1,
+      flex: "1 1 400px",
       paddingRight: "40px",
+      minWidth: "280px",
     },
     mainTitle: {
       fontSize: "3.5rem",
-      color: "#4a2dff", // بنفش
+      color: "#4a2dff", // تیتر بنفش
       marginBottom: "20px",
     },
     heroDesc: {
@@ -105,9 +107,10 @@ export default function Dashboard() {
       marginRight: "10px",
     },
     heroImageContainer: {
-      flex: 1,
+      flex: "1 1 300px",
       display: "flex",
       justifyContent: "flex-end",
+      minWidth: "250px",
     },
     heroImage: {
       width: "350px",
@@ -123,7 +126,7 @@ export default function Dashboard() {
       marginBottom: "40px",
     },
     card: {
-      padding: "20px",
+      padding: "25px",
       borderRadius: "12px",
       boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
       background: "linear-gradient(145deg, #eef2ff, #ffffff)",
@@ -200,7 +203,7 @@ export default function Dashboard() {
             <h1>{totalSpent.toLocaleString()} AFN</h1>
           </div>
           <button onClick={askAITips} disabled={loadingTips}>
-            {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
+            {loadingTips ? "🤔 Thinking..." : "🧠 Get AI Saving Tips"}
           </button>
 
           {aiTips && (
