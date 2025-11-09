@@ -220,7 +220,7 @@ export default function Dashboard() {
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
         <h2><TrendingUp size={20} /> Monthly Spending Trend</h2>
         {trendData.length === 0 ? (
-          <p style={{ textAlign: "center", padding: "20px", color: PURPLE }}>
+          <p style={{ textAlign: "center", padding: "20px", color: BLACK }}>
             Add expenses to see your monthly spending trend.
           </p>
         ) : (
@@ -238,7 +238,7 @@ export default function Dashboard() {
       <div style={{ ...styles.card, ...styles.sectionMargin }}>
         <h2><PieChart size={20} /> Spending by Category</h2>
         {Object.keys(totalsByCategory).length === 0 ? (
-          <p style={{ textAlign: "center", padding: "20px", color: PURPLE }}>
+          <p style={{ textAlign: "center", padding: "20px", color: BLACK }}>
             Add expenses to start tracking categories.
           </p>
         ) : (
