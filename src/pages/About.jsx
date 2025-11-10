@@ -65,10 +65,28 @@ export default function AboutDashboard() {
       <header style={styles.header}>
         <h1 style={styles.title}>💡 About FamTrack</h1>
         <p style={styles.subtitle}>
-          Family Budget Tracker is a modern web app to help families manage daily expenses, track essentials, and set smart saving goals. Everything is visual, simple, and interactive—designed to make financial management stress-free.
+          Family Budget Tracker is a modern web app to help families manage daily expenses, track essentials, and set smart saving goals. Everything is visual, simple, and interactive designed to make financial management stress free.
         </p>
       </header>
 
+      {/* What it Offers Section */}
+<div style={{ textAlign: "center", marginBottom: "32px" }}>
+  <h2 style={{
+    fontWeight: 800,
+    fontSize: "1.5rem",
+    marginBottom: "8px",
+  }}>
+    What it Offers
+  </h2>
+  <div style={{
+    width: "50px",
+    height: "3px",
+    backgroundColor: "#7c3aed",
+    margin: "0 auto",
+    borderRadius: "2px",
+  }}></div>
+</div>
+      
       {/* Features */}
       <section style={styles.grid}>
         {features.map((f) => (
