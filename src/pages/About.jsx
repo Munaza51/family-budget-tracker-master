@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowRightCircle, Mail, Phone, DollarSign, CheckCircle2, Lightbulb } from "lucide-react";
+import { ArrowRightCircle, Mail, Phone, DollarSign, CheckCircle2, Lightbulb, Github, Instagram, Linkedin, Behance } from "lucide-react";
 
 export default function AboutDashboard() {
   const [activeFeature, setActiveFeature] = useState(null);
@@ -8,37 +8,37 @@ export default function AboutDashboard() {
     {
       id: "expense",
       title: "Track Expenses",
-      img: "https://images.unsplash.com/photo-1556155092-490a1ba16284",
+      img: "https://share.google/images/mzUrIPsYflPw5wcsZ",  // Replace with the correct image link
       desc: "Log every expense easily with category, date, and item tracking. Stay organized and never miss a payment.",
     },
     {
       id: "ai",
       title: "AI Saving Tips",
-      img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/8bc7d876-e4c5-4710-854a-a23c0f231652/thumb_AI_Insights800_800_px__1b.gif",
+      img: "https://share.google/images/WwkVx16TjGIJDpVGl",  // Replace with the correct image link
       desc: "Use AI to get personalized recommendations to save more efficiently. Smart suggestions help you spend wisely.",
     },
     {
       id: "reports",
       title: "Visual Reports",
-      img: "https://images.unsplash.com/photo-1581093588401-69d9f20224f0",
+      img: "https://share.google/images/Nwxzux7s9femA0GOu",  // Replace with the correct image link
       desc: "Beautiful charts and summaries make your spending clear at a glance. Understand where your money goes.",
     },
     {
       id: "essentials",
       title: "Essentials Tracker",
-      img: "https://images.unsplash.com/photo-1586201375761-83865001e0e4",
+      img: "https://share.google/images/wQaq4ztUlRPEDDNLz",  // Replace with the correct image link
       desc: "Track household essentials, mark items as bought, or quickly add new necessities. Keep your family organized.",
     },
     {
       id: "quickAdd",
       title: "Quick Add Suggestions",
-      img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce",
+      img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce",  // Default image if no link
       desc: "Pre-made essential items for quick adding. Click and add instantly to your checklist without typing.",
     },
     {
       id: "incomeSavings",
       title: "Income & Savings",
-      img: "https://images.unsplash.com/photo-1601597113937-4b1c2e89a004",
+      img: "https://images.unsplash.com/photo-1601597113937-4b1c2e89a004",  // Default image if no link
       desc: "Track your monthly income and savings. Set goals and see progress directly on your dashboard.",
     },
   ];
@@ -81,6 +81,19 @@ export default function AboutDashboard() {
       marginTop: "12px",
       fontWeight: 600,
     },
+    socialIcons: {
+      display: "flex",
+      justifyContent: "center",
+      gap: "16px",
+      marginTop: "16px",
+    },
+    icon: {
+      color: "#fff",
+      backgroundColor: "#444",
+      borderRadius: "50%",
+      padding: "10px",
+      cursor: "pointer",
+    },
   };
 
   return (
@@ -91,6 +104,9 @@ export default function AboutDashboard() {
         <p style={styles.subtitle}>
           Family Budget Tracker is a modern web app to help families manage daily expenses, track essentials, and set smart saving goals.
           Everything is visual, simple, and interactive—designed to make financial management stress-free.
+        </p>
+        <p style={styles.subtitle}>
+          The app is <strong>under development</strong> and will keep improving. Stay tuned for new features!
         </p>
       </header>
 
@@ -124,11 +140,23 @@ export default function AboutDashboard() {
         <div style={styles.contactCard}>
           <h3>📬 Contact Us</h3>
           <p>If you have questions, feedback, or want to collaborate, reach out:</p>
-          <p><Mail size={18} /> support@familybudget.app</p>
-          <p><Phone size={18} /> +93 700 000 000</p>
+          <div style={styles.socialIcons}>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={styles.icon}>
+              <Github size={24} />
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" style={styles.icon}>
+              <Instagram size={24} />
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" style={styles.icon}>
+              <Linkedin size={24} />
+            </a>
+            <a href="https://www.behance.net" target="_blank" rel="noopener noreferrer" style={styles.icon}>
+              <Behance size={24} />
+            </a>
+          </div>
           <button style={styles.contactBtn}>Go to Dashboard</button>
         </div>
       </section>
     </div>
   );
-        }
+}
