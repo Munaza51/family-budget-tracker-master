@@ -352,7 +352,7 @@ heroButton: {
               style={{
                 padding: "10px 16px",
                 borderRadius: 10,
-                background: "#111",
+                background: "#9c6ff1",
                 color: "#fff",
                 border: "none",
                 cursor: "pointer",
