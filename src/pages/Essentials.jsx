@@ -69,7 +69,7 @@ export default function EssentialsDashboard() {
   return (
     <div style={styles.container}>
       {/* Header */}
-      <h1 style={styles.title}>Essentials Dashboard</h1>
+      <h1 style={styles.title}>📋 Essentials</h1>
       <p style={styles.subtitle}>
         Quickly track your essentials, income, and savings. Add items, mark them as done, or use quick suggestions to stay organized.
         If you don’t have time to add prices or want to quickly add an item, this is the right place. Everything is simple, fast, and hassle-free.
