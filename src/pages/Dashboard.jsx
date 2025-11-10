@@ -507,7 +507,7 @@ heroButton: {
             </button>
 
             {aiTips && (
-              <div style={styles.aiTips}>
+              <div id="aiTipsSection" style={styles.aiTips}>
                 <Brain size={18} />
                 <div>
                   <strong>AI Suggestions</strong>
