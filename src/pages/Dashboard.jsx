@@ -372,7 +372,6 @@ heroButton: {
         />
       </div>
 
-      
 {/* ===== Dashboard Sections Overview Table with Scroll ===== */}
 <div
   style={{
@@ -382,20 +381,44 @@ heroButton: {
     margin: "40px auto",
     padding: "20px",
     maxWidth: "1200px",
-    background: "#8b5cf6", // پس‌زمینه بنفش
+    background: "#8b5cf6", 
     borderRadius: "16px",
-    color: "#fff", // متن سفید
+    color: "#fff",
     textAlign: "center",
     fontFamily: "'Poppins', sans-serif",
   }}
 >
   {[
-    { title: "Add Expense", refId: "addExpenseSection" },
-    { title: "Quick Add", refId: "quickAddSection" },
-    { title: "Spending Summary", refId: "spendingSummarySection" },
-    { title: "AI Tips", refId: "aiTipsSection" },
-    { title: "Monthly Trend", refId: "monthlyTrendSection" },
-    { title: "Spending by Category", refId: "categorySection" },
+    { 
+      title: "Add Expense", 
+      desc: "Add a new cost quickly", 
+      refId: "addExpenseSection" 
+    },
+    { 
+      title: "Quick Add", 
+      desc: "Fast presets for common expenses", 
+      refId: "quickAddSection" 
+    },
+    { 
+      title: "Spending Summary", 
+      desc: "Overview of your monthly spending", 
+      refId: "spendingSummarySection" 
+    },
+    { 
+      title: "AI Tips", 
+      desc: "Smart suggestions to optimize", 
+      refId: "aiTipsSection" 
+    },
+    { 
+      title: "Monthly Trend", 
+      desc: "See how your expenses change", 
+      refId: "monthlyTrendSection" 
+    },
+    { 
+      title: "Spending by Category", 
+      desc: "Visual breakdown of categories", 
+      refId: "categorySection" 
+    },
   ].map((section, idx) => (
     <div
       key={idx}
@@ -406,12 +429,30 @@ heroButton: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        minHeight: "150px",
+        minHeight: "170px",
       }}
     >
-      <h3 style={{ margin: "0 0 10px 0", fontWeight: 600, fontSize: "1.2rem" }}>
+      <h3
+        style={{
+          margin: "0 0 8px 0",
+          fontWeight: 600,
+          fontSize: "1.2rem",
+        }}
+      >
         {section.title}
       </h3>
+
+      {/* ✅ توضیح کوتاه */}
+      <p
+        style={{
+          fontSize: "0.9rem",
+          opacity: 0.9,
+          margin: "0 0 14px 0",
+        }}
+      >
+        {section.desc}
+      </p>
+
       <button
         style={{
           marginTop: "auto",
