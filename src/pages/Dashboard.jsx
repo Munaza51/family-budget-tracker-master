@@ -230,7 +230,7 @@ featureArrow: {
 // دکمه پایان متن
 heroButton: {
   padding: "12px 20px",
-  background: "#111",
+  background: "#8b5cf6",
   color: "#fff",
   border: "none",
   borderRadius: "10px",
