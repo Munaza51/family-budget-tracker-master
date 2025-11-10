@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { ArrowRightCircle, Mail, Phone, DollarSign, CheckCircle2, Lightbulb } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRightCircle, Mail, Phone, Github, Instagram, Linkedin } from "lucide-react";
+import { SiBehance } from "react-icons/si";
 
 export default function AboutDashboard() {
   const [activeFeature, setActiveFeature] = useState(null);
@@ -8,31 +10,31 @@ export default function AboutDashboard() {
     {
       id: "expense",
       title: "Track Expenses",
-      img: "https://share.google/Nwxzux7s9femA0GOu",
+      img: "https://enveloppe-budget.fr/cdn/shop/products/defidumois_1.png?v=1662213389",
       desc: "Log every expense easily with category, date, and item tracking. Stay organized and never miss a payment.",
     },
     {
       id: "ai",
       title: "AI Saving Tips",
-      img: "https://share.google/wQaq4ztUlRPEDDNLz1b.gif",
+      img: "https://enveloppe-budget.fr/cdn/shop/products/defidumois_7.png?v=1662215766",
       desc: "Use AI to get personalized recommendations to save more efficiently. Smart suggestions help you spend wisely.",
     },
     {
       id: "reports",
       title: "Visual Reports",
-      img: "https://share.google/images/WwkVx16TjGIJDpVGl",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDt7cxdGQnKvI7XIbQICzaWi2JJ9b3S-8m_jxK9zwPL0c3fzM5k_ofVdwG&s=10",
       desc: "Beautiful charts and summaries make your spending clear at a glance. Understand where your money goes.",
     },
     {
       id: "essentials",
       title: "Essentials Tracker",
-      img: "https://share.google/images/mzUrIPsYflPw5wcsZ",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwKiOdgKDmfc1h0sBjeStDnigwOAVRNInj7g&usqp=CAU",
       desc: "Track household essentials, mark items as bought, or quickly add new necessities. Keep your family organized.",
     },
     {
       id: "quickAdd",
       title: "Quick Add Suggestions",
-      img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZWXrhhzx4Sa0jn6cDCx1RJRSWwrYp98BGIsN9FQ3HbylZR8Gk6y0tYy0&s=10",
       desc: "Pre-made essential items for quick adding. Click and add instantly to your checklist without typing.",
     },
     {
@@ -89,8 +91,7 @@ export default function AboutDashboard() {
       <header style={styles.header}>
         <h1 style={styles.title}>💡 About Family Budget Tracker</h1>
         <p style={styles.subtitle}>
-          Family Budget Tracker is a modern web app to help families manage daily expenses, track essentials, and set smart saving goals.
-          Everything is visual, simple, and interactive—designed to make financial management stress-free.
+          Family Budget Tracker is a modern web app to help families manage daily expenses, track essentials, and set smart saving goals. Everything is visual, simple, and interactive—designed to make financial management stress-free.
         </p>
       </header>
 
@@ -124,9 +125,23 @@ export default function AboutDashboard() {
         <div style={styles.contactCard}>
           <h3>📬 Contact Us</h3>
           <p>If you have questions, feedback, or want to collaborate, reach out:</p>
-          <p><Mail size={18} /> support@familybudget.app</p>
-          <p><Phone size={18} /> +93 700 000 000</p>
-          <button style={styles.contactBtn}>Go to Dashboard</button>
+          <div style={{ display: "flex", justifyContent: "center", gap: "12px" }}>
+            <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+              <Instagram size={24} />
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
+              <Linkedin size={24} />
+            </a>
+            <a href="https://github.com" target="_blank" rel="noreferrer">
+              <Github size={24} />
+            </a>
+            <a href="https://www.behance.net" target="_blank" rel="noreferrer">
+              <SiBehance size={24} />
+            </a>
+          </div>
+          <button style={styles.contactBtn}>
+            <Link to="/dashboard">Go to Dashboard</Link>
+          </button>
         </div>
       </section>
     </div>
