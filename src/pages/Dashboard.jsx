@@ -159,24 +159,86 @@ export default function Dashboard() {
     toggleButton: { cursor: "pointer", position: "absolute", top: 20, right: 20 },
     // HERO with purple -> white gradient (chosen)
     hero: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "20px",
-      margin: "28px 0",
-      padding: "28px 24px",
-      borderRadius: "16px",
-      background: "PURPLE",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-      flexWrap: "wrap",
-    },
-    heroText: { flex: "1 1 420px", minWidth: "240px", color: "#111" },
-    heroImg: { width: "200px", height: "200px", borderRadius: "12px", objectFit: "cover" },
-    mainTitle: { fontSize: "2rem", color: "#111", marginBottom: "8px", fontWeight: 700 },
-    heroDesc: { fontSize: "1rem", lineHeight: 1.4, color: "#222", marginBottom: "12px" },
-    features: { listStyle: "none", paddingLeft: 0, display: "flex", flexDirection: "column", gap: "8px", color: "#111", margin: 0 },
-    featureItem: { display: "flex", alignItems: "center", fontSize: "0.95rem" },
-    featureArrow: { marginRight: "8px", color: "#111", fontWeight: 700 },
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "40px",
+  margin: "28px 0",
+  padding: "40px 32px",
+  borderRadius: "20px",
+  background: PURPLE, // بنفش واقعی
+  boxShadow: "0 12px 30px rgba(0,0,0,0.15)",
+  flexWrap: "wrap",
+  textAlign: "left",
+},
+
+heroText: { 
+  flex: "1 1 420px", 
+  minWidth: "260px", 
+  color: "#fff",              // نوشته سفید
+  fontFamily: "'Inter', sans-serif", // فونت مینیمال
+},
+
+heroImg: { 
+  width: "220px", 
+  height: "220px", 
+  borderRadius: "16px", 
+  objectFit: "cover",
+  boxShadow: "0 8px 20px rgba(0,0,0,0.25)",
+},
+
+mainTitle: { 
+  fontSize: "2.2rem", 
+  color: "#fff",             // سفید
+  marginBottom: "10px", 
+  fontWeight: 700,
+  fontFamily: "'Inter', sans-serif",
+},
+
+heroDesc: { 
+  fontSize: "1.05rem", 
+  lineHeight: 1.5, 
+  color: "#f3f3f3", 
+  marginBottom: "12px",
+  fontFamily: "'Inter', sans-serif",
+},
+
+features: { 
+  listStyle: "none", 
+  paddingLeft: 0, 
+  display: "flex", 
+  flexDirection: "column", 
+  gap: "8px", 
+  color: "#fff", 
+  margin: 0,
+  fontFamily: "'Inter', sans-serif",
+},
+
+featureItem: { 
+  display: "flex", 
+  alignItems: "center", 
+  fontSize: "0.95rem",
+  color: "#fff",
+},
+
+featureArrow: { 
+  marginRight: "8px", 
+  color: "#fff", 
+  fontWeight: 700,
+},
+
+// دکمه پایان متن
+heroButton: {
+  padding: "12px 20px",
+  background: "#111",
+  color: "#fff",
+  border: "none",
+  borderRadius: "10px",
+  marginTop: "16px",
+  cursor: "pointer",
+  fontWeight: 600,
+  fontFamily: "'Inter', sans-serif",
+},
 
     // Top grid (3 columns)
     topGrid: {
@@ -310,6 +372,64 @@ export default function Dashboard() {
         />
       </div>
 
+      {/* ===== Dashboard Sections Overview Table ===== */}
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+    margin: "40px auto",
+    padding: "20px",
+    maxWidth: "1200px",
+    background: "#8b5cf6", // بنفش
+    borderRadius: "16px",
+    color: "#fff", // متن سفید
+    textAlign: "center",
+    fontFamily: "'Poppins', sans-serif",
+  }}
+>
+  {[
+    { title: "Add Expense", desc: "Add and track your expenses in detail." },
+    { title: "Quick Add", desc: "Quickly add frequent expenses." },
+    { title: "Spending Summary", desc: "See total spent and progress toward your goals." },
+    { title: "AI Tips", desc: "Get smart saving suggestions from AI." },
+    { title: "Monthly Trend", desc: "Visualize your monthly spending trends." },
+    { title: "Spending by Category", desc: "Analyze your expenses by category." },
+  ].map((section, idx) => (
+    <div
+      key={idx}
+      style={{
+        background: "#9c6ff1", // کمی روشن‌تر برای هر کارت
+        borderRadius: "12px",
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        minHeight: "150px",
+      }}
+    >
+      <h3 style={{ margin: "0 0 10px 0", fontWeight: 600, fontSize: "1.2rem" }}>
+        {section.title}
+      </h3>
+      <p style={{ margin: 0, fontSize: "0.95rem" }}>{section.desc}</p>
+      <button
+        style={{
+          marginTop: "12px",
+          padding: "8px 16px",
+          borderRadius: "8px",
+          border: "none",
+          background: "#fff",
+          color: "#8b5cf6",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        Go
+      </button>
+    </div>
+  ))}
+</div>
+      
       {/* Top row: Add Expense | Quick Add | Monthly Trend */}
       <div style={{ ...styles.topGrid }} ref={addExpenseRef}>
         <section style={{ ...styles.card, ...styles.addExpenseCard }}>
