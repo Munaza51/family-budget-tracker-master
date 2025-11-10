@@ -231,7 +231,7 @@ featureArrow: {
 heroButton: {
   padding: "12px 20px",
   background: "#8b5cf6",
-  color: "#fff",
+  color: "#9c6ff1",
   border: "none",
   borderRadius: "10px",
   marginTop: "16px",
@@ -436,14 +436,14 @@ heroButton: {
       
       {/* Top row: Add Expense | Quick Add | Monthly Trend */}
       <div style={{ ...styles.topGrid }} ref={addExpenseRef}>
-        <section style={{ ...styles.card, ...styles.addExpenseCard }}>
+        <section id="addExpenseSection" style={{ ...styles.card, ...styles.addExpenseCard }}>
           <h3 style={{ margin: 0, color: "#fff" }}><Sparkles /> Add Expense</h3>
           <div style={{ marginTop: 12 }}>
             <ExpenseForm onAdd={addExpense} />
           </div>
         </section>
 
-        <section style={{ ...styles.card, ...styles.quickAddCard }}>
+        <section id="quickAddSection" style={{ ...styles.card, ...styles.quickAddCard }}>
           <h3 style={{ margin: 0 }}><Sparkles /> Quick Add</h3>
           <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
             {["Food", "Transport", "Rent", "Groceries", "Electricity", "Water", "Internet", "Entertainment"].map((item, i) => (
@@ -458,7 +458,7 @@ heroButton: {
           </div>
         </section>
 
-        <section style={{ ...styles.card }}>
+        <section id="monthlyTrendSection" style={{ ...styles.card }}>
           <h3 style={{ margin: 0 }}><TrendingUp /> Monthly Trend</h3>
           <div style={{ marginTop: 12 }}>
             {trendData.length === 0 ? (
@@ -479,7 +479,7 @@ heroButton: {
 
       {/* Summary row: Spending Summary (with AI tips) | Spending by Category */}
       <div style={styles.summaryGrid}>
-        <section style={styles.spendingSummaryCard}>
+        <section id="spendingSummarySection" style={styles.spendingSummaryCard}>
           {budgetAlert && (
             <div style={{ background: "#fff", color: PURPLE, padding: "6px 12px", borderRadius: 8, display: "inline-block", fontWeight: 700 }}>
               ⚠️ Budget exceeded!
@@ -518,7 +518,7 @@ heroButton: {
           </div>
         </section>
 
-        <section style={styles.card}>
+        <section id="categorySection" style={styles.card}>
           <h3 style={{ marginTop: 0 }}><PieChart /> Spending by Category</h3>
 
           {Object.keys(totalsByCategory).length === 0 ? (
