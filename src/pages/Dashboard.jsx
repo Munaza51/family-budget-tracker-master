@@ -372,7 +372,8 @@ heroButton: {
         />
       </div>
 
-      {/* ===== Dashboard Sections Overview Table ===== */}
+      
+{/* ===== Dashboard Sections Overview Table with Scroll ===== */}
 <div
   style={{
     display: "grid",
@@ -381,7 +382,7 @@ heroButton: {
     margin: "40px auto",
     padding: "20px",
     maxWidth: "1200px",
-    background: "#8b5cf6", // بنفش
+    background: "#8b5cf6", // پس‌زمینه بنفش
     borderRadius: "16px",
     color: "#fff", // متن سفید
     textAlign: "center",
@@ -389,17 +390,17 @@ heroButton: {
   }}
 >
   {[
-    { title: "Add Expense", desc: "Add and track your expenses in detail." },
-    { title: "Quick Add", desc: "Quickly add frequent expenses." },
-    { title: "Spending Summary", desc: "See total spent and progress toward your goals." },
-    { title: "AI Tips", desc: "Get smart saving suggestions from AI." },
-    { title: "Monthly Trend", desc: "Visualize your monthly spending trends." },
-    { title: "Spending by Category", desc: "Analyze your expenses by category." },
+    { title: "Add Expense", refId: "addExpenseSection" },
+    { title: "Quick Add", refId: "quickAddSection" },
+    { title: "Spending Summary", refId: "spendingSummarySection" },
+    { title: "AI Tips", refId: "aiTipsSection" },
+    { title: "Monthly Trend", refId: "monthlyTrendSection" },
+    { title: "Spending by Category", refId: "categorySection" },
   ].map((section, idx) => (
     <div
       key={idx}
       style={{
-        background: "#9c6ff1", // کمی روشن‌تر برای هر کارت
+        background: "#9c6ff1",
         borderRadius: "12px",
         padding: "20px",
         display: "flex",
@@ -411,10 +412,9 @@ heroButton: {
       <h3 style={{ margin: "0 0 10px 0", fontWeight: 600, fontSize: "1.2rem" }}>
         {section.title}
       </h3>
-      <p style={{ margin: 0, fontSize: "0.95rem" }}>{section.desc}</p>
       <button
         style={{
-          marginTop: "12px",
+          marginTop: "auto",
           padding: "8px 16px",
           borderRadius: "8px",
           border: "none",
@@ -422,6 +422,10 @@ heroButton: {
           color: "#8b5cf6",
           fontWeight: "bold",
           cursor: "pointer",
+        }}
+        onClick={() => {
+          const el = document.getElementById(section.refId);
+          el?.scrollIntoView({ behavior: "smooth" });
         }}
       >
         Go
