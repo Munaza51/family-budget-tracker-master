@@ -75,6 +75,7 @@ export default function AboutDashboard() {
     fontWeight: 800,
     fontSize: "1.5rem",
     marginBottom: "8px",
+ color: "#7c3aed",
   }}>
     What it Offers
   </h2>
