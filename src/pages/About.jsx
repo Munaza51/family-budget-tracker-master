@@ -8,25 +8,25 @@ export default function AboutDashboard() {
     {
       id: "expense",
       title: "Track Expenses",
-      img: "https://images.unsplash.com/photo-1556155092-490a1ba16284",
+      img: "https://share.google/Nwxzux7s9femA0GOu",
       desc: "Log every expense easily with category, date, and item tracking. Stay organized and never miss a payment.",
     },
     {
       id: "ai",
       title: "AI Saving Tips",
-      img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/8bc7d876-e4c5-4710-854a-a23c0f231652/thumb_AI_Insights800_800_px__1b.gif",
+      img: "https://share.google/wQaq4ztUlRPEDDNLz1b.gif",
       desc: "Use AI to get personalized recommendations to save more efficiently. Smart suggestions help you spend wisely.",
     },
     {
       id: "reports",
       title: "Visual Reports",
-      img: "https://images.unsplash.com/photo-1581093588401-69d9f20224f0",
+      img: "https://share.google/images/WwkVx16TjGIJDpVGl",
       desc: "Beautiful charts and summaries make your spending clear at a glance. Understand where your money goes.",
     },
     {
       id: "essentials",
       title: "Essentials Tracker",
-      img: "https://images.unsplash.com/photo-1586201375761-83865001e0e4",
+      img: "https://share.google/images/mzUrIPsYflPw5wcsZ",
       desc: "Track household essentials, mark items as bought, or quickly add new necessities. Keep your family organized.",
     },
     {
@@ -38,7 +38,7 @@ export default function AboutDashboard() {
     {
       id: "incomeSavings",
       title: "Income & Savings",
-      img: "https://images.unsplash.com/photo-1601597113937-4b1c2e89a004",
+      img: "https://share.google/images/mzUrIPsYflPw5wcsZ",
       desc: "Track your monthly income and savings. Set goals and see progress directly on your dashboard.",
     },
   ];
