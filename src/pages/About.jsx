@@ -99,7 +99,7 @@ export default function AboutDashboard() {
             <a href="https://github.com" target="_blank" rel="noreferrer" style={styles.socialLink}>GitHub</a>
             <a href="https://www.behance.net" target="_blank" rel="noreferrer" style={styles.socialLink}>Behance</a>
           </div>
-          <button style={styles.contactBtn} onClick={() => navigate("/dashboard")}>
+          <button style={styles.contactBtn} onClick={() => navigate("/")}>
             Go to Dashboard
           </button>
         </div>
