@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart as RePieChart, Pie, Cell, Legend } from "recharts";
-import { Sparkles, Wallet, PieChart, Brain, Sun, Moon, TrendingUp } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  PieChart as RePieChart, Pie, Cell, Legend
+} from "recharts";
+import {
+  Sparkles, Wallet, PieChart, Brain, Sun, Moon, TrendingUp
+} from "lucide-react";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import { getBudgetTips } from "../ai/aiService";
@@ -19,48 +24,74 @@ export default function Dashboard() {
   const [recentlyAdded, setRecentlyAdded] = useState([]);
   const [timeFilter, setTimeFilter] = useState("all");
 
-  // Load expenses from localStorage
+  const addExpenseRef = useRef(null);
+
+  // Load expenses
   useEffect(() => {
     const raw = localStorage.getItem(LOCAL_KEY);
     setExpenses(raw ? JSON.parse(raw) : []);
   }, []);
 
-  // Save expenses and check budget alert
+  // Save + budget check
   useEffect(() => {
     localStorage.setItem(LOCAL_KEY, JSON.stringify(expenses));
     const total = expenses.reduce((s, e) => s + Number(e.cost), 0);
     setBudgetAlert(total > 100000);
   }, [expenses]);
 
-  // Add, remove, edit expenses
+  // Add expense
   function addExpense(exp) {
     setExpenses((s) => [exp, ...s]);
     setRecentlyAdded((s) => [exp, ...s].slice(0, 3));
   }
+
+  // Quick Add + show total spent
   function quickAdd(name, cost, category) {
-    const exp = { id: Date.now(), item: name, cost, category, date: new Date().toISOString() };
+    const exp = {
+      id: Date.now(),
+      item: name,
+      cost,
+      category,
+      date: new Date().toISOString(),
+    };
     addExpense(exp);
   }
+
   function removeExpense(id) {
     setExpenses((s) => s.filter((e) => e.id !== id));
   }
-  function editExpense(id, newItem) {
-    setExpenses((s) =>
-      s.map((e) => (e.id === id ? { ...e, item: newItem } : e))
+
+  // ✅ FULL EDIT (item + cost + category)
+  function editExpense(id, updated) {
+    setExpenses((prev) =>
+      prev.map((e) => (e.id === id ? { ...e, ...updated } : e))
     );
   }
 
-  // Compute totals
+  // Spending Summary
+  const totalSpent = expenses.reduce((s, e) => s + Number(e.cost), 0);
+  const savingGoal = 200000;
+  const progressPercent = Math.min(
+    ((savingGoal - totalSpent) / savingGoal) * 100,
+    100
+  );
+
+  // Category totals
   const totalsByCategory = expenses.reduce((acc, e) => {
     acc[e.category] = (acc[e.category] || 0) + Number(e.cost);
     return acc;
   }, {});
+
+  // Monthly trend
   const monthlyTrend = expenses.reduce((acc, e) => {
     const month = new Date(e.date).toLocaleString("default", { month: "short" });
     acc[month] = (acc[month] || 0) + Number(e.cost);
     return acc;
   }, {});
-  const trendData = Object.entries(monthlyTrend).map(([month, total]) => ({ month, total }));
+  const trendData = Object.entries(monthlyTrend).map(([month, total]) => ({
+    month,
+    total,
+  }));
 
   // AI tips
   async function askAITips() {
@@ -72,338 +103,239 @@ export default function Dashboard() {
     try {
       const tips = await getBudgetTips(summary);
       setAiTips(tips);
-    } catch (err) {
-      setAiTips("⚠️ AI tip error — check API key or network.");
-      console.error(err);
-    } finally {
-      setLoadingTips(false);
+    } catch {
+      setAiTips("⚠️ AI error — check API key or network.");
     }
+    setLoadingTips(false);
   }
 
-  // Spending summary
-  const totalSpent = expenses.reduce((s, e) => s + Number(e.cost), 0);
-  const savingGoal = 200000;
-  const progressPercent = Math.min((savingGoal - totalSpent) / savingGoal * 100, 100);
-
-  // Filtered expenses
+  // Filters
   const filteredExpenses = expenses.filter((e) => {
-    const matchesFilter =
+    const matches =
       e.item.toLowerCase().includes(filter.toLowerCase()) ||
       e.category.toLowerCase().includes(filter.toLowerCase());
+
     if (timeFilter === "month") {
       const now = new Date();
-      return matchesFilter && new Date(e.date).getMonth() === now.getMonth();
-    } else if (timeFilter === "week") {
+      return matches && new Date(e.date).getMonth() === now.getMonth();
+    }
+    if (timeFilter === "week") {
       const now = new Date();
       const weekAgo = new Date(now);
       weekAgo.setDate(now.getDate() - 7);
-      return matchesFilter && new Date(e.date) >= weekAgo;
+      return matches && new Date(e.date) >= weekAgo;
     }
-    return matchesFilter;
+    return matches;
   });
-const styles = {
-  container: {
-    fontFamily: "'Poppins', sans-serif",
-    color: "#000",
-    maxWidth: "1440px",
-    margin: "auto",
-    padding: "0 20px",
-    background: "#fff",
-    transition: "background 0.3s, color 0.3s",
-  },
-  hero: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: "20px",
-    margin: "60px 0",
-    padding: "40px 20px",
-    borderRadius: "20px",
-    background: PURPLE,
-    boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-    transition: "all 0.5s",
-    flexWrap: "wrap",
-  },
-  heroText: { flex: "1", minWidth: "250px" },
-  heroImg: { width: "200px", height: "200px", borderRadius: "20px", objectFit: "cover" },
-  mainTitle: { fontSize: "2.5rem", color: "#fff", marginBottom: "15px", fontWeight: "bold" },
-  heroDesc: { fontSize: "1.1rem", lineHeight: "1.5", color: "#fff", marginBottom: "15px" },
-  features: { listStyle: "none", paddingLeft: 0, display: "flex", flexDirection: "column", gap: "10px", color: "#fff" },
-  featureItem: { display: "flex", alignItems: "center", fontSize: "0.95rem" },
-  featureArrow: { color: "#fff", fontWeight: "bold", marginRight: "8px" },
 
-  cardGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "20px",
-    marginBottom: "40px",
-  },
-  card: {
-    padding: "25px",
-    borderRadius: "12px",
-    boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
-    background: "#fff",
-    transition: "all 0.3s ease",
-  },
-  addExpenseCard: { background: PURPLE, color: "#fff" },
-  quickAddCard: { 
-  background: "#fff", 
-  color: "#000", 
-  display: "flex", 
-  flexDirection: "column", 
-  gap: "10px", 
-  padding: "20px", 
-  alignItems: "center",      // اضافه شد
-  justifyContent: "center",  // اضافه شد
-  textAlign: "center"        // اضافه شد
-},
-quickAddButton: {
-  padding: "8px 15px",
-  borderRadius: "6px",
-  background: PURPLE,
-  color: "#fff",
-  border: "none",
-  cursor: "pointer",
-  transition: "all 0.3s ease",
-  textAlign: "center",
-  width: "fit-content",
-  minWidth: "100px",
-  margin: "0 auto"           // اضافه شد برای وسط چین
-},
-  spendingSummaryContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "20px",
-    marginTop: "40px",
-  },
-  spendingSummaryCard: {
-    padding: "25px",
-    borderRadius: "12px",
-    boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
-    background: "#fff",
-    color: "#000",
-    maxWidth: "400px",
-    width: "100%",
-    textAlign: "center",
-    transition: "all 0.3s ease",
-  },
+  // Styles
+  const styles = {
+    container: {
+      maxWidth: "1440px",
+      margin: "auto",
+      padding: "0 20px",
+      fontFamily: "'Poppins', sans-serif",
+    },
+    // ✅ HERO CENTERED
+    hero: {
+      margin: "50px auto",
+      background: PURPLE,
+      borderRadius: "22px",
+      padding: "40px 20px",
+      textAlign: "center",
+      color: "white",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "20px",
+    },
+    heroInner: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "30px",
+      flexWrap: "wrap",
+      maxWidth: "900px",
+    },
+    heroImg: {
+      width: "200px",
+      height: "200px",
+      borderRadius: "18px",
+      objectFit: "cover",
+    },
+    startButton: {
+      background: "#fff",
+      color: PURPLE,
+      padding: "12px 24px",
+      borderRadius: "10px",
+      border: "none",
+      cursor: "pointer",
+      marginTop: "10px",
+      fontWeight: "bold",
+    },
 
-  input: {
-    width: "100%",
-    padding: "8px 12px",
-    marginBottom: "10px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    fontSize: "0.95rem",
-    boxSizing: "border-box",
-  },
-  select: {
-    width: "100%",
-    padding: "8px 12px",
-    marginBottom: "10px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    fontSize: "0.95rem",
-    boxSizing: "border-box",
-  },
-  button: {
-    width: "100%",
-    padding: "8px 12px",
-    marginBottom: "10px",
-    borderRadius: "6px",
-    border: "none",
-    fontSize: "0.95rem",
-    cursor: "pointer",
-    boxSizing: "border-box",
-  },
+    cardGrid3: {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+      gap: "22px",
+      marginTop: "40px",
+    },
+    cardGrid2: {
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+      gap: "22px",
+      marginTop: "35px",
+    },
 
-spendingSummaryContainer: {
-  display: "flex",
-  justifyContent: "space-between", // تغییر یافت
-  alignItems: "center",
-  gap: "20px",
-  flexWrap: "wrap",               // اضافه شد
-  marginTop: "40px",
-},
-spendingSummaryCard: {
-  padding: "25px",
-  borderRadius: "12px",
-  boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
-  background: "#fff",
-  color: "#000",
-  flex: "1 1 250px",              // اضافه شد برای اندازه قابل انعطاف
-  textAlign: "center",
-  transition: "all 0.3s ease",
-  maxWidth: "300px",              // محدود کردن حداکثر اندازه
-},
-  summaryBox: {
-    backgroundColor: "#fff",
-    padding: "15px",
-    borderRadius: "10px",
-    marginBottom: "15px",
-    textAlign: "center",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-  },
-  aiTips: { display: "flex", alignItems: "flex-start", gap: "10px", backgroundColor: PURPLE, color: "#fff", padding: "10px", borderRadius: "8px", marginTop: "10px" },
-  aiButton: { backgroundColor: PURPLE, color: "#fff", border: "none", padding: "10px 15px", borderRadius: "6px", cursor: "pointer", marginTop: "10px", transition: "all 0.3s ease" },
-
-  sectionMargin: { marginTop: "40px" },
-  inputFilter: { padding: "6px 10px", borderRadius: "6px", border: "1px solid #ccc", width: "150px", fontSize: "0.9rem" },
-  badgeAlert: { backgroundColor: "#fff", color: PURPLE, padding: "6px 12px", borderRadius: "6px", fontWeight: "bold", marginBottom: "10px", textAlign: "center" },
-  miniList: { display: "flex", gap: "10px", marginTop: "10px" },
-  miniItem: { padding: "5px 10px", borderRadius: "6px", background: PURPLE, color: "#fff", fontSize: "0.85rem" },
-  progressContainer: { background: "#eee", borderRadius: "12px", overflow: "hidden", marginTop: "10px" },
-  progressBar: { height: "15px", width: `${progressPercent}%`, background: PURPLE, transition: "width 0.5s ease" },
-  toggleButton: { cursor: "pointer", position: "absolute", top: "20px", right: "20px" },
-};   
-
+    card: {
+      background: "#fff",
+      padding: "25px",
+      borderRadius: "14px",
+      boxShadow: "0 6px 18px rgba(0,0,0,0.07)",
+    },
+    addExpenseCard: { background: PURPLE, color: "white" },
+    quickAddBox: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "10px",
+    },
+    quickButton: {
+      background: PURPLE,
+      color: "white",
+      padding: "8px 18px",
+      borderRadius: "6px",
+      border: "none",
+      cursor: "pointer",
+      width: "120px",
+    },
+  };
 
   return (
     <div style={styles.container}>
-      <div style={styles.toggleButton} onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+      {/* Theme Toggle */}
+      <div
+        style={{ cursor: "pointer", position: "absolute", top: 20, right: 20 }}
+        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      >
         {theme === "light" ? <Moon size={28} /> : <Sun size={28} />}
       </div>
 
-      {/* هیرو */}
+      {/* ✅ HERO (Centered) */}
       <div style={styles.hero}>
-        <div style={styles.heroText}>
-          <h1 style={styles.mainTitle}><Wallet size={28} /> Family Budget Tracker</h1>
-          <p style={styles.heroDesc}>Track your expenses, see trends, and save smarter.</p>
-          <ul style={styles.features}>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Real-time expense tracking</li>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Category & monthly breakdowns</li>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Smart AI suggestions</li>
-            <li style={styles.featureItem}><span style={styles.featureArrow}>➡</span>Budget alerts & gamification</li>
-          </ul>
+        <div style={styles.heroInner}>
+          <div>
+            <h1><Wallet /> Family Budget Tracker</h1>
+            <p>Track smarter. Save easier.</p>
 
-          {/* Recently Added Expenses */}
-          {recentlyAdded.length > 0 && (
-            <div style={styles.miniList}>
-              {recentlyAdded.map((e) => (
-                <div key={e.id} style={styles.miniItem}>
-                  {e.item} - {e.cost} AFN
-                </div>
-              ))}
-            </div>
-          )}
+            {recentlyAdded.length > 0 && (
+              <p style={{ fontSize: "1.1rem", marginTop: "10px" }}>
+                ✅ آخرین مصرف:{" "}
+                <b>{recentlyAdded[0].item} — {recentlyAdded[0].cost} AFN</b>
+              </p>
+            )}
+          </div>
+
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s"
+            alt="hero"
+            style={styles.heroImg}
+          />
         </div>
 
-        <img
-          style={styles.heroImg}
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s"
-          alt="Budget illustration"
-        />
+        {/* Start Tracking Button */}
+        <button
+          style={styles.startButton}
+          onClick={() => addExpenseRef.current?.scrollIntoView({ behavior: "smooth" })}
+        >
+          Start Tracking
+        </button>
       </div>
 
-      {/* Add Expense + Quick Add + Summary */}
-      <div style={styles.cardGrid}>
+      {/* ✅ Add Expense + Quick Add + Monthly Trend */}
+      <div style={styles.cardGrid3} ref={addExpenseRef}>
         <section style={{ ...styles.card, ...styles.addExpenseCard }}>
-          <h2><Sparkles size={20} /> Add Expense</h2>
+          <h2><Sparkles /> Add Expense</h2>
           <ExpenseForm onAdd={addExpense} />
         </section>
 
-        <section style={{ ...styles.card, ...styles.quickAddCard }}>
-          <h2><Sparkles size={20} />Quick Add</h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {["Food", "Transport", "Rent", "Groceries", "Electricity", "Water", "Internet", "Entertainment"].map((item, i) => (
-              <button key={i} style={styles.quickAddButton} onClick={() => quickAdd(item, 100 * (i+1), "General")}>{item}</button>
+        <section style={styles.card}>
+          <h2><Sparkles /> Quick Add</h2>
+          <div style={styles.quickAddBox}>
+            {["Food", "Transport", "Rent", "Electricity"].map((name, i) => (
+              <button
+                key={i}
+                style={styles.quickButton}
+                onClick={() => quickAdd(name, (i + 1) * 100, "General")}
+              >
+                {name}
+              </button>
             ))}
           </div>
         </section>
+
+        <section style={styles.card}>
+          <h2><TrendingUp /> Monthly Trend</h2>
+          {trendData.length === 0 ? (
+            <p>No data yet</p>
+          ) : (
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={trendData}>
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="total" stroke={PURPLE} strokeWidth={3} />
+              </LineChart>
+            </ResponsiveContainer>
+          )}
+        </section>
       </div>
 
-      {/* Spending Summary - Now in its own row */}
-      <div style={styles.spendingSummaryContainer}>
-  <section style={styles.spendingSummaryCard}>
-    {budgetAlert && <div style={styles.badgeAlert}>⚠️ Budget exceeded!</div>}
-    <h2><PieChart size={20} /> Spending Summary</h2>
-    <div style={styles.summaryBox}>
-      <p>Total Spent:</p>
-      <h1>{totalSpent.toLocaleString()} AFN</h1>
-      <div style={styles.progressContainer}>
-        <div style={styles.progressBar}></div>
-      </div>
-      <small>Goal: {savingGoal.toLocaleString()} AFN</small>
-    </div>
-    <button style={styles.aiButton} onClick={askAITips} disabled={loadingTips}>
-      {loadingTips ? "🤔 Thinking..." : "Get AI Saving Tips"}
-    </button>
-    {aiTips && (
-      <div style={styles.aiTips}>
-        <Brain size={20} />
-        <div><h4>AI Suggestions</h4><p>{aiTips}</p></div>
-      </div>
-    )}
-  </section>
-</div>
+      {/* ✅ Spending Summary + Categories */}
+      <div style={styles.cardGrid2}>
+        <section style={styles.card}>
+          <h2><PieChart /> Spending Summary</h2>
+          <h1>{totalSpent.toLocaleString()} AFN</h1>
+        </section>
 
-      {/* Filter + Expense List */}
-      <div style={{ ...styles.card, ...styles.sectionMargin }}>
-        <h2><Sparkles size={20} />All Expenses</h2>
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "10px", justifyContent: "center" }}>
-          <input
-            type="text"
-            placeholder="Search expenses..."
-            style={styles.inputFilter}
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          />
-          <select value={timeFilter} onChange={(e) => setTimeFilter(e.target.value)} style={styles.inputFilter}>
-            <option value="all">All time</option>
-            <option value="month">This Month</option>
-            <option value="week">This Week</option>
-          </select>
-        </div>
-        <ExpenseList items={filteredExpenses} onDelete={removeExpense} onEdit={editExpense} />
+        <section style={styles.card}>
+          <h2><PieChart /> Spending by Category</h2>
+
+          {Object.keys(totalsByCategory).length === 0 ? (
+            <p>No categories yet</p>
+          ) : (
+            <ResponsiveContainer width="100%" height={250}>
+              <RePieChart>
+                <Pie
+                  data={Object.entries(totalsByCategory).map(([name, value]) => ({
+                    name,
+                    value,
+                  }))}
+                  dataKey="value"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                >
+                  {Object.keys(totalsByCategory).map((_, i) => (
+                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Legend />
+              </RePieChart>
+            </ResponsiveContainer>
+          )}
+        </section>
       </div>
 
-      {/* Charts آخر صفحه */}
-      <div style={{ ...styles.card, ...styles.sectionMargin }}>
-        <h2><TrendingUp size={20} /> Monthly Spending Trend</h2>
-        {trendData.length === 0 ? (
-          <p style={{ textAlign: "center", padding: "20px", color: "black" }}>
-            Add expenses to see your monthly spending trend.
-          </p>
-        ) : (
-          <ResponsiveContainer width="100%" height={250}>
-            <LineChart data={trendData}>
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Line type="monotone" dataKey="total" stroke={PURPLE} strokeWidth={3} />
-            </LineChart>
-          </ResponsiveContainer>
-        )}
-      </div>
+      {/* ✅ Expense List at the END */}
+      <div style={{ ...styles.card, marginTop: "40px" }}>
+        <h2><Sparkles /> All Expenses</h2>
 
-      <div style={{ ...styles.card, ...styles.sectionMargin }}>
-        <h2><PieChart size={20} /> Spending by Category</h2>
-        {Object.keys(totalsByCategory).length === 0 ? (
-          <p style={{ textAlign: "center", padding: "20px", color: "black" }}>
-            Add expenses to start tracking categories.
-          </p>
-        ) : (
-          <ResponsiveContainer width="100%" height={250}>
-            <RePieChart>
-              <Pie
-                data={Object.entries(totalsByCategory).map(([name, value]) => ({ name, value }))}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label
-              >
-                {Object.entries(totalsByCategory).map((_, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Legend />
-            </RePieChart>
-          </ResponsiveContainer>
-        )}
+        <ExpenseList
+          items={filteredExpenses}
+          onDelete={removeExpense}
+          onEdit={editExpense} // ✅ full edit support
+        />
       </div>
     </div>
   );
