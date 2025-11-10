@@ -2,20 +2,32 @@ import React, { useState } from "react";
 
 export default function ExpenseList({ items, onDelete, onEdit }) {
   const [editingId, setEditingId] = useState(null);
-  const [editedItem, setEditedItem] = useState("");
+  const [form, setForm] = useState({
+    item: "",
+    category: "",
+    cost: "",
+  });
 
-  const handleEditClick = (id, currentItem) => {
-    setEditingId(id);
-    setEditedItem(currentItem);
+  const startEdit = (expense) => {
+    setEditingId(expense.id);
+    setForm({
+      item: expense.item,
+      category: expense.category,
+      cost: expense.cost,
+    });
   };
 
-  const handleSaveClick = () => {
-    if (editedItem.trim()) {
-      // Pass id and new item to the parent
-      onEdit(editingId, editedItem.trim());
-      setEditingId(null);
-      setEditedItem("");
-    }
+  const saveEdit = () => {
+    if (!form.item.trim() || !form.category.trim() || !form.cost) return;
+
+    onEdit(editingId, {
+      item: form.item.trim(),
+      category: form.category.trim(),
+      cost: Number(form.cost),
+    });
+
+    setEditingId(null);
+    setForm({ item: "", category: "", cost: "" });
   };
 
   if (!items.length)
@@ -43,48 +55,86 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
           boxShadow: "0 6px 15px rgba(0,0,0,0.1)",
         }}
       >
-        <thead style={{ background: "linear-gradient(to right, #6366f1, #8b5cf6)", color: "#fff" }}>
+        <thead
+          style={{
+            background: "linear-gradient(to right, #6366f1, #8b5cf6)",
+            color: "#fff",
+          }}
+        >
           <tr>
-            <th style={{ padding: "12px" }}>Date</th>
-            <th style={{ padding: "12px" }}>Item</th>
-            <th style={{ padding: "12px" }}>Category</th>
-            <th style={{ padding: "12px" }}>Cost</th>
-            <th style={{ padding: "12px" }}>Actions</th>
+            <th style={th}>Date</th>
+            <th style={th}>Item</th>
+            <th style={th}>Category</th>
+            <th style={th}>Cost</th>
+            <th style={th}>Actions</th>
           </tr>
         </thead>
+
         <tbody>
-          {items.map((it) => (
-            <tr key={it.id}>
-              <td style={{ padding: "12px" }}>{it.date}</td>
-              <td style={{ padding: "12px" }}>
-                {editingId === it.id ? (
+          {items.map((exp) => (
+            <tr key={exp.id}>
+              {/* DATE */}
+              <td style={td}>{exp.date}</td>
+
+              {/* ITEM */}
+              <td style={td}>
+                {editingId === exp.id ? (
                   <input
-                    value={editedItem}
-                    onChange={(e) => setEditedItem(e.target.value)}
-                    style={{
-                      padding: "6px",
-                      borderRadius: "6px",
-                      border: "1px solid #ccc",
-                      width: "100%",
-                    }}
+                    value={form.item}
+                    onChange={(e) => setForm({ ...form, item: e.target.value })}
+                    style={input}
                   />
                 ) : (
-                  it.item
+                  exp.item
                 )}
               </td>
-              <td style={{ padding: "12px" }}>{it.category}</td>
-              <td style={{ padding: "12px" }}>{it.cost}</td>
-              <td style={{ padding: "12px", textAlign: "center" }}>
-                {editingId === it.id ? (
-                  <button onClick={handleSaveClick} style={actionButtonStyle}>
+
+              {/* CATEGORY */}
+              <td style={td}>
+                {editingId === exp.id ? (
+                  <input
+                    value={form.category}
+                    onChange={(e) =>
+                      setForm({ ...form, category: e.target.value })
+                    }
+                    style={input}
+                  />
+                ) : (
+                  exp.category
+                )}
+              </td>
+
+              {/* COST */}
+              <td style={td}>
+                {editingId === exp.id ? (
+                  <input
+                    type="number"
+                    value={form.cost}
+                    onChange={(e) =>
+                      setForm({ ...form, cost: e.target.value })
+                    }
+                    style={input}
+                  />
+                ) : (
+                  exp.cost
+                )}
+              </td>
+
+              {/* ACTIONS */}
+              <td style={{ ...td, textAlign: "center" }}>
+                {editingId === exp.id ? (
+                  <button onClick={saveEdit} style={btnSave}>
                     Save
                   </button>
                 ) : (
                   <>
-                    <button onClick={() => handleEditClick(it.id, it.item)} style={actionButtonStyle}>
+                    <button onClick={() => startEdit(exp)} style={btn}>
                       Edit
                     </button>
-                    <button onClick={() => onDelete(it.id)} style={actionButtonStyle}>
+                    <button
+                      onClick={() => onDelete(exp.id)}
+                      style={{ ...btn, background: "#ef4444" }}
+                    >
                       Delete
                     </button>
                   </>
@@ -98,7 +148,25 @@ export default function ExpenseList({ items, onDelete, onEdit }) {
   );
 }
 
-const actionButtonStyle = {
+/* Styles */
+const th = {
+  padding: "12px",
+  fontWeight: "600",
+};
+
+const td = {
+  padding: "12px",
+  borderBottom: "1px solid #eee",
+};
+
+const input = {
+  padding: "6px",
+  borderRadius: "6px",
+  border: "1px solid #ccc",
+  width: "100%",
+};
+
+const btn = {
   margin: "0 4px",
   padding: "6px 10px",
   borderRadius: "6px",
@@ -106,4 +174,10 @@ const actionButtonStyle = {
   background: "#8b5cf6",
   color: "#fff",
   cursor: "pointer",
+  fontWeight: "500",
+};
+
+const btnSave = {
+  ...btn,
+  background: "#10b981",
 };
