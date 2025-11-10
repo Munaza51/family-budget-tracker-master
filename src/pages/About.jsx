@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRightCircle, Mail, Phone, Github, Instagram, Linkedin } from "lucide-react";
-import { SiBehance } from "react-icons/si";
 
 export default function AboutDashboard() {
   const [activeFeature, setActiveFeature] = useState(null);
@@ -83,6 +81,11 @@ export default function AboutDashboard() {
       marginTop: "12px",
       fontWeight: 600,
     },
+    socialLink: {
+      color: "#fff",
+      textDecoration: "underline",
+      fontWeight: 600,
+    },
   };
 
   return (
@@ -125,22 +128,14 @@ export default function AboutDashboard() {
         <div style={styles.contactCard}>
           <h3>📬 Contact Us</h3>
           <p>If you have questions, feedback, or want to collaborate, reach out:</p>
-          <div style={{ display: "flex", justifyContent: "center", gap: "12px" }}>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
-              <Instagram size={24} />
-            </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
-              <Linkedin size={24} />
-            </a>
-            <a href="https://github.com" target="_blank" rel="noreferrer">
-              <Github size={24} />
-            </a>
-            <a href="https://www.behance.net" target="_blank" rel="noreferrer">
-              <SiBehance size={24} />
-            </a>
+          <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginTop: "12px" }}>
+            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" style={styles.socialLink}>Instagram</a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" style={styles.socialLink}>LinkedIn</a>
+            <a href="https://github.com" target="_blank" rel="noreferrer" style={styles.socialLink}>GitHub</a>
+            <a href="https://www.behance.net" target="_blank" rel="noreferrer" style={styles.socialLink}>Behance</a>
           </div>
           <button style={styles.contactBtn}>
-            <Link to="/dashboard">Go to Dashboard</Link>
+            <Link to="/dashboard" style={{ color: "#7c3aed", textDecoration: "none" }}>Go to Dashboard</Link>
           </button>
         </div>
       </section>
