@@ -9,13 +9,13 @@ export default function AboutDashboard() {
     {
       id: "expense",
       title: "Track Expenses",
-      img: "",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s",
       desc: "Log every expense easily with category, date, and item tracking. Stay organized and never miss a payment.",
     },
     {
       id: "ai",
       title: "AI Saving Tips",
-      img: "", // Visual Reports image
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwKiOdgKDmfc1h0sBjeStDnigwOAVRNInj7g&usqp=CAU", // Visual Reports image
       desc: "Use AI to get personalized recommendations to save more efficiently. Smart suggestions help you spend wisely.",
     },
     {
@@ -27,19 +27,19 @@ export default function AboutDashboard() {
     {
       id: "essentials",
       title: "Essentials Tracker",
-      img: "",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZWXrhhzx4Sa0jn6cDCx1RJRSWwrYp98BGIsN9FQ3HbylZR8Gk6y0tYy0&s=10",
       desc: "Track household essentials, mark items as bought, or quickly add new necessities. Keep your family organized.",
     },
     {
       id: "quickAdd",
       title: "Quick Add Suggestions",
-      img: "",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDt7cxdGQnKvI7XIbQICzaWi2JJ9b3S-8m_jxK9zwPL0c3fzM5k_ofVdwG&s=10",
       desc: "Pre-made essential items for quick adding. Click and add instantly to your checklist without typing.",
     },
     {
       id: "incomeSavings",
       title: "Income & Savings",
-      img: "", // همان Essentials Tracker image
+      img: "https://enveloppe-budget.fr/cdn/shop/products/defidumois_1.png?v=1662213389", // همان Essentials Tracker image
       desc: "Track your monthly income and savings. Set goals and see progress directly on your dashboard.",
     },
   ];
