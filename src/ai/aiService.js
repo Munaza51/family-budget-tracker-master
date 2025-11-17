@@ -1,6 +1,6 @@
 export async function getBudgetTips(summary) {
   
-  const key = "sk-or-v1-";
+  const key = "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";
 
   const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
