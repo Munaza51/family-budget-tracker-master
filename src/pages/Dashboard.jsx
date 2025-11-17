@@ -367,7 +367,7 @@ heroButton: {
 
         <img
           style={styles.heroImg}
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPwQe_UEirO7xN3DfMTEd3SIG9hL8bTKAt5Q&s"
+          src=""
           alt="Budget illustration"
         />
       </div>
